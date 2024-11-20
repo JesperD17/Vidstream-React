@@ -1,11 +1,21 @@
 import React from 'react';
-import ReactDOM from 'react-dom/client';
-import App from './App';
 
-const root = ReactDOM.createRoot(document.getElementById('root'));
-root.render(
+import './css/general';
+import Header from './htmlStructure/header';
+import Footer from './htmlStructure/footer';
+
+const header = ReactDOM.createRoot(document.getElementById('header'));
+header.render(
   <React.StrictMode>
-    <App />
+    <Header />
   </React.StrictMode>
 );
 
+const footer = ReactDOM.createRoot(document.getElementById('footer'));
+footer.render(
+  <React.StrictMode>
+    <Footer />
+  </React.StrictMode>
+);
+
+import ReactDOM from 'react-dom/client';

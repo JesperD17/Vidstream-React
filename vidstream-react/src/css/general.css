@@ -1,0 +1,39 @@
+/* general */
+:root {
+	--first-color: linear-gradient(51deg, rgba(46, 57, 63, 1) 0%, rgba(33, 39, 43, 1) 51%, rgba(29, 34, 41, 1) 100%);
+	--second-color:#1d2229;
+	--third-color: #505050;
+	--fourth-color: #e6e6e6;
+	--fifth-color: #141313;
+	--sixth-color: #b3b3b3;
+	--logo-width: min-content;
+	--logo-height: min-content;
+	--nav-height: 100px;
+	--search-field-width: 500px;
+	--search-field-height: 50px;
+	--search-field-border-radius: 30px;
+
+	--padding-search-text: 20px;
+	--padding-search-right: calc(var(--search-field-width) - var(--padding-search-text));
+
+	--card-height: 378px;
+    --card-width: 250px;
+}
+
+body, html {
+    background: var(--first-color);
+	margin: 0px;
+	font-family: fantasy;
+}
+
+#shell {
+	color: #a7acb0;
+}
+
+i {
+	cursor: pointer
+}
+
+.hover:hover {
+    color: white !important;
+}

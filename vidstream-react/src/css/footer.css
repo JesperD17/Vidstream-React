@@ -1,0 +1,105 @@
+/* :root from general.css */
+
+.footer {
+    background: var(--first-color); 
+    height: 300px;
+    /* justify-content: center;
+    flex-direction: column;
+    display: flex; */
+}
+
+/* footer_links */
+.logo_links {
+    display: flex;
+    justify-content: space-around;
+}
+
+.footer_links {
+    display: flex;
+}
+
+summary2 {
+    align-items: center;
+    display: flex;
+}
+
+.footer_links .links {
+    flex-direction: column;
+    display: flex;
+    gap: 10px;
+}
+
+.links_title {
+    font-size: 30px;
+}
+
+.footer_links .links a {
+    left: 10px;
+    position: relative;
+}
+
+.footer_links .links a::before {
+    content: "";
+    border: 1px solid #e2e2e2;
+    border-width: 1px 1px 0 0;
+    position: relative;
+    right: 9px;
+    height: 100%;
+}
+
+/* footer_logo  */
+img.footer_Logo {
+    height: calc(15vh - 17px);
+}
+
+/* align logo */
+.footer .logo_links a {
+    align-items: center;
+    display: flex;
+}
+
+/* collab */
+.WBR_collab_text {
+    display: flex;
+    justify-content: end;
+    gap: 5px;
+    right: 20px;
+    bottom: 20px;
+}
+
+
+#second_part, #fourth_part {
+    /* color: var(--first-color); */
+    color: white;
+}
+
+.WBR_collab_text a {
+    text-decoration: none;
+}
+
+.WBR_collab_text a::after {
+    position: relative;
+    height: 2px;
+    content: "";
+    
+    background: var(--third-color);
+    display: block; 
+    width: 100%; 
+    top: 5px;
+}
+
+.WBR_collab_text a:hover::after {
+    background: var(--fourth-color);
+}
+
+.WBR_collab_text a:hover::after {
+    opacity: 1; /* Fade-in on hover */
+    /* animation: fadeOut 1s forwards; */
+    animation: fadeIn 1s forwards
+}
+
+@keyframes fadeIn {
+    0% { opacity: 0; }
+    100% { opacity: 1; }
+}
+

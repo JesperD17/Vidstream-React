@@ -1,0 +1,250 @@
+/* :root from general.css */
+
+/* slideshow */
+
+.output {
+    display: flex;
+    flex-direction: row;
+    overflow-x: scroll;
+    scroll-snap-type: x mandatory;
+    -webkit-overflow-scrolling: touch;
+    scrollbar-width: none;
+    flex-wrap: nowrap !important;
+    position: relative;
+    height: 600px;;
+}
+
+.slide-Card {
+    flex: 0 0 100%;
+    scroll-snap-align: start;
+    
+    opacity: 0;
+
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    
+    transition: visibility  0.2s, opacity 0.2s linear;
+}
+
+.slide-movie-banner {
+    position: relative;
+}
+
+.slide-movie-banner img {
+    width: 100%;
+    max-height: 585px;
+    object-fit: cover;
+    /* animation: fadeInFromLeft 1.5s ease; */
+}
+
+
+
+/* text show & button */
+
+.slide-card_info {
+    justify-content: end;
+    display: flex;
+    flex-direction: column;
+    position: relative;
+    height: 100%;
+    left: 30px;
+    bottom: 30px;
+    font-size: 3.375vw;
+}
+
+.img_front_color {
+    position: absolute;
+    bottom: 3px;
+    font-size: 60px;
+    color: white;
+    height: 100%;
+    width: 55%;
+    background: linear-gradient(61deg, rgba(22,25,28,1) 0%, rgba(31,38,42,1) 44%, rgba(38,53,61,0) 65%);
+}
+
+/* left right buttons */
+.btns {
+    position: absolute;
+    z-index: 10;
+    top: 15%;
+    right: 40px;
+    font-size: 60px;
+}
+
+.btns button {
+    height: 50px;
+    width: 50px;
+    font-size: 35px;
+    align-items: center;
+    display: flex;
+    margin: 10px;
+}
+
+button.slide_left, button.slide_right {
+    background: yellow;
+    border: none;
+    border-radius: 100%;
+    display: block;
+}
+
+.active_style_slide {
+    opacity: 1;
+
+
+}
+
+/* active-style-slide  */
+
+/* text above cards */
+.head {
+    display: flex;
+    justify-content: space-between;
+}
+
+.header_title {
+    font-size: 25px;
+    position: relative;
+    padding: 25px 0px 0px 25px;
+}
+
+.Hheader {
+    font-size: 45px;
+    margin: 20px 0px 0px 20px;
+}
+
+.text-right {
+    font-size: 20px;
+    position: relative;
+    align-items: end;
+    display: flex;
+    right: 35px;
+    right: 20px;
+}
+
+.text-right:hover {
+    color: var(--first-color);
+}
+
+.text-right a {
+    color: white;
+    text-decoration: none;
+}
+
+.text-right a:visited {
+    color: var(--third-color);
+}
+
+
+/* cards */
+#main {
+    bottom: 20px;
+    position: relative;
+}
+
+.MainCards {
+    display: flex;
+    gap: 15px;
+    overflow: scroll;
+    padding: 25px 30px 25px 30px;
+    scrollbar-color: var(--third-color) transparent;
+    scrollbar-width: thin;
+    overflow-y: hidden;
+    user-select: none; 
+    cursor: grab;
+}
+
+.MainCards:hover {
+    overflow-x: auto;
+}
+
+.MainCards:active {
+    cursor: grabbing;
+}
+
+.movie-banner img {
+    border-radius: 10px;
+    pointer-events: none;
+    height: var(--card-height); /* 378px */
+    width: var(--card-width); /* 250px */
+}
+
+.Card {
+    background: var(--first-color);
+    border-radius: 10px;
+    transition: .4s;
+}
+
+.Card:hover {
+    transform: scale(1.05);
+    clip-path: inset(0);
+    transition: .4s;
+}
+
+.release_date, .ratings {
+    color: #9c9c9c;
+    width: max-content;
+    transition: .4s; 
+}
+
+.card_info {
+    display: flex;
+    justify-content: space-between;
+    padding: 8px;
+    padding-top: 20px;
+}
+
+.card_info:hover {
+    cursor: pointer;
+}
+
+.titles {
+    transition: .4s;  
+}
+
+.titles:hover, .release_date:hover, .ratings:hover {
+    transform: scale(1.1);
+    clip-path: inset(0);
+    transition: .4s;   
+}
+
+i.bx.bxs-star-half {
+    color: yellow;
+}
+
+
+@media (max-width: 889px) {
+    /* slider style & next to info */
+    .output {
+        height: 503px;
+    }
+
+    .slide-movie-banner img {
+        height: 500px;
+    }
+
+    .img_front_color {
+        height: 50%;
+        width: 100%;
+        background: linear-gradient(13deg, rgba(22, 25, 28, 1) 0%, rgba(31, 38, 42, 1) 47%, rgba(38, 53, 61, 0) 70%);
+    }
+
+    .slide-card_info {
+        font-size: 7vw;
+        bottom: 20px;
+    }
+}
+
+@media (max-width: 768px) {
+    .slide-card_info {
+        font-size: 6.5vw;
+    }
+}
+
+@media (min-width: 460px) {
+    .slide-card_info {
+        font-size: 3.5vw;
+    }
+}

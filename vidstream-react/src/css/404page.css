@@ -1,0 +1,36 @@
+body {
+    height: fit-content;
+}
+
+#shell {
+    position: relative;
+    flex-direction: column;
+    display: flex;
+    justify-content: space-between;
+    height: 100%;
+}
+
+.message404 {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.header {
+    font-size: calc(2vw + 35px);
+}
+
+.error_code {
+    font-size: calc(39vw + 35px);
+}
+
+.text a {
+    text-decoration: none;
+    color: var(--first-color);
+}
+
+@media (max-width: 1374px) {
+    body {
+        height: 100vh;
+    }
+}
