@@ -1,8 +1,10 @@
+import './css/general.css';
 import React from 'react';
+import ReactDOM from 'react-dom/client';
 
-import './css/general';
 import Header from './htmlStructure/header';
 import Footer from './htmlStructure/footer';
+import Slideshow from './htmlStructure/slideshow';
 
 const header = ReactDOM.createRoot(document.getElementById('header'));
 header.render(
@@ -18,4 +20,9 @@ footer.render(
   </React.StrictMode>
 );
 
-import ReactDOM from 'react-dom/client';
+const slideshow = ReactDOM.createRoot(document.getElementById('slideshow'));
+slideshow.render(
+  <React.StrictMode>
+    <Slideshow />
+  </React.StrictMode>
+);
