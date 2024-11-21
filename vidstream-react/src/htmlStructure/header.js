@@ -1,5 +1,8 @@
 import '../css/header.css';
 
+import collapse from '../js/collapsibleIcons';
+collapse()
+
 function Header() {
   return (
     <div id="navigation">
@@ -43,5 +46,6 @@ function Header() {
     </div>
   );
 }
+
 
 export default Header;
