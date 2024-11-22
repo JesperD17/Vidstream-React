@@ -1,11 +1,11 @@
-import '../css/header.css';
+import './header.css';
 
-import collapse from '../js/collapsibleIcons';
-collapse()
+// import collapse from '../../js/collapsibleIcons';
 
+// interduction video react js 1:24:53
 function Header() {
   return (
-    <div id="navigation">
+    <main id="navigation">
     {/* Logo's */}
      <a href="http://localhost/Vidstream/Vidstream/Onscreen/html/homepage.php">
       <img id="logo" src="../pics/2e logo kopie.png"/>
@@ -43,9 +43,12 @@ function Header() {
         {/* End search bar */}
       </div>
       {/* End link bar */}
-    </div>
+
+    </main>
+
+
   );
 }
-
+// collapse()
 
 export default Header;

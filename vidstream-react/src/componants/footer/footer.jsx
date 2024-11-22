@@ -1,8 +1,8 @@
-import '../css/footer.css';
+import './footer.css';
 
 function Footer() {
   return (
-    <div className="footer">
+    <main className="footer">
       <div className="logo_links">
         
         <div className="footer_links">
@@ -35,7 +35,7 @@ function Footer() {
           </a>
       </div>
 
-    </div>
+    </main>
   );
 }
 

@@ -2,8 +2,8 @@ import './css/general.css';
 import React from 'react';
 import ReactDOM from 'react-dom/client';
 
-import Header from './htmlStructure/header';
-import Footer from './htmlStructure/footer';
+import Header from './componants/header/header';
+import Footer from './componants/footer/footer';
 import Slideshow from './htmlStructure/slideshow';
 
 
