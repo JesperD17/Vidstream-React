@@ -6,7 +6,7 @@ function Footer() {
       <div className="logo_links">
         
         <div className="footer_links">
-          <summary2>
+          <summary>
             <div className="links">
               <div className="links_title">Navigation</div>
               <a href="http://localhost/Vidstream/Vidstream/Onscreen/html/homepage.php" className="hover">HOME</a>
@@ -16,7 +16,7 @@ function Footer() {
               <a href="#" className="hover">CONTACT</a>
               <a href="#" className="hover">ADVERTISE</a>
             </div>
-          </summary2>
+          </summary>
         </div>
         <a href="http://localhost/Vidstream/Vidstream/Onscreen/html/homepage.php">
           <img className="footer_Logo" src="../pics/Logo Icon.png"></img>

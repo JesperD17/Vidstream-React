@@ -3,9 +3,10 @@ import './header.css';
 
 // import collapse from '../../js/collapsibleIcons';
 
-function collapsibleIcons() {
-  console.log("hallo")
-}
+// function collapsibleIcons() {
+  const iconMenu = inputIcon(null);
+// }
+
 
 function Header() {
   return (
@@ -20,7 +21,8 @@ function Header() {
       <div className="alignBars">
         <div className="Full_collapsible_content">
           <div id="content">
-            <i onclick={collapsibleIcons()} className='bx bx-align-left'></i>
+
+              <i className='bx bx-align-left' ref={inputIcon()}></i>
 
             <summary>
               <div className="links">
@@ -38,7 +40,7 @@ function Header() {
         {/* Search bar */}
         <div className="full_search_bar">
           <div id="search">
-            <input type="text" name="search-field" placeholder="Zoeken..." id="search-field" classNameName="blink search-field"/>
+            <input type="text" name="search-field" placeholder="Zoeken..." id="search-field" className="blink search-field"/>
             <i id="searchIcon1" className='bx bx-search bx-tada'></i>
             <i id="IconNoClick" className="bx bx-search bx-tada"></i>
             {/* </input> */}

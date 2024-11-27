@@ -2,13 +2,13 @@ import '../css/slideshow.css'
 
 function Slideshow() {
   return (
-      <div class="output cards"> {/* Slideshow & Optamized html / load in api */}
-      <div class="btns">
-        <button class="slide_left">
-            <i class='bx bxs-chevron-left'></i>
+      <div className="output cards"> {/* Slideshow & Optamized html / load in api */}
+      <div className="btns">
+        <button className="slide_left">
+            <i className='bx bxs-chevron-left'></i>
         </button>
-        <button class="slide_right">
-            <i class='bx bxs-chevron-right' ></i>
+        <button className="slide_right">
+            <i className='bx bxs-chevron-right' ></i>
         </button>
       </div>
     </div>
