@@ -8,7 +8,7 @@ import Slideshow from './htmlStructure/slideshow';
 
 
 
-const header = ReactDOM.createRoot(document.getElementById('header'));
+const header = ReactDOM.createRoot(document.getElementById('navigation'));
 header.render(
   <React.StrictMode>
     <Header />
