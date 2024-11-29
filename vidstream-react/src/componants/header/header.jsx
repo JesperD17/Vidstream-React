@@ -1,14 +1,29 @@
 
 import './header.css';
 
+import React, { useState } from 'react';
+
+
 // import collapse from '../../js/collapsibleIcons';
 
-// function collapsibleIcons() {
-  const iconMenu = inputIcon(null);
+// function icons() {
 // }
 
 
+
 function Header() {
+  const [menuActive, setMenuActive] = useState(false);
+  const [searchActive, setSearchActive] = useState(false);
+
+  function icons() {
+    setMenuActive(!menuActive)
+  }
+  function searchStyle() {
+    setSearchActive(!searchActive)
+  }
+
+  // function for screen width to shw 'links a' on specific width and the nuse menuActive under specific width. 
+
   return (
     <>
     {/* Logo's */}
@@ -21,9 +36,10 @@ function Header() {
       <div className="alignBars">
         <div className="Full_collapsible_content">
           <div id="content">
-
-              <i className='bx bx-align-left' ref={inputIcon()}></i>
-
+          
+              <i className={"bx " + (!menuActive ? 'bx-align-left' : 'bx-align-middle')} 
+              onClick={icons}></i>
+              {menuActive &&
             <summary>
               <div className="links">
                 <a href="http://localhost/Vidstream/Vidstream/Onscreen/html/homepage.php" className="hover">HOME</a>
@@ -33,7 +49,9 @@ function Header() {
                 <a href="#" className="hover">CONTACT</a>
                 <a href="#" className="hover">ADVERTISE</a>
               </div>
-            </summary>
+           </summary>
+                }
+          
           </div>
         </div>
 
@@ -41,8 +59,10 @@ function Header() {
         <div className="full_search_bar">
           <div id="search">
             <input type="text" name="search-field" placeholder="Zoeken..." id="search-field" className="blink search-field"/>
-            <i id="searchIcon1" className='bx bx-search bx-tada'></i>
-            <i id="IconNoClick" className="bx bx-search bx-tada"></i>
+              <i id="searchIcon1"
+              className={"bx " + (!searchActive ? 'bx-search bx-tada' : 'bxs-search')} onClick={searchStyle}></i>
+              
+              <i id="IconNoClick" className="bx bx-search bx-tada"></i>
             {/* </input> */}
           </div>
         </div>
