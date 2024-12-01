@@ -68,7 +68,7 @@
 /* left right buttons */
 .btns {
     position: absolute;
-    z-index: 10;
+    /* z-index: 10; */
     top: 15%;
     right: 40px;
     font-size: 60px;

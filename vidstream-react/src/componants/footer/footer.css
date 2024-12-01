@@ -63,8 +63,9 @@ img.footer_Logo {
     display: flex;
     justify-content: end;
     gap: 5px;
-    right: 20px;
-    bottom: 20px;
+    right: 20px;    
+    bottom: -15%;
+    position: relative;
 }
 
 

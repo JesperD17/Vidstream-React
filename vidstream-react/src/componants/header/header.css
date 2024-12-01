@@ -95,7 +95,7 @@
 /* input searchbar etc. */
 #search-field {
 	border-radius: var(--search-field-border-radius);
-	background-color: transparent;
+	background-color: var(--second-color);
 	border: transparent;
 	font-family: fantasy;
 	width: calc(var(--padding-search-right) - 20px);
@@ -110,9 +110,9 @@
 #search-field:active,
 #search-field:focus {
     outline: none; 
-    border: none;  
+    /* border: none;  
     box-shadow: none; 
-    background-color: transparent;
+    background-color: transparent; */
 }
 
 #search-field::placeholder {
@@ -157,8 +157,6 @@ i.bx.bx-align-left, i.bx.hiden.bx-align-middle {
 
 	.full_search_bar {
 		width: 88%;
-        gap: 15px;
-		
 	}
 
 	i.bx.bx-align-left, i.bx.bx-align-middle {
@@ -174,11 +172,7 @@ i.bx.bx-align-left, i.bx.hiden.bx-align-middle {
 		position: relative;
 	}
 
-	#content .links a {
-		right: 10px;
-		position: relative;
-		width: auto;
-	}
+	
 
 	/* de '| link |'  */
 	#content .links a:not(:last-child)::after{
@@ -228,7 +222,7 @@ i.bx.bx-align-left, i.bx.hiden.bx-align-middle {
 	} 
 	
 	#search-field {
-		width: 90%;
+		width: 60%;
 		border: solid yellow;
 	}
 
