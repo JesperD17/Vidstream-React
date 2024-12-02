@@ -50,6 +50,11 @@
     line-height: 50px;
 	border-radius: 10px;
 	font-family: fantasy;
+	display: flex;
+}
+
+i.bx.bxs-chevron-right {
+	display: none;
 }
 
 #content .links a:not(:last-child)::after{
@@ -57,8 +62,9 @@
 	border:1px solid #e2e2e2;
 	border-width: 1px 1px 0 0;
 	position:relative; 
-	left: 9px; 
-	height:100%;
+	left: 9px;
+    height: 20px;
+    top: 30%;
   }
 
 ::marker {
@@ -167,13 +173,21 @@ i.bx.bx-align-left, i.bx.bx-align-middle {
 
 	#content .links {
 		background: transparent;
-		/* width: auto; */
     	flex-direction: column;	
-		/* right: 100px; */
 		position: relative;
+		top: 35px;
 	}
 
+	#content .links a {
+		background: var(--second-color);
+		display: flex;
+        flex-direction: row;
+	}
+		
 	
+	i.bx.bxs-chevron-right {
+		display: contents;
+	}
 
 	/* de '| link |'  */
 	#content .links a:not(:last-child)::after{
@@ -182,22 +196,36 @@ i.bx.bx-align-left, i.bx.bx-align-middle {
 
 	/* Used in footer.css */
 	#content .links a::before {
-		content: "";
-		border: 1px solid #e2e2e2;
+		content:""; 
+		border:1px solid #e2e2e2;
 		border-width: 1px 1px 0 0;
-		position: relative;
-		right: 9px;
-		height: 100%;
+		position:relative; 
+		right: 2%;
+	}
+
+	#content .links a.hover {
+		justify-content: center;
 	}
 
 	/* a {
 		width: 120px;
 	} */
 
+	#content summary {
+		left: 0;
+		width: 100%;
+	}
+
 	summary {
 		position: absolute;
 	}
 	
+	.spaceBetween {
+		width: 90vw;
+		display: flex;
+		justify-content: space-between;
+		align-items: center;
+	}
 }
 
 @media (max-width: 900px) {

@@ -3,7 +3,6 @@ import './header.css';
 
 import React, { useState, useEffect } from 'react';
 
-
 // import collapse from '../../js/collapsibleIcons';
 
 // function icons() {
@@ -12,9 +11,10 @@ import React, { useState, useEffect } from 'react';
 
 
 function Header() {
+
   // Icons onclick changes icon.
   const [menuActive, setMenuActive] = useState(false);
-  function icons() {
+  function menStyle() {
     setMenuActive(!menuActive)
   }
 
@@ -23,29 +23,33 @@ function Header() {
     setSearchActive(!searchActive)
   }
 
-  // function for screen width to show 'links a' and 'searchbar' on specific width and the nuse menuActive under specific width. 
-  // const [screenWidth, setScreenWidth] = useState(window.innerWidth);
-  useEffect(() => {
-    
-    if (window.innerWidth < 1586) {
-      // setMenuActive(!menuActive);
-      console.log("1");
-    }
-    else {
-      console.log("2")
-      setMenuActive(!menuActive);
-    }
-    
-    if (window.innerWidth < 700) {
-      console.log(window.innerWidth);
-    }
-    else {
-      console.log("aaa");
-      setSearchActive(!searchActive);
-    }
-    
-  }, [])
+  // changes things on screen width change.
+
   
+  window.addEventListener("resize", handleResize);
+  function handleResize() {
+
+    // useEffect(() => {
+      if (window.innerWidth < 1586) {
+        // setMenuActive(!menuActive);
+        console.log("1");
+      }
+      else {
+        console.log("2")
+        setMenuActive(!menuActive);
+      }
+      
+      if (window.innerWidth < 700) {
+        console.log(window.innerWidth);
+      }
+      else {
+        console.log("aaa");
+        setSearchActive(!searchActive);
+      }
+    // }, [])
+    console.log(window.innerWidth);
+    return () => window.removeEventListener("resize", handleResize);
+  }
 
   return (
     <>
@@ -61,18 +65,54 @@ function Header() {
           <div id="content">
           
               <i className={"bx " + (!menuActive ? 'bx-align-left' : 'bx-align-middle')} 
-                onClick={icons}>
+                onClick={menStyle}>
               </i>
 
             {menuActive &&
               <summary>
                 <div className="links">
-                  <a href="http://localhost/Vidstream/Vidstream/Onscreen/html/homepage.php" className="hover">HOME</a>
-                  <a href="#" className="hover">NEWS</a>
-                  <a href="#" className="hover">IN THEATERS</a>
-                  <a href="#" className="hover">COMING SOON</a>
-                  <a href="#" className="hover">CONTACT</a>
-                  <a href="#" className="hover">ADVERTISE</a>
+                  <a href="http://localhost/Vidstream/Vidstream/Onscreen/html/homepage.php" 
+                  className="hover">
+                    <div className="spaceBetween">
+                      HOME 
+                      <i class='bx bxs-chevron-right'></i>
+                    </div>
+                  </a> 
+                  <a href="#" 
+                  className="hover">
+                    <div className="spaceBetween">
+                      NEWS 
+                      <i class='bx bxs-chevron-right'></i>
+                    </div>
+                  </a>
+                  <a href="#" 
+                  className="hover">
+                    <div className="spaceBetween">
+                      IN THEATERS 
+                      <i class='bx bxs-chevron-right'></i>
+                    </div>
+                  </a>
+                  <a href="#" 
+                  className="hover">
+                    <div className="spaceBetween">
+                      COMING SOON 
+                      <i class='bx bxs-chevron-right'></i>
+                    </div>
+                  </a>
+                  <a href="#" 
+                  className="hover">
+                    <div className="spaceBetween">
+                      CONTACT 
+                      <i class='bx bxs-chevron-right'></i>
+                    </div>
+                  </a>
+                  <a href="#" 
+                  className="hover">
+                    <div className="spaceBetween">
+                      ADVERTISE 
+                      <i class='bx bxs-chevron-right'></i>
+                    </div>
+                  </a>
                 </div>
             </summary>
             }
