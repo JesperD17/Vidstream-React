@@ -145,9 +145,10 @@
 	right: 50px;
 }
 
-i.bx.bx-align-left, i.bx.hiden.bx-align-middle {
+i.bx.bx-align-left, i.bx.bx-align-middle {
 	display: none;
 }
+
 
 @media  (max-width: 1586px) {
 

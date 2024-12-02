@@ -23,6 +23,10 @@ summary2 {
     display: flex;
 }
 
+.links_title {
+    color: white;
+}
+
 .footer_links .links {
     flex-direction: column;
     display: flex;

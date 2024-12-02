@@ -1,7 +1,7 @@
 
 import './header.css';
 
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 
 
 // import collapse from '../../js/collapsibleIcons';
@@ -12,20 +12,41 @@ import React, { useState } from 'react';
 
 
 function Header() {
+  // Icons onclick changes icon.
   const [menuActive, setMenuActive] = useState(false);
-  const [searchActive, setSearchActive] = useState(false);
-
   function icons() {
     setMenuActive(!menuActive)
   }
+
+  const [searchActive, setSearchActive] = useState(false);
   function searchStyle() {
     setSearchActive(!searchActive)
   }
 
-  // function for screen width to shw 'links a' on specific width and the nuse menuActive under specific width. 
-  function screenWidth() {
+  // function for screen width to show 'links a' and 'searchbar' on specific width and the nuse menuActive under specific width. 
+  // const [screenWidth, setScreenWidth] = useState(window.innerWidth);
+  useEffect(() => {
     
-  }
+    if (window.innerWidth < 1586) {
+      // setMenuActive(!menuActive);
+      console.log("1");
+    }
+    else {
+      console.log("2")
+      setMenuActive(!menuActive);
+    }
+    
+    if (window.innerWidth < 700) {
+      console.log(window.innerWidth);
+    }
+    else {
+      console.log("aaa");
+      setSearchActive(!searchActive);
+    }
+    
+  }, [])
+  
+
   return (
     <>
     {/* Logo's */}
@@ -40,19 +61,21 @@ function Header() {
           <div id="content">
           
               <i className={"bx " + (!menuActive ? 'bx-align-left' : 'bx-align-middle')} 
-              onClick={icons}></i>
-              {menuActive &&
-            <summary>
-              <div className="links">
-                <a href="http://localhost/Vidstream/Vidstream/Onscreen/html/homepage.php" className="hover">HOME</a>
-                <a href="#" className="hover">NEWS</a>
-                <a href="#" className="hover">IN THEATERS</a>
-                <a href="#" className="hover">COMING SOON</a>
-                <a href="#" className="hover">CONTACT</a>
-                <a href="#" className="hover">ADVERTISE</a>
-              </div>
-           </summary>
-                }
+                onClick={icons}>
+              </i>
+
+            {menuActive &&
+              <summary>
+                <div className="links">
+                  <a href="http://localhost/Vidstream/Vidstream/Onscreen/html/homepage.php" className="hover">HOME</a>
+                  <a href="#" className="hover">NEWS</a>
+                  <a href="#" className="hover">IN THEATERS</a>
+                  <a href="#" className="hover">COMING SOON</a>
+                  <a href="#" className="hover">CONTACT</a>
+                  <a href="#" className="hover">ADVERTISE</a>
+                </div>
+            </summary>
+            }
           
           </div>
         </div>
@@ -60,7 +83,10 @@ function Header() {
         {/* Search bar */}
         <div className="full_search_bar">
           <i id="searchIcon1"
-          className={"bx " + (!searchActive ? 'bx-search bx-tada' : 'bxs-search')} onClick={searchStyle}></i>
+            className={"bx " + (!searchActive ? 'bx-search bx-tada' : 'bxs-search')} 
+            onClick={searchStyle}>
+          </i>
+
         {searchActive &&
           <div id="search">
             <input type="text" name="search-field" placeholder="Zoeken..." id="search-field" className="blink search-field"/>
@@ -68,7 +94,8 @@ function Header() {
               <i id="IconNoClick" className="bx bx-search bx-tada"></i>
             {/* </input> */}
           </div>
-            } 
+        } 
+
         </div>
         {/* End search bar */}
       </div>
