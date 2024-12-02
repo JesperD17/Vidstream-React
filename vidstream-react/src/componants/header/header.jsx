@@ -3,15 +3,8 @@ import './header.css';
 
 import React, { useState, useEffect } from 'react';
 
-// import collapse from '../../js/collapsibleIcons';
-
-// function icons() {
-// }
-
-
 
 function Header() {
-
   // Icons onclick changes icon.
   const [menuActive, setMenuActive] = useState(false);
   function menStyle() {
@@ -24,32 +17,32 @@ function Header() {
   }
 
   // changes things on screen width change.
+    useEffect(() => {
+      const handleResize = () => {
+        console.log("Screen width: ", window.innerWidth);
+        if (window.innerWidth > 1586) { // menu
+          setMenuActive(!menuActive);
+        } 
+        else {
+          setMenuActive(menuActive);
+        }
 
+        if (window.innerWidth > 700) { // searchbar
+          setSearchActive(!searchActive);
+        } 
+        else {
+          setSearchActive(searchActive);
+        }
+      };
   
-  window.addEventListener("resize", handleResize);
-  function handleResize() {
-
-    // useEffect(() => {
-      if (window.innerWidth < 1586) {
-        // setMenuActive(!menuActive);
-        console.log("1");
-      }
-      else {
-        console.log("2")
-        setMenuActive(!menuActive);
-      }
-      
-      if (window.innerWidth < 700) {
-        console.log(window.innerWidth);
-      }
-      else {
-        console.log("aaa");
-        setSearchActive(!searchActive);
-      }
-    // }, [])
-    console.log(window.innerWidth);
-    return () => window.removeEventListener("resize", handleResize);
-  }
+      // adds the event listener
+      window.addEventListener("resize", handleResize);
+  
+      // removes the even listener so there isnt a loop
+      return () => {
+        window.removeEventListener("resize", handleResize);
+      };
+    }, []);
 
   return (
     <>

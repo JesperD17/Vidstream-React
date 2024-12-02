@@ -53,7 +53,7 @@
 	display: flex;
 }
 
-i.bx.bxs-chevron-right {
+.spaceBetween i.bx.bxs-chevron-right {
 	display: none;
 }
 
