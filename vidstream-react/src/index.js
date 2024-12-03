@@ -10,8 +10,6 @@ import Footer from './componants/footer/footer';
 import Homepage from './componants/homepage/homePage';
 
 
-
-
 const homepage = ReactDOM.createRoot(document.getElementById('all_homepage'));
 homepage.render(
   <React.StrictMode>

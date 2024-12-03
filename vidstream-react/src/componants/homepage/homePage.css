@@ -1,0 +1,23 @@
+/* cards */
+.allCards {
+    display: flex;
+    margin: 10px;
+    gap: 10px;
+    position: relative;
+}
+
+.card {
+    background: var(--second-color);
+    border-radius: 10px;
+}
+
+.banner img {
+    object-fit: cover;
+    width: 275px;
+    height: 400px;
+    border-radius: 10px 10px 0px 0px;
+}
+
+.card_info {
+    margin: 10px;
+}
