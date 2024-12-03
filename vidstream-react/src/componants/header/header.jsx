@@ -6,43 +6,58 @@ import React, { useState, useEffect } from 'react';
 
 function Header() {
   // Icons onclick changes icon.
-  const [menuActive, setMenuActive] = useState(false);
-  function menStyle() {
+  var stateMenu = false; // refresh active icons true or false.
+  var stateSearch = false;
+  if (window.innerWidth > 1586) {
+    stateMenu = true;
+  } else {
+    stateMenu = false;
+  }
+  if (window.innerWidth > 700) { 
+    stateSearch = true;
+  } else {
+    stateSearch = false;
+  }
+
+  const [menuActive, setMenuActive] = useState(stateMenu);
+  function menuStyle() {
     setMenuActive(!menuActive)
   }
 
-  const [searchActive, setSearchActive] = useState(false);
+  const [searchActive, setSearchActive] = useState(stateSearch);
   function searchStyle() {
     setSearchActive(!searchActive)
   }
 
-  // changes things on screen width change.
-    useEffect(() => {
-      const handleResize = () => {
-        console.log("Screen width: ", window.innerWidth);
-        if (window.innerWidth > 1586) { // menu
-          setMenuActive(!menuActive);
-        } 
-        else {
-          setMenuActive(menuActive);
-        }
+  document.addEventListener("DOMContentLoaded", (event) => {
+  })
 
-        if (window.innerWidth > 700) { // searchbar
-          setSearchActive(!searchActive);
-        } 
-        else {
-          setSearchActive(searchActive);
-        }
-      };
+  // changes things on screen width change.
+  useEffect(() => {
+    const handleResize = () => {
+      console.log("Screen width = ", window.innerWidth);
+      if (window.innerWidth > 1586) { // menu higher then screen width
+        setMenuActive(!menuActive);
+      } 
+      else {
+        setMenuActive(menuActive);
+      }
+
+      if (window.innerWidth > 700) { // searchbar higher then screen width
+        setSearchActive(searchActive);
+      } 
+      else {
+        setSearchActive(!searchActive);
+      }
+    };
+    // adds the event listener
+    window.addEventListener("resize", handleResize);
+    // removes the even listener so there isnt a loop
+    return () => {
+      window.removeEventListener("resize", handleResize);
+    };
+  }, []);
   
-      // adds the event listener
-      window.addEventListener("resize", handleResize);
-  
-      // removes the even listener so there isnt a loop
-      return () => {
-        window.removeEventListener("resize", handleResize);
-      };
-    }, []);
 
   return (
     <>
@@ -58,7 +73,7 @@ function Header() {
           <div id="content">
           
               <i className={"bx " + (!menuActive ? 'bx-align-left' : 'bx-align-middle')} 
-                onClick={menStyle}>
+                onClick={menuStyle}>
               </i>
 
             {menuActive &&
@@ -113,26 +128,21 @@ function Header() {
           </div>
         </div>
 
-        {/* Search bar */}
+        {/* Search bar, icons for searchbar */}
         <div className="full_search_bar">
           <i id="searchIcon1"
             className={"bx " + (!searchActive ? 'bx-search bx-tada' : 'bxs-search')} 
             onClick={searchStyle}>
           </i>
-
         {searchActive &&
           <div id="search">
             <input type="text" name="search-field" placeholder="Zoeken..." id="search-field" className="blink search-field"/>
-              
               <i id="IconNoClick" className="bx bx-search bx-tada"></i>
             {/* </input> */}
           </div>
         } 
-
         </div>
-        {/* End search bar */}
       </div>
-      {/* End link bar */}
 
     </>
 
