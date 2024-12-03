@@ -37,10 +37,10 @@ function Header() {
     const handleResize = () => {
       console.log("Screen width = ", window.innerWidth);
       if (window.innerWidth > 1586) { // menu higher then screen width
-        setMenuActive(!menuActive);
+        setMenuActive(menuActive);
       } 
       else {
-        setMenuActive(menuActive);
+        setMenuActive(!menuActive);
       }
 
       if (window.innerWidth > 700) { // searchbar higher then screen width
@@ -60,7 +60,7 @@ function Header() {
   
 
   return (
-    <>
+  <div id="navigation">
     {/* Logo's */}
      <a href="http://localhost/Vidstream/Vidstream/Onscreen/html/homepage.php">
       <img id="logo" src="../pics/2e logo kopie.png"/>
@@ -144,7 +144,7 @@ function Header() {
         </div>
       </div>
 
-    </>
+    </div>
 
 
   );

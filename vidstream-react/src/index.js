@@ -2,30 +2,23 @@ import './css/general.css';
 import React from 'react';
 import ReactDOM from 'react-dom/client';
 
+// standard components
 import Header from './componants/header/header';
 import Footer from './componants/footer/footer';
-import Slideshow from './htmlStructure/slideshow';
+
+// pages components
+import Homepage from './componants/homepage/homePage';
 
 
 
-const header = ReactDOM.createRoot(document.getElementById('navigation'));
-header.render(
+
+const homepage = ReactDOM.createRoot(document.getElementById('all_homepage'));
+homepage.render(
   <React.StrictMode>
     <Header />
-  </React.StrictMode>
-);
-
-const slideshow = ReactDOM.createRoot(document.getElementById('slideshow'));
-slideshow.render(
-  <React.StrictMode>
-    <Slideshow />
-  </React.StrictMode>
-);
-
-const footer = ReactDOM.createRoot(document.getElementById('footer'));
-footer.render(
-  <React.StrictMode>
+      <Homepage />
     <Footer />
   </React.StrictMode>
 );
+
 

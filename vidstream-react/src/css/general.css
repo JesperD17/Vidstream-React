@@ -35,5 +35,5 @@ i {
 }
 
 .hover:hover {
-    color: white !important;
+    color: var(--fourth-color) !important;
 }
