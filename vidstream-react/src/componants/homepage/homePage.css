@@ -3,12 +3,32 @@
     display: flex;
     margin: 10px;
     gap: 10px;
+    overflow: auto;
     position: relative;
+    padding-bottom: 10px;
+
+}
+
+.allCards:hover {
+    cursor: grab;
+}
+
+.allCards:active {
+    cursor: grabbing;
 }
 
 .card {
     background: var(--second-color);
     border-radius: 10px;
+    user-select: none;
+    scale: 0.98;
+    transition: all 300ms ease-in-out;
+}
+
+.card:hover {
+    /* scale:1; */
+    cursor:pointer;
+    scale: 1;
 }
 
 .banner img {
@@ -20,4 +40,14 @@
 
 .card_info {
     margin: 10px;
+    transition: all 100ms ease-in-out;
+}
+
+.card_info:hover {
+    cursor: grab;
+    scale: 1.02;
+}
+
+.card_info:active {
+    cursor: grabbing;
 }

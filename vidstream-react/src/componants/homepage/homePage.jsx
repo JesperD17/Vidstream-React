@@ -1,47 +1,68 @@
 
 import './homePage.css';
 
-import React, { useEffect } from 'react';
+import React, { useRef, useState } from 'react';
 
 
 
 function Homepage() {
-    // aantal cards preloaded
-    const totalItems = 8;
+// number of cards preloaded
+    const totalItems = 20;
     const items = new Array(totalItems).fill(null);
-    const card = "card ";
 
-    // slide function
-    // handleMouseMove = (event) => {
-    //     console.log('Mouse position:', event.clientX, event.clientY);
-        
-    //   };
+// slide cards function
+    const containerRef = useRef(null);
 
-    // useEffect(() => {
-    //     window.addEventListener("mousemove", handleMouseMove );
-    //     console.log();
-    // })
+    const [isDragging, setIsDragging] = useState(false); // when holding mouse or letting go makes the images follow or not.
+    const [startX, setStartX] = useState(0);
+    const [scrollLeft, setScrollLeft] = useState(0);
 
-    function handleMouseMove(e) {
-        
-    }
+    // e = on action, example when handleMouseDown is triggered 'e' is read.
+    const handleMouseDown = (e) => {
+        console.log(e);
+        const container = containerRef.current; // grabs the current activated div.
+        setIsDragging(true); // sticks to mouse.
+        setStartX(e.pageX - container.offsetLeft); 
+        setScrollLeft(container.scrollLeft);
+    };
+
+    const handleMouseMove = (e) => {
+        if (!isDragging) return;
+        e.preventDefault();
+        const container = containerRef.current;
+        const x = e.pageX - container.offsetLeft;
+        const walk = (x - startX) * 2;
+        container.scrollLeft = scrollLeft - walk;
+    };
+
+    const handleMouseUpOrLeave = () => {
+        setIsDragging(false);
+    };
 
     return (
-        <div className="allCards">
-            {items.map((_, idx) => 
-            <div className={card + idx}
-            onMouseMove={this.handleMouseMove}>
+    <>
+        <div className={"allCards"}
+        ref={containerRef}
+        onMouseDown={handleMouseDown}
+        onMouseMove={handleMouseMove}
+        onMouseUp={handleMouseUpOrLeave} 
+        onMouseLeave={handleMouseUpOrLeave}
+      >
+            {items.map((any, number) => // 'any' is used when 'totalItems' = null.
+            <div className={"card " + number }
+            >
                 <div className="banner">
-                    <img src="../pics/dummy image.png"/>
+                    <img src="../pics/dummy image.png" draggable="false" />
                 </div>
                 <div className="card_info">
-                    <div className="titel">titel</div>
+                    <div className="titel">titel {number}</div>
                     <div className="review">review</div>
                     <div className="duration">duration</div>
                     <div className="year">year</div>
                 </div>
             </div>)}
         </div>
+    </>
     );
 }
 

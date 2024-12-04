@@ -37,3 +37,23 @@ i {
 .hover:hover {
     color: var(--fourth-color) !important;
 }
+
+/* scrollbar style */
+::-webkit-scrollbar {
+	width: 7px;
+	height: 7px;
+}
+
+/* Handle */
+::-webkit-scrollbar-thumb {
+	background: var(--fourth-color);
+	border-radius: 12px;
+}
+
+/* Handle on hover */
+::-webkit-scrollbar-thumb:hover {
+	background: var(--third-color);
+}
+::-webkit-scrollbar:vertical {
+	background: transparent;
+}
