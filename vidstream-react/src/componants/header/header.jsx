@@ -83,42 +83,42 @@ function Header() {
                   className="hover">
                     <div className="spaceBetween">
                       HOME 
-                      <i class='bx bxs-chevron-right'></i>
+                      <i className='bx bxs-chevron-right'></i>
                     </div>
                   </a> 
                   <a href="#" 
                   className="hover">
                     <div className="spaceBetween">
                       NEWS 
-                      <i class='bx bxs-chevron-right'></i>
+                      <i className='bx bxs-chevron-right'></i>
                     </div>
                   </a>
                   <a href="#" 
                   className="hover">
                     <div className="spaceBetween">
                       IN THEATERS 
-                      <i class='bx bxs-chevron-right'></i>
+                      <i className='bx bxs-chevron-right'></i>
                     </div>
                   </a>
                   <a href="#" 
                   className="hover">
                     <div className="spaceBetween">
                       COMING SOON 
-                      <i class='bx bxs-chevron-right'></i>
+                      <i className='bx bxs-chevron-right'></i>
                     </div>
                   </a>
                   <a href="#" 
                   className="hover">
                     <div className="spaceBetween">
                       CONTACT 
-                      <i class='bx bxs-chevron-right'></i>
+                      <i className='bx bxs-chevron-right'></i>
                     </div>
                   </a>
                   <a href="#" 
                   className="hover">
                     <div className="spaceBetween">
                       ADVERTISE 
-                      <i class='bx bxs-chevron-right'></i>
+                      <i className='bx bxs-chevron-right'></i>
                     </div>
                   </a>
                 </div>

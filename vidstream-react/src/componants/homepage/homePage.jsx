@@ -40,17 +40,15 @@ function Homepage() {
     };
 
     return (
-    <>
         <div className={"allCards"}
         ref={containerRef}
         onMouseDown={handleMouseDown}
         onMouseMove={handleMouseMove}
         onMouseUp={handleMouseUpOrLeave} 
         onMouseLeave={handleMouseUpOrLeave}
-      >
+        >
             {items.map((any, number) => // 'any' is used when 'totalItems' = null.
-            <div className={"card " + number }
-            >
+            <div className={"card " + number } key={number}>
                 <div className="banner">
                     <img src="../pics/dummy image.png" draggable="false" />
                 </div>
@@ -60,9 +58,9 @@ function Homepage() {
                     <div className="duration">duration</div>
                     <div className="year">year</div>
                 </div>
-            </div>)}
+            </div>
+            )}
         </div>
-    </>
     );
 }
 
