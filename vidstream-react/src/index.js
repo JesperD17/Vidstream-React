@@ -2,22 +2,22 @@ import './css/general.css';
 import React from 'react';
 import ReactDOM from 'react-dom/client';
 
-import LoadInAPI from './componants/api/api';
+import Swr from './componants/api/api';
 
 // standard components
 import Header from './componants/header/header';
 import Footer from './componants/footer/footer';
 
 // pages components
-import Homepage from './componants/homepage/homePage';
+// import Homepage from './componants/homepage/homePage';
 
 
 const homepage = ReactDOM.createRoot(document.getElementById('all_homepage'));
 homepage.render(
   <React.StrictMode>
-    <LoadInAPI />
+    <Swr />
     <Header />
-      <Homepage />
+      {/* <Homepage /> */}
     <Footer />
   </React.StrictMode>
 );

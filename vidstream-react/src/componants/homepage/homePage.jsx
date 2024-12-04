@@ -3,9 +3,25 @@ import './homePage.css';
 
 import React, { useRef, useState } from 'react';
 
+import useSWR from "swr";
 
+// import Swr from '../api/api';
+function Homepage() {            
+    
+    // Loads Api
+    const Swr = () => {
+        const fetcher = (...args) => fetch(...args).then((res) => res.json());
+        const {
+            data: allMovies,
+            error,
+            isValidating,
+        } = useSWR('https://vidstream-api.vercel.app/home', fetcher);
+        console.log(allMovies)
+    }
+    
+    Swr()      
 
-function Homepage() {
+            
 // number of cards preloaded
     const totalItems = 20;
     const items = new Array(totalItems).fill(null);
@@ -39,7 +55,10 @@ function Homepage() {
         setIsDragging(false);
     };
 
+    
+    // console.log(allMovies); 
     return (
+        
         <div className={"allCards"}
         ref={containerRef}
         onMouseDown={handleMouseDown}
@@ -47,6 +66,9 @@ function Homepage() {
         onMouseUp={handleMouseUpOrLeave} 
         onMouseLeave={handleMouseUpOrLeave}
         >
+
+            
+
             {items.map((any, number) => // 'any' is used when 'totalItems' = null.
             <div className={"card " + number } key={number}>
                 <div className="banner">
@@ -60,6 +82,7 @@ function Homepage() {
                 </div>
             </div>
             )}
+
         </div>
     );
 }
