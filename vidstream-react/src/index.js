@@ -2,24 +2,27 @@ import './css/general.css';
 import React from 'react';
 import ReactDOM from 'react-dom/client';
 
-import Swr from './componants/api/api';
+// import Swr from './componants/api/api';
+// import { tab } from '@testing-library/user-event/dist/tab';
 
 // standard components
 import Header from './componants/header/header';
 import Footer from './componants/footer/footer';
+import Swr from './componants/api/api';
 
 // pages components
-// import Homepage from './componants/homepage/homePage';
+import Homepage from './componants/homepage/homePage';
 
-
+<tab forceRenderTabPanel={true} />
 const homepage = ReactDOM.createRoot(document.getElementById('all_homepage'));
 homepage.render(
-  <React.StrictMode>
-    <Swr />
+  <div>
     <Header />
-      {/* <Homepage /> */}
+      <Homepage />
+      <Swr />
     <Footer />
-  </React.StrictMode>
+  </div>
+  
 );
 
 

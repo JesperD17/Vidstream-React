@@ -3,30 +3,17 @@ import './homePage.css';
 
 import React, { useRef, useState } from 'react';
 
-import useSWR from "swr";
+// import Swr from '../api/api';
+
 
 // import Swr from '../api/api';
-function Homepage() {            
-    
-    // Loads Api
-    const Swr = () => {
-        const fetcher = (...args) => fetch(...args).then((res) => res.json());
-        const {
-            data: allMovies,
-            error,
-            isValidating,
-        } = useSWR('https://vidstream-api.vercel.app/home', fetcher);
-        console.log(allMovies)
-    }
-    
-    Swr()      
+function Homepage() {
 
-            
-// number of cards preloaded
+    // number of cards preloaded
     const totalItems = 20;
     const items = new Array(totalItems).fill(null);
 
-// slide cards function
+    // slide cards function
     const containerRef = useRef(null);
 
     const [isDragging, setIsDragging] = useState(false); // when holding mouse or letting go makes the images follow or not.
@@ -38,7 +25,7 @@ function Homepage() {
         console.log(e);
         const container = containerRef.current; // grabs the current activated div.
         setIsDragging(true); // sticks to mouse.
-        setStartX(e.pageX - container.offsetLeft); 
+        setStartX(e.pageX - container.offsetLeft);
         setScrollLeft(container.scrollLeft);
     };
 
@@ -55,33 +42,44 @@ function Homepage() {
         setIsDragging(false);
     };
 
+    // Swr()
+    // if api is loaded
     
-    // console.log(allMovies); 
+    // if (isValidating = true) {
+    //     console.log("loading")
+    // } else {
+    //     console.log("not loading")
+    // }
     return (
-        
+
         <div className={"allCards"}
-        ref={containerRef}
-        onMouseDown={handleMouseDown}
-        onMouseMove={handleMouseMove}
-        onMouseUp={handleMouseUpOrLeave} 
-        onMouseLeave={handleMouseUpOrLeave}
+            onMouseDown={handleMouseDown}
+            onMouseMove={handleMouseMove}
+            onMouseUp={handleMouseUpOrLeave}
+            onMouseLeave={handleMouseUpOrLeave}
         >
 
-            
-
-            {items.map((any, number) => // 'any' is used when 'totalItems' = null.
-            <div className={"card " + number } key={number}>
-                <div className="banner">
-                    <img src="../pics/dummy image.png" draggable="false" />
-                </div>
-                <div className="card_info">
-                    <div className="titel">titel {number}</div>
-                    <div className="review">review</div>
-                    <div className="duration">duration</div>
-                    <div className="year">year</div>
-                </div>
-            </div>
-            )}
+            {
+                items && items.length > 0 ? (
+                    items.map((any, number) => (
+                        <div className={"card " + number} key={number}>
+                            <div className="banner">
+                                <img src="../pics/dummy image.png" draggable="false" />
+                            </div>
+                            <div className="card_info">
+                                <div className="titel">titel {number}</div>
+                                <div className="review">review</div>
+                                <div className="duration">duration</div>
+                                <div className="year">year</div>
+                            </div>
+                        </div>
+                    ))
+                ) : (
+                    <div className="no-items">
+                        <p>No items available.</p>
+                    </div>
+                )
+            }
 
         </div>
     );
