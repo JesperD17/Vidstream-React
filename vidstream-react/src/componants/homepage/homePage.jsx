@@ -62,6 +62,7 @@ function Homepage() {
             {
                 items && items.length > 0 ? (
                     items.map((any, number) => (
+
                         <div className={"card " + number} key={number}>
                             <div className="banner">
                                 <img src="../pics/dummy image.png" draggable="false" />
@@ -74,6 +75,7 @@ function Homepage() {
                             </div>
                         </div>
                     ))
+                    
                 ) : (
                     <div className="no-items">
                         <p>No items available.</p>

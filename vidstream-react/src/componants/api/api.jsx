@@ -14,25 +14,35 @@ const fetcher = (...args) => fetch(...args).then((res) => res.json());
   if (isValidating) return <div className="Loading">Loading...</div>;
   
   console.log(allMovies);
-  // console.log(allMovies.spotlight[0].poster);
+  console.log(allMovies.latestMovies.length);
 
-  for (let index = 0; index < allMovies.spotlight.length; index++) {
-    console.log(index);  
+
+
+  const totalItems = allMovies.latestMovies.length;
+  const items = new Array(totalItems).fill(null);
+
+  // for (let index = 0; index < allMovies.latestMovies.length; index++) {
 
     return (
-      <div className="card">
-          <div className="banner">
-              <img src={allMovies.spotlight[1].poster} draggable="false" />
+      <div className='allCards'>
+        { items.map((any, number) => (
+
+          <div className="card">
+            <div className="banner">
+                <img src={allMovies.latestMovies[number].poster} draggable="false" />
+            </div>
+            <div className="card_info">
+                <div className="titel">{allMovies.latestMovies[number].title} </div>
+                <div className="review">{allMovies.latestMovies[number].stats.rating}</div>
+                <div className="duration">{allMovies.latestMovies[number].stats.duration}</div>
+                <div className="year">{allMovies.latestMovies[number].stats.year}</div>
+            </div>
           </div>
-          <div className="card_info">
-              <div className="titel">titel </div>
-              <div className="review">review</div>
-              <div className="duration">duration</div>
-              <div className="year">year</div>
-          </div>
+
+        ))}
       </div>
     )
-  }
+  // }
 };
 
 

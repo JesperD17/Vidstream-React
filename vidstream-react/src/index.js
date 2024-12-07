@@ -13,7 +13,7 @@ import Swr from './componants/api/api';
 // pages components
 import Homepage from './componants/homepage/homePage';
 
-<tab forceRenderTabPanel={true} />
+<tab forceRenderTabPanel={false} />
 const homepage = ReactDOM.createRoot(document.getElementById('all_homepage'));
 homepage.render(
   <div>
