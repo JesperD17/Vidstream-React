@@ -24,7 +24,8 @@ const fetcher = (...args) => fetch(...args).then((res) => res.json());
   // for (let index = 0; index < allMovies.latestMovies.length; index++) {
 
     return (
-      <div className='allCards'>
+      <div className='allCards'
+      > 
         { items.map((any, number) => (
 
           <div className="card">
