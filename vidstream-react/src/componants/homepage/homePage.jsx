@@ -1,12 +1,8 @@
 
 import './homePage.css';
 
+import { Drag } from '../global functions/draggableItems';
 
-import { handleMouseDown, handleMouseMove, handleMouseUpOrLeave, containerRef } from '../global functions/draggableItems';
-// import Swr from '../api/api';
-
-
-// import Swr from '../api/api';
 function Homepage() {
 
 // number of cards preloaded
@@ -14,39 +10,50 @@ function Homepage() {
     const items = new Array(totalItems).fill(null);
 
 
+function drag({handleMouseDown, handleMouseMove, handleMouseUpOrLeave}) {
+    handleMouseDown = {handleMouseDown};
+    handleMouseMove = {handleMouseMove};
+    handleMouseUpOrLeave = {handleMouseUpOrLeave};
+}
+
     return (
+        <>
+            <Drag
+            handleMouseDown = {handleMouseDown}
 
-        <div className={"allCards"}
-        ref={containerRef}
-            onMouseDown={handleMouseDown}
-            onMouseMove={handleMouseMove}
-            onMouseUp={handleMouseUpOrLeave}
-            onMouseLeave={handleMouseUpOrLeave}
-        >
-
-            {
-                items && items.length > 0 ? (
-                    items.map((any, number) => (
-                        <div className={"card " + number} key={number}>
-                            <div className="banner">
-                                <img src="../pics/dummy image.png" draggable="false" />
+            />
+            
+            <div className={"allCards"}
+            ref={containerRef}
+                onMouseDown={handleMouseDown}
+                onMouseMove={handleMouseMove}
+                onMouseUp={handleMouseUpOrLeave}
+                onMouseLeave={handleMouseUpOrLeave}
+            >
+                {
+                    items && items.length > 0 ? (
+                        items.map((any, number) => (
+                            <div className={"card " + number} key={number}>
+                                <div className="banner">
+                                    <img src="../pics/dummy image.png" draggable="false" />
+                                </div>
+                                <div className="card_info">
+                                    <div className="titel">titel {number}</div>
+                                    <div className="review">review</div>
+                                    <div className="duration">duration</div>
+                                    <div className="year">year</div>
+                                </div>
                             </div>
-                            <div className="card_info">
-                                <div className="titel">titel {number}</div>
-                                <div className="review">review</div>
-                                <div className="duration">duration</div>
-                                <div className="year">year</div>
-                            </div>
+                        ))
+                    ) : (
+                        <div className="no-items">
+                            <p>No items available.</p>
                         </div>
-                    ))
-                ) : (
-                    <div className="no-items">
-                        <p>No items available.</p>
-                    </div>
-                )
-            }
+                    )
+                }
 
-        </div>
+            </div>
+        </>
     );
 }
 

@@ -1,17 +1,19 @@
+import React, {  useRef, useState } from 'react';
 
-import React, { forwardRef, useRef, useState } from 'react';
 
-    // slide cards function
-const SlideCards = forwardRef(function MyInput(props, ref) { 
+// slide cards function
 
-    export const containerRef = useRef(null);
+
+export const Drag = ({ handleMouseDown, handleMouseMove, handleMouseUpOrLeave }) => {
+
+    const containerRef = useRef(null);
 
     const [isDragging, setIsDragging] = useState(false); // when holding mouse or letting go makes the images follow or not.
     const [startX, setStartX] = useState(0);
     const [scrollLeft, setScrollLeft] = useState(0);
 
     // e = on action, example when handleMouseDown is triggered 'e' is read.
-    export const handleMouseDown = (e) => {
+    const handleMouseDown = (e) => {
         console.log(e);
         const container = containerRef.current; // grabs the current activated div.
         setIsDragging(true); // sticks to mouse.
@@ -19,7 +21,7 @@ const SlideCards = forwardRef(function MyInput(props, ref) {
         setScrollLeft(container.scrollLeft);
     };
 
-    export const handleMouseMove = (e) => {
+    const handleMouseMove = (e) => {
         if (!isDragging) return;
         e.preventDefault();
         const container = containerRef.current;
@@ -28,13 +30,11 @@ const SlideCards = forwardRef(function MyInput(props, ref) {
         container.scrollLeft = scrollLeft - walk;
     };
 
-    export const handleMouseUpOrLeave = () => {
+    const handleMouseUpOrLeave = () => {
         setIsDragging(false);
     };
 
-}, [])
-
-
+}
 // import items in file:
 // import { handleMouseDown, handleMouseMove, handleMouseUpOrLeave, containerRef } from '../global functions/draggableItems';
 
