@@ -8,7 +8,7 @@ import Footer from './componants/footer/footer';
 import Swr from './componants/api/api';
 
 // pages components
-import Homepage from './componants/homepage/homePage';
+// import Homepage from './componants/homepage/homePage';
 
 
 
@@ -17,7 +17,7 @@ const homepage = ReactDOM.createRoot(document.getElementById('all_homepage'));
 homepage.render(
   <div>
     <Header />
-      <Homepage />
+      {/* <Homepage /> */}
       <Swr />
     <Footer />
   </div>

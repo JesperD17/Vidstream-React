@@ -1,7 +1,7 @@
 
 import './homePage.css';
 
-import { Drag } from '../global functions/draggableItems';
+import Drag from '../global functions/draggableItems';
 
 function Homepage() {
 
@@ -10,19 +10,12 @@ function Homepage() {
     const items = new Array(totalItems).fill(null);
 
 
-function drag({handleMouseDown, handleMouseMove, handleMouseUpOrLeave}) {
-    handleMouseDown = {handleMouseDown};
-    handleMouseMove = {handleMouseMove};
-    handleMouseUpOrLeave = {handleMouseUpOrLeave};
-}
+// importing drag function
+const { containerRef, handleMouseDown, handleMouseMove, handleMouseUpOrLeave } = Drag();
 
+Drag()
     return (
-        <>
-            <Drag
-            handleMouseDown = {handleMouseDown}
-
-            />
-            
+        <>  
             <div className={"allCards"}
             ref={containerRef}
                 onMouseDown={handleMouseDown}

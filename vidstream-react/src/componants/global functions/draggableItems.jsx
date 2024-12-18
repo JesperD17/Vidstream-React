@@ -1,10 +1,8 @@
-import React, {  useRef, useState } from 'react';
-
+import {  useRef, useState } from 'react';
 
 // slide cards function
 
-
-export const Drag = ({ handleMouseDown, handleMouseMove, handleMouseUpOrLeave }) => {
+export default function Drag(props) {
 
     const containerRef = useRef(null);
 
@@ -34,15 +32,21 @@ export const Drag = ({ handleMouseDown, handleMouseMove, handleMouseUpOrLeave })
         setIsDragging(false);
     };
 
-}
-// import items in file:
-// import { handleMouseDown, handleMouseMove, handleMouseUpOrLeave, containerRef } from '../global functions/draggableItems';
+    return {
+        containerRef, handleMouseDown, handleMouseMove, handleMouseUpOrLeave
+    };
 
-// html items:
-// <div className={"allCards"}
+}
+// import:
+// import Drag from '../global functions/draggableItems';
+
+
+// jsx:
+// const { containerRef, handleMouseDown, handleMouseMove, handleMouseUpOrLeave } = Drag();
+
+// inside parent div:
 // ref={containerRef}
 // onMouseDown={handleMouseDown}
 // onMouseMove={handleMouseMove}
 // onMouseUp={handleMouseUpOrLeave}
 // onMouseLeave={handleMouseUpOrLeave}
-// ></div>
