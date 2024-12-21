@@ -1,5 +1,5 @@
 
-import './homePage.css';
+// import './homePage.css';
 
 import Drag from '../global functions/draggableItems';
 

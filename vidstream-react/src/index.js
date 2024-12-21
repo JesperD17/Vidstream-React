@@ -1,4 +1,5 @@
 import './css/general.css';
+import './css/cards.css';
 import React from 'react';
 import ReactDOM from 'react-dom/client';
 
@@ -8,16 +9,16 @@ import Footer from './componants/footer/footer';
 import Swr from './componants/api/api';
 
 // pages components
-// import Homepage from './componants/homepage/homePage';
+import Homepage from './componants/homepage/homePage';
 
 
 
-<tab forceRenderTabPanel={false} />
+<tab forceRenderTabPanel={true} />
 const homepage = ReactDOM.createRoot(document.getElementById('all_homepage'));
 homepage.render(
   <div>
     <Header />
-      {/* <Homepage /> */}
+      <Homepage />
       <Swr />
     <Footer />
   </div>

@@ -1,8 +1,8 @@
-import {  useRef, useState } from 'react';
+import { useRef, useState } from 'react';
 
 // slide cards function
 
-export default function Drag(props) {
+function useDrag() {
 
     const containerRef = useRef(null);
 
@@ -37,12 +37,14 @@ export default function Drag(props) {
     };
 
 }
+
+export default useDrag;
 // import:
-// import Drag from '../global functions/draggableItems';
+// import useDrag from '../global functions/draggableItems';
 
 
 // jsx:
-// const { containerRef, handleMouseDown, handleMouseMove, handleMouseUpOrLeave } = Drag();
+// const { containerRef, handleMouseDown, handleMouseMove, handleMouseUpOrLeave } = useDrag();
 
 // inside parent div:
 // ref={containerRef}

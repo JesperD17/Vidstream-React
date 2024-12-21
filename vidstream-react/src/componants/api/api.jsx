@@ -1,5 +1,5 @@
+import useDrag from '../global functions/draggableItems';
 import useSWR from 'swr';
-import Drag from '../global functions/draggableItems';
 
 // created function to handle API request
 const fetcher = (...args) => fetch(...args).then((res) => res.json());
@@ -11,6 +11,9 @@ function Swr() {
     isValidating,
   } = useSWR('https://vidstream-api.vercel.app/home', fetcher);
   
+  // drag function
+  const { containerRef, handleMouseDown, handleMouseMove, handleMouseUpOrLeave } = useDrag();
+
   // Handles error and loading state
   if (error) return <div className='failed'>failed to load</div>;
   if (isValidating) return <div className="Loading">Loading...</div>;
@@ -20,22 +23,24 @@ function Swr() {
   
   const totalItems = allMovies.latestMovies.length;
   const items = new Array(totalItems).fill(null);
+
+  // if array has "?", function changes it to empty array.
   
-  // drag function
-  const { containerRef, handleMouseDown, handleMouseMove, handleMouseUpOrLeave } = Drag();
-  
+
   return (
     <>
-      <div className='allCards'
-      ref={containerRef}
-      onMouseDown={handleMouseDown}
-      onMouseMove={handleMouseMove}
-      onMouseUp={handleMouseUpOrLeave}
-      onMouseLeave={handleMouseUpOrLeave}
+      <div 
+        className='allCards'
+        ref={containerRef}
+        onMouseDown={handleMouseDown}
+        onMouseMove={handleMouseMove}
+        onMouseUp={handleMouseUpOrLeave}
+        onMouseLeave={handleMouseUpOrLeave}
       >
         {items.map((any, number) => (
           
-          <div className="card">
+          <div className="card"
+          key={number}>
             <div className="banner">
               <img src={allMovies.latestMovies[number].poster} draggable="false" />
             </div>
@@ -50,8 +55,8 @@ function Swr() {
         ))}
       </div>
     </>
-  )
-};
+  );
+}
 
 
 export default Swr;
