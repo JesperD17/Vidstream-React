@@ -13,7 +13,6 @@ import Homepage from './componants/homepage/homePage';
 
 
 
-<tab forceRenderTabPanel={true} />
 const homepage = ReactDOM.createRoot(document.getElementById('all_homepage'));
 homepage.render(
   <div>
@@ -21,8 +20,7 @@ homepage.render(
       <Homepage />
       <Swr />
     <Footer />
-  </div>
-  
+  </div> 
 );
 
 

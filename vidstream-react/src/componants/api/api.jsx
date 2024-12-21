@@ -25,7 +25,28 @@ function Swr() {
   const items = new Array(totalItems).fill(null);
 
   // if array has "?", function changes it to empty array.
+  // allMovies.latestMovies.map(number)
+  // if (allMovies.latestMovies[1].stats.rating.includes("?")) {
+  //   console.log("JKA")
+
+  // }
+  console.log(totalItems);
+  // var newReviews = "";
+  var newReviews;
+    var oldReviews = allMovies.latestMovies[number].stats.rating;
+  console.log(oldReviews)
+    if(oldReviews.includes("?")) {
+      console.log("JA")
+      newReviews = oldReviews.replace("?", 'EMPTY');
+    } else {
+      newReviews = oldReviews;
+    }
+
+
   
+
+  // if (oldReviews)
+  // allMovies.latestMovies[number].stats.rating
 
   return (
     <>
@@ -46,7 +67,14 @@ function Swr() {
             </div>
             <div className="card_info">
               <div className="titel">{allMovies.latestMovies[number].title} </div>
-              <div className="review">{allMovies.latestMovies[number].stats.rating}</div>
+
+              {items.map((any, number) => (
+                <div className="review"
+                key={number}
+                >{newReviews}</div>
+              ))}
+
+
               <div className="duration">{allMovies.latestMovies[number].stats.duration}</div>
               <div className="year">{allMovies.latestMovies[number].stats.year}</div>
             </div>
