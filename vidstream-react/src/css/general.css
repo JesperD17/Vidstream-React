@@ -23,7 +23,8 @@
 body, html {
     background: var(--first-color);
 	margin: 0px;
-	font-family: fantasy;
+	font-family: sans-serif;
+    font-weight: bold;
 }
 
 #shell {
