@@ -18,35 +18,27 @@ function Swr() {
   if (error) return <div className='failed'>failed to load</div>;
   if (isValidating) return <div className="Loading">Loading...</div>;
   
+  // console logging api etc.
   console.log(allMovies);
   console.log(allMovies.latestMovies.length);
   
-  const totalItems = allMovies.latestMovies.length;
-  const items = new Array(totalItems).fill(null);
+  // repeating the card div structure to the amount of movies in api.
+  const moviesLength = allMovies.latestMovies.length;
+  const repeatCardDivs = new Array(moviesLength).fill(null);
 
-  // if array has "?", function changes it to empty array.
-  // allMovies.latestMovies.map(number)
-  // if (allMovies.latestMovies[1].stats.rating.includes("?")) {
-  //   console.log("JKA")
+// if a string has "?", function changes it to empty string.
+let ratings = []; // making an object for updated strings.
+var movieRating;
 
-  // }
-  console.log(totalItems);
-  // var newReviews = "";
-  var newReviews;
-    var oldReviews = allMovies.latestMovies[number].stats.rating;
-  console.log(oldReviews)
-    if(oldReviews.includes("?")) {
-      console.log("JA")
-      newReviews = oldReviews.replace("?", 'EMPTY');
-    } else {
-      newReviews = oldReviews;
-    }
+  for (let i = 0; i < allMovies.latestMovies.length; i++) {
+    movieRating = allMovies.latestMovies[i].stats.rating;
 
-
-  
-
-  // if (oldReviews)
-  // allMovies.latestMovies[number].stats.rating
+    if(movieRating == "?") {
+      movieRating = "EMPTY"; // empties string
+    } 
+    // sends the new strings to the object
+    ratings.push(movieRating);
+  }
 
   return (
     <>
@@ -58,7 +50,7 @@ function Swr() {
         onMouseUp={handleMouseUpOrLeave}
         onMouseLeave={handleMouseUpOrLeave}
       >
-        {items.map((any, number) => (
+        {repeatCardDivs.map((_, number) => (
           
           <div className="card"
           key={number}>
@@ -67,14 +59,7 @@ function Swr() {
             </div>
             <div className="card_info">
               <div className="titel">{allMovies.latestMovies[number].title} </div>
-
-              {items.map((any, number) => (
-                <div className="review"
-                key={number}
-                >{newReviews}</div>
-              ))}
-
-
+              <div className="review">{ratings[number]}</div> 
               <div className="duration">{allMovies.latestMovies[number].stats.duration}</div>
               <div className="year">{allMovies.latestMovies[number].stats.year}</div>
             </div>
