@@ -1,9 +1,10 @@
 
 // import './homePage.css';
+// import './skeleton.css';
 
 import Drag from '../global functions/draggableItems';
 
-function Homepage() {
+function Skeleton() {
 
 // number of cards preloaded
     const totalItems = 20;
@@ -16,6 +17,7 @@ const { containerRef, handleMouseDown, handleMouseMove, handleMouseUpOrLeave } =
 Drag()
     return (
         <>  
+        <link href='./skeleton.css' rel='stylesheet'/>
             <div className={"allCards"}
             ref={containerRef}
                 onMouseDown={handleMouseDown}
@@ -28,7 +30,7 @@ Drag()
                         items.map((any, number) => (
                             <div className={"card " + number} key={number}>
                                 <div className="banner">
-                                    <img src="../pics/dummy image.png" draggable="false" />
+                                    <img onerror="display='none'" draggable="false" /> {/* hides the broken image icon */}
                                 </div>
                                 <div className="card_info">
                                     <div className="titel">titel {number}</div>
@@ -50,4 +52,4 @@ Drag()
     );
 }
 
-export default Homepage;
+export default Skeleton;

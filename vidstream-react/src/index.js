@@ -1,15 +1,14 @@
 import './css/general.css';
-import './css/cards.css';
 import React from 'react';
 import ReactDOM from 'react-dom/client';
 
 // standard components
 import Header from './componants/header/header';
 import Footer from './componants/footer/footer';
-import Swr from './componants/api/api';
+import Homepage from './componants/api/Allapi';
 
 // pages components
-import Homepage from './componants/homepage/homePage';
+import Skeleton from './componants/skeleton/skeleton';
 
 
 
@@ -17,8 +16,8 @@ const homepage = ReactDOM.createRoot(document.getElementById('all_homepage'));
 homepage.render(
   <div>
     <Header />
+      <Skeleton />
       <Homepage />
-      <Swr />
     <Footer />
   </div> 
 );

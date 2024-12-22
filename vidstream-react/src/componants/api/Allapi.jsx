@@ -1,22 +1,23 @@
 import useDrag from '../global functions/draggableItems';
 import useSWR from 'swr';
+import './cards.css';
 
 // created function to handle API request
 const fetcher = (...args) => fetch(...args).then((res) => res.json());
 // using Swr for fetching api
-function Swr() {
+function Homepage() {
   const {
     data: allMovies,
     error,
     isValidating,
   } = useSWR('https://vidstream-api.vercel.app/home', fetcher);
   
-  // drag function
+  // imported drag function
   const { containerRef, handleMouseDown, handleMouseMove, handleMouseUpOrLeave } = useDrag();
 
   // Handles error and loading state
   if (error) return <div className='failed'>failed to load</div>;
-  if (isValidating) return <div className="Loading">Loading...</div>;
+  if (isValidating) return; //<div className="Loading">Loading...</div>
   
   // console logging api etc.
   console.log(allMovies);
@@ -34,7 +35,7 @@ var movieRating;
     movieRating = allMovies.latestMovies[i].stats.rating;
 
     if(movieRating == "?") {
-      movieRating = "EMPTY"; // empties string
+      movieRating = ""; // empties string
     } 
     // sends the new strings to the object
     ratings.push(movieRating);
@@ -42,6 +43,7 @@ var movieRating;
 
   return (
     <>
+    
       <div 
         className='allCards'
         ref={containerRef}
@@ -72,4 +74,4 @@ var movieRating;
 }
 
 
-export default Swr;
+export default Homepage;

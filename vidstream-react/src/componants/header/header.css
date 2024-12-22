@@ -49,7 +49,6 @@
 	padding: 10px;
     line-height: 50px;
 	border-radius: 10px;
-	font-family: fantasy;
 	display: flex;
 }
 
@@ -103,7 +102,6 @@
 	border-radius: var(--search-field-border-radius);
 	background-color: var(--second-color);
 	border: transparent;
-	font-family: fantasy;
 	width: calc(var(--padding-search-right) - 20px);
 	height: var(--search-field-height);
 	color: var(--fourth-color);
@@ -111,6 +109,7 @@
 	position: relative;
 	display: block;
 	z-index: 1;
+	font-family: sans-serif !important;
 }
 
 #search-field:active,
