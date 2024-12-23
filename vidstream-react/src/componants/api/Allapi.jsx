@@ -1,23 +1,26 @@
 import useDrag from '../global functions/draggableItems';
 import useSWR from 'swr';
-import './cards.css';
+import Skeleton from '../skeleton/skeleton';
+
 
 // created function to handle API request
 const fetcher = (...args) => fetch(...args).then((res) => res.json());
 // using Swr for fetching api
 function Homepage() {
+
   const {
     data: allMovies,
     error,
     isValidating,
   } = useSWR('https://vidstream-api.vercel.app/home', fetcher);
   
-  // imported drag function
+  // imported drag function.
   const { containerRef, handleMouseDown, handleMouseMove, handleMouseUpOrLeave } = useDrag();
 
-  // Handles error and loading state
+  // Handles error and loading/Skeleton.
   if (error) return <div className='failed'>failed to load</div>;
-  if (isValidating) return; //<div className="Loading">Loading...</div>
+  if (isValidating) return <Skeleton />; 
+ 
   
   // console logging api etc.
   console.log(allMovies);
@@ -52,6 +55,7 @@ var movieRating;
         onMouseUp={handleMouseUpOrLeave}
         onMouseLeave={handleMouseUpOrLeave}
       >
+
         {repeatCardDivs.map((_, number) => (
           
           <div className="card"

@@ -1,6 +1,6 @@
 
 // import './homePage.css';
-// import './skeleton.css';
+import './skeleton.css';
 
 import Drag from '../global functions/draggableItems';
 
@@ -17,7 +17,6 @@ const { containerRef, handleMouseDown, handleMouseMove, handleMouseUpOrLeave } =
 Drag()
     return (
         <>  
-        <link href='./skeleton.css' rel='stylesheet'/>
             <div className={"allCards"}
             ref={containerRef}
                 onMouseDown={handleMouseDown}
@@ -25,28 +24,54 @@ Drag()
                 onMouseUp={handleMouseUpOrLeave}
                 onMouseLeave={handleMouseUpOrLeave}
             >
-                {
-                    items && items.length > 0 ? (
-                        items.map((any, number) => (
-                            <div className={"card " + number} key={number}>
-                                <div className="banner">
-                                    <img onerror="display='none'" draggable="false" /> {/* hides the broken image icon */}
-                                </div>
-                                <div className="card_info">
-                                    <div className="titel">titel {number}</div>
-                                    <div className="review">review</div>
-                                    <div className="duration">duration</div>
-                                    <div className="year">year</div>
-                                </div>
-                            </div>
-                        ))
-                    ) : (
-                        <div className="no-items">
-                            <p>No items available.</p>
+                {items.map((any, number) => (
+                    <div className={"card " + number} 
+                    key={number}
+                    style={{background: "white"}}
+                    >
+                        <div className="banner">
+                            <img 
+                                onerror="display='none'" 
+                                draggable="false"
+                                style={{
+                                    animation: "skeleton-loading 1s linear infinite alternate",
+                                    color: "transparent"
+                                }}
+                            /> 
                         </div>
-                    )
-                }
-
+                        <div className="card_info"
+                        style={{
+                            gap: "10px",
+                            display: "flex",
+                            flexDirection: "column"
+                        }}>
+                            <div className="titel"
+                            style={{
+                                animation: "skeleton-loading 1s linear infinite alternate",
+                                color: "transparent"
+                            }}
+                            >titel {number}</div>
+                            <div className="review"
+                            style={{
+                                animation: "skeleton-loading 1s linear infinite alternate",
+                                color: "transparent"
+                            }}
+                            >review</div>
+                            <div className="duration"
+                            style={{
+                                animation: "skeleton-loading 1s linear infinite alternate",
+                                color: "transparent"
+                            }}
+                            >duration</div>
+                            <div className="year"
+                            style={{
+                                animation: "skeleton-loading 1s linear infinite alternate",
+                                color: "transparent"
+                            }}
+                            >year</div>
+                        </div>
+                    </div>
+                ))}
             </div>
         </>
     );

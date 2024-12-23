@@ -1,3 +1,6 @@
+/* .card {
+    background: white;
+}
 .banner img {
     animation: skeleton-loading 1s linear infinite alternate;
     color: transparent;
@@ -9,9 +12,6 @@
     flex-direction: column;
 }
 
-.card {
-    background: white;
-}
 
 .titel {
     animation: skeleton-loading 1s linear infinite alternate;
@@ -31,7 +31,7 @@
 .year {
     animation: skeleton-loading 1s linear infinite alternate;
     color: transparent;
-}
+} */
 
 @keyframes skeleton-loading {
     0% {
