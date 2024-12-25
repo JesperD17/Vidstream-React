@@ -7,12 +7,16 @@ import Skeleton from '../skeleton/skeleton';
 const fetcher = (...args) => fetch(...args).then((res) => res.json());
 // using Swr for fetching api
 function Homepage() {
-
+console.log("aaaaaa")
   const {
     data: allMovies,
     error,
     isValidating,
-  } = useSWR('https://vidstream-api.vercel.app/home', fetcher);
+  } = useSWR('https://vidstream-api.vercel.app/home', fetcher,  { // settings to stop swr from reloading.
+    revalidateIfStale: false,
+    revalidateOnFocus: false,
+    revalidateOnReconnect: false
+  });
   
   // imported drag function.
   const { containerRef, handleMouseDown, handleMouseMove, handleMouseUpOrLeave } = useDrag();
@@ -33,20 +37,17 @@ function Homepage() {
 // if a string has "?", function changes it to empty string.
 let ratings = []; // making an object for updated strings.
 var movieRating;
-
   for (let i = 0; i < allMovies.latestMovies.length; i++) {
     movieRating = allMovies.latestMovies[i].stats.rating;
 
     if(movieRating == "?") {
       movieRating = ""; // empties string
-    } 
-    // sends the new strings to the object
+    } // sends the new strings to the object
     ratings.push(movieRating);
   }
 
   return (
     <>
-    
       <div 
         className='allCards'
         ref={containerRef}
