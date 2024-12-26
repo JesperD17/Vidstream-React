@@ -1,3 +1,20 @@
+/* card titles etc */
+.Titles_wrapper {
+    display: flex;
+    flex-direction: column;
+    align-items: end;
+    padding: 0px 20px;
+}
+
+.Titles_wrapper .MainTitles {
+    font-size: 35px;
+    color: white;
+}
+
+.Titles_wrapper .See_all_Links {
+    font-size: 20px;
+}
+
 /* cards */
 .allCards {
     display: flex;
@@ -36,11 +53,17 @@
     width: 275px;
     height: 400px;
     border-radius: 10px 10px 0px 0px;
+    animation: skeleton-loading 1s linear infinite alternate;
+    color: transparent;
 }
 
 .card_info {
     margin: 10px;
     transition: all 100ms ease-in-out;
+    justify-content: space-around;
+    display: flex;
+    flex-direction: column;
+    height: 90px;
 }
 
 .card_info:hover {
@@ -50,4 +73,12 @@
 
 .card_info:active {
     cursor: grabbing;
+}
+
+.titel {
+    color: white;
+}
+
+.review .bx.bxs-star {
+    color: yellow;
 }
