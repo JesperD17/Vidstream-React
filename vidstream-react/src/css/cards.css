@@ -2,8 +2,8 @@
 .Titles_wrapper {
     display: flex;
     flex-direction: column;
-    align-items: end;
-    padding: 0px 20px;
+    align-items: start;
+    padding: 0px 20px; /* change to 20px 20px after api is fixed */
 }
 
 .Titles_wrapper .MainTitles {
@@ -17,13 +17,13 @@
 
 /* cards */
 .allCards {
-    display: flex;
+    display: inline-flex;
+    flex-wrap: wrap;
+    justify-content: center;
     margin: 10px;
     gap: 10px;
-    overflow: auto;
     position: relative;
     padding-bottom: 10px;
-    overflow-x: scroll; 
 }
 
 .allCards:hover {
@@ -35,11 +35,14 @@
 }
 
 .card {
-    background: var(--second-color);
+    background: var(--first-color);
     border-radius: 10px;
+    -webkit-user-select: none;
     user-select: none;
     scale: 0.98;
     transition: all 300ms ease-in-out;
+    float: left;
+    width: min-content;
 }
 
 .card:hover {
@@ -81,4 +84,12 @@
 
 .review .bx.bxs-star {
     color: yellow;
+}
+
+@media (max-width: 780px) {
+    .allCards {
+        display: flex;
+        overflow: auto;
+        overflow-x: scroll;
+    }
 }

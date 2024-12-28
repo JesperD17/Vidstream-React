@@ -1,4 +1,3 @@
-import useDrag from '../global functions/draggableItems';
 import useSWR from 'swr';
 import Skeleton from '../skeleton/skeleton';
 
@@ -11,106 +10,109 @@ function Homepage() {
     data: allMovies,
     error,
     isValidating,
-  } = useSWR('https://vidstream-api.vercel.app/home', fetcher,  { // settings to stop swr from reloading.
+  } = useSWR('https://vidstream-api.vercel.app/home', fetcher, { // settings to stop swr from reloading.
     revalidateIfStale: false,
     revalidateOnFocus: false,
     revalidateOnReconnect: false
   });
-  
-  // imported drag function.
-  const { containerRef, handleMouseDown, handleMouseMove, handleMouseUpOrLeave } = useDrag();
+
+  console.log(allMovies);
 
   // Handles error and loading/Skeleton.
-  if (error) return <div className='failed'>failed to load</div>;
-  if (isValidating | !allMovies) return <Skeleton />; 
- 
-  
-  // console logging api
-  console.log(allMovies);
-  
-// repeating the card div structure to the amount of movies in api.
-const trendingMoviesLength = allMovies.trending.movies.length;
-const repeatTrendingMoviesCardDivs = new Array(trendingMoviesLength).fill(null);
-// if a string has "?", function changes it to empty string.
-let ratingsTrendingMovies = [] // making an object for updated strings.
-var trendingMovieRating; 
-  for (let i = 0; i < allMovies.trending.movies.length; i++) {
-    trendingMovieRating = allMovies.trending.movies[i].stats.rating;
+  if (error) return console.log("FAILED OR INCOMPLETE API!");
+  if (isValidating | !allMovies) { // || allMovies.latestMovies.length === 0 || allMovies.latestTvSeries.length === 0 || allMovies.trending.movies.length === 0 || allMovies.trending.tvSeries.length === 0
+    return <Skeleton />;
+  }
 
-    if(trendingMovieRating == "?") {
-      trendingMovieRating = ""; // empties string
+
+  // repeating the cards for the api.
+  const trendingMoviesLength = allMovies.trending.movies.length;
+  const repeatTrendingMoviesCardDivs = new Array(trendingMoviesLength).fill(null);
+  const trendingSeriesLength = allMovies.trending.tvSeries.length;
+  const repeatTrendingSeriesCardDivs = new Array(trendingSeriesLength).fill(null);
+  const moviesLength = allMovies.latestMovies.length;
+  const repeatMovieCardDivs = new Array(moviesLength).fill(null);
+  const seriesLength = allMovies.latestTvSeries.length;
+  const repeatSerieCardDivs = new Array(seriesLength).fill(null);
+
+
+  // if a string has "?", function changes it to empty string.
+  var ratingsTrendingMovies = []; // making an object for updated strings.
+  for (var i = 0; i < allMovies.trending.movies.length; i++) {
+    var movieRating = allMovies.trending.movies[i].stats.rating;
+
+    if (movieRating == "?") {
+      movieRating = ""; // empties string
     } // sends the new strings to the object
-    ratingsTrendingMovies.push(trendingMovieRating);
+    ratingsTrendingMovies.push(movieRating);
   }
 
-const trendingSeriesLength = allMovies.trending.tvSeries.length;
-const repeatTrendingSeriesCardDivs = new Array(trendingSeriesLength).fill(null);
-let ratingsTrendingSeries = [] 
-var trendingSerieRating; 
-  for (let i = 0; i < allMovies.trending.tvSeries.length; i++) {
-    trendingSerieRating = allMovies.trending.tvSeries[i].stats.rating;
+  var ratingsTrendingSeries = [];
+  var seasonsTrendingSeries = [];
+  for (var i = 0; i < allMovies.trending.tvSeries.length; i++) {
+    var serieRating = allMovies.trending.tvSeries[i].stats.rating;
+    var serieSeasons = allMovies.trending.tvSeries[i].stats.seasons;
 
-    if(trendingSerieRating == "?") {
-      trendingSerieRating = "";
-    } 
-    ratingsTrendingSeries.push(trendingSerieRating);
+    if (serieRating == "?") {
+      serieRating = "";
+    }
+    if (serieSeasons.includes("SS", "/ EPS")) {
+      serieSeasons = serieSeasons.replace("SS ", "S",).replace("EPS ", "EP");
+    }
+    ratingsTrendingSeries.push(serieRating);
+    seasonsTrendingSeries.push(serieSeasons);
   }
 
-const moviesLength = allMovies.latestMovies.length;
-const repeatMovieCardDivs = new Array(moviesLength).fill(null);
-let ratingsLatestMovies = [];
-var movieRating;
-  for (let i = 0; i < allMovies.latestMovies.length; i++) {
-    movieRating = allMovies.latestMovies[i].stats.rating;
 
-    if(movieRating == "?") {
-      movieRating = ""; 
-    } 
+
+  var ratingsLatestMovies = [];
+  for (var i = 0; i < allMovies.latestMovies.length; i++) {
+    var movieRating = allMovies.latestMovies[i].stats.rating;
+
+    if (movieRating == "?") {
+      movieRating = "";
+    }
     ratingsLatestMovies.push(movieRating);
   }
 
-const seriesLength = allMovies.latestTvSeries.length;
-const repeatSerieCardDivs = new Array(seriesLength).fill(null);
 
-let ratingsLatestTvSeries = []
-var serieRating; 
-  for (let i = 0; i < allMovies.latestTvSeries.length; i++) {
-    serieRating = allMovies.latestTvSeries[i].stats.rating;
+  var ratingsLatestTvSeries = [];
+  var seasonsLatestTvSeries = [];
+  for (var i = 0; i < allMovies.latestTvSeries.length; i++) {
+    var serieRating = allMovies.latestTvSeries[i].stats.rating;
+    serieSeasons = allMovies.latestTvSeries[i].stats.seasons;
 
-    if(serieRating == "?") {
+    if (serieRating == "?") {
       serieRating = "";
     }
+
+    if (serieSeasons.includes("SS", "/ EPS")) {
+      serieSeasons = serieSeasons.replace("SS ", "S",).replace("EPS ", "EP");
+    }
     ratingsLatestTvSeries.push(serieRating);
+    seasonsLatestTvSeries.push(serieSeasons);
   }
 
 
-  
   return (
     <>
       <div className="Titles_wrapper">
         <div className="MainTitles">Most trending movies & series.</div>
         <div className="See_all_Links">See all. <i className='bx bx-right-arrow-alt'></i></div>
       </div>
-      <div 
-        className='allCards'
-        ref={containerRef}
-        onMouseDown={handleMouseDown}
-        onMouseMove={handleMouseMove}
-        onMouseUp={handleMouseUpOrLeave}
-        onMouseLeave={handleMouseUpOrLeave}
-      >
 
+      <div className='allCards'>
         {repeatTrendingMoviesCardDivs.map((_, number) => (
-          
+
           <div className="card"
-          key={number}>
+            key={number}>
             <div className="banner">
               <img src={allMovies.trending.movies[number].poster} draggable="false" />
             </div>
             <div className="card_info">
               <div className="titel">{allMovies.trending.movies[number].title} </div>
               <div className="card_info_inner">
-                <div className="review">{ratingsTrendingMovies[number]} <i className='bx bxs-star'></i></div> 
+                <div className="review">{ratingsTrendingMovies[number]} <i className='bx bxs-star'></i></div>
                 <div className="duration">{allMovies.trending.movies[number].stats.duration}</div>
                 <div className="year">{allMovies.trending.movies[number].stats.year}</div>
               </div>
@@ -119,31 +121,23 @@ var serieRating;
 
         ))}
       </div>
-      <div 
-        className='allCards'
-        ref={containerRef}
-        onMouseDown={handleMouseDown}
-        onMouseMove={handleMouseMove}
-        onMouseUp={handleMouseUpOrLeave}
-        onMouseLeave={handleMouseUpOrLeave}
-      >
 
+      <div className='allCards'>
         {repeatTrendingSeriesCardDivs.map((_, number) => (
-          
+
           <div className="card"
-          key={number}>
+            key={number}>
             <div className="banner">
               <img src={allMovies.trending.tvSeries[number].poster} draggable="false" />
             </div>
             <div className="card_info">
               <div className="titel">{allMovies.trending.tvSeries[number].title} </div>
               <div className="card_info_inner">
-                <div className="review">{ratingsTrendingSeries[number]} <i className='bx bxs-star'></i></div> 
-                <div className="year">{allMovies.trending.tvSeries[number].stats.seasons}</div>
+                <div className="review">{ratingsTrendingSeries[number]} <i className='bx bxs-star'></i></div>
+                <div className="year">{seasonsTrendingSeries[number]}</div>
               </div>
             </div>
           </div>
-
         ))}
       </div>
 
@@ -152,26 +146,19 @@ var serieRating;
         <div className="MainTitles">Newest movies.</div>
         <div className="See_all_Links">See all. <i className='bx bx-right-arrow-alt'></i></div>
       </div>
-      <div 
-        className='allCards'
-        ref={containerRef}
-        onMouseDown={handleMouseDown}
-        onMouseMove={handleMouseMove}
-        onMouseUp={handleMouseUpOrLeave}
-        onMouseLeave={handleMouseUpOrLeave}
-      >
 
+      <div className='allCards'>
         {repeatMovieCardDivs.map((_, number) => (
-          
+
           <div className="card"
-          key={number}>
+            key={number}>
             <div className="banner">
               <img src={allMovies.latestMovies[number].poster} draggable="false" />
             </div>
             <div className="card_info">
               <div className="titel">{allMovies.latestMovies[number].title} </div>
               <div className="card_info_inner">
-                <div className="review">{ratingsLatestMovies[number]} <i className='bx bxs-star'></i></div> 
+                <div className="review">{ratingsLatestMovies[number]} <i className='bx bxs-star'></i></div>
                 <div className="duration">{allMovies.latestMovies[number].stats.duration}</div>
                 <div className="year">{allMovies.latestMovies[number].stats.year}</div>
               </div>
@@ -182,38 +169,31 @@ var serieRating;
       </div>
 
 
-
       <div className="Titles_wrapper">
         <div className="MainTitles">Newest Series.</div>
         <div className="See_all_Links">See all. <i className='bx bx-right-arrow-alt'></i></div>
-      </div>  
-      <div 
-        className='allCards'
-        ref={containerRef}
-        onMouseDown={handleMouseDown}
-        onMouseMove={handleMouseMove}
-        onMouseUp={handleMouseUpOrLeave}
-        onMouseLeave={handleMouseUpOrLeave}
-      >
+      </div>
 
+      <div className='allCards'>
         {repeatSerieCardDivs.map((_, number) => (
-          
+
           <div className="card"
-          key={number}>
+            key={number}>
             <div className="banner">
               <img src={allMovies.latestTvSeries[number].poster} draggable="false" />
             </div>
             <div className="card_info">
               <div className="titel">{allMovies.latestTvSeries[number].title} </div>
               <div className="card_info_inner">
-                <div className="review">{ratingsLatestTvSeries[number]} <i className='bx bxs-star'></i></div> 
-                <div className="seasons">{allMovies.latestTvSeries[number].stats.seasons}</div>
+                <div className="review">{ratingsLatestTvSeries[number]} <i className='bx bxs-star'></i></div>
+                <div className="seasons">{seasonsLatestTvSeries[number]}</div>
               </div>
             </div>
           </div>
 
         ))}
       </div>
+
     </>
   );
 }

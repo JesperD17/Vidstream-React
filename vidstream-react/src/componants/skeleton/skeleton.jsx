@@ -13,9 +13,6 @@ function Skeleton() {
     const amountOfStructures = 4;
     const totalStructures = new Array(amountOfStructures).fill(null);
 
-    // importing drag function
-    const { containerRef, handleMouseDown, handleMouseMove, handleMouseUpOrLeave } = Drag();
-
     Drag()
     return (
         <>
@@ -24,18 +21,13 @@ function Skeleton() {
             key={structures}>
                 <div className="Titles_wrapper">
                     <div className="MainTitles"
-                    style={{ animation: "skeleton-loading 1s linear infinite alternate", color: "transparent" }}
-                    >Title of mainTitles.</div>
+                    style={{ animation: "skeleton-loading 1s linear infinite alternate", color: "transparent", fontsize: "35px" }}
+                    >Most trending movies & series.</div>
                     <div className="See_all_Links"
-                    style={{ animation: "skeleton-loading 1s linear infinite alternate", color: "transparent" }}
-                    >Links of See_all_Links. <i className='bx bx-right-arrow-alt'></i></div>
+                    style={{ animation: "skeleton-loading 1s linear infinite alternate", color: "transparent", fontsize: "20px" }}
+                    >See all. -=<i className='bx bx-right-arrow-alt'></i></div>
                 </div>
                 <div className={"allCards"}
-                    ref={containerRef}
-                    onMouseDown={handleMouseDown}
-                    onMouseMove={handleMouseMove}
-                    onMouseUp={handleMouseUpOrLeave}
-                    onMouseLeave={handleMouseUpOrLeave}
                 >
                     {totalCards.map((_, number) => (
                         <div className={"card " + number}
