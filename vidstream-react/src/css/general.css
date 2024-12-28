@@ -39,24 +39,22 @@ i {
     color: var(--fourth-color) !important;
 }
 
-@media (max-width: 780px) {
-	/* scrollbar style */
-	::-webkit-scrollbar {
-		width: 7px;
-		height: 7px;
-	}
+/* scrollbar style */
+::-webkit-scrollbar {
+	width: 7px;
+	height: 7px;
+}
 
-	/* Handle */
-	::-webkit-scrollbar-thumb {
-		background: var(--fourth-color);
-		border-radius: 12px;
-	}
+/* Handle */
+::-webkit-scrollbar-thumb {
+	background: var(--fourth-color);
+	border-radius: 12px;
+}
 
-	/* Handle on hover */
-	::-webkit-scrollbar-thumb:hover {
-		background: var(--third-color);
-	}
-	::-webkit-scrollbar:vertical {
-		background: transparent;
-	}
+/* Handle on hover */
+::-webkit-scrollbar-thumb:hover {
+	background: var(--third-color);
+}
+::-webkit-scrollbar:vertical {
+	background: transparent;
 }

@@ -7,12 +7,21 @@ function Header() {
 
   const menuStyle = () => {
     setMenuActive(!menuActive);
+    console.log(window.innerWidth)
+    if(window.innerWidth < 700 && searchActive) { // if searchbar is open - close searchbar
+      setSearchActive(!searchActive)
+    }
   };
-
+  
   const searchStyle = () => {
     setSearchActive(!searchActive);
-  };
 
+    if(menuActive) { // if collapsible items is open - close collapse
+      setMenuActive(!menuActive)
+    }
+  };
+  
+  
   useEffect(() => {
     const handleResize = () => {
       setMenuActive(window.innerWidth > 1586);
@@ -20,9 +29,9 @@ function Header() {
     };
 
     window.addEventListener('resize', handleResize);
-    return () => {
-      window.removeEventListener('resize', handleResize);
-    };
+    // return () => {
+    //   window.removeEventListener('resize', handleResize);
+    // };
   }, []);
 
   return (
@@ -40,51 +49,51 @@ function Header() {
             ></i>
             {menuActive && (
               <summary>
-              <div className="links">
-                <a href="http://localhost/Vidstream/Vidstream/Onscreen/html/homepage.php" 
-                className="hover">
-                  <div className="spaceBetween">
-                    HOME 
-                    <i className='bx bxs-chevron-right'></i>
-                  </div>
-                </a> 
-                <a href="#" 
-                className="hover">
-                  <div className="spaceBetween">
-                    NEWS 
-                    <i className='bx bxs-chevron-right'></i>
-                  </div>
-                </a>
-                <a href="#" 
-                className="hover">
-                  <div className="spaceBetween">
-                    IN THEATERS 
-                    <i className='bx bxs-chevron-right'></i>
-                  </div>
-                </a>
-                <a href="#" 
-                className="hover">
-                  <div className="spaceBetween">
-                    COMING SOON 
-                    <i className='bx bxs-chevron-right'></i>
-                  </div>
-                </a>
-                <a href="#" 
-                className="hover">
-                  <div className="spaceBetween">
-                    CONTACT 
-                    <i className='bx bxs-chevron-right'></i>
-                  </div>
-                </a>
-                <a href="#" 
-                className="hover">
-                  <div className="spaceBetween">
-                    ADVERTISE 
-                    <i className='bx bxs-chevron-right'></i>
-                  </div>
-                </a>
-              </div>
-          </summary>
+                <div className="links">
+                  <a href="http://localhost/Vidstream/Vidstream/Onscreen/html/homepage.php"
+                    className="hover">
+                    <div className="spaceBetween">
+                      HOME
+                      <i className='bx bxs-chevron-right'></i>
+                    </div>
+                  </a>
+                  <a href="#"
+                    className="hover">
+                    <div className="spaceBetween">
+                      NEWS
+                      <i className='bx bxs-chevron-right'></i>
+                    </div>
+                  </a>
+                  <a href="#"
+                    className="hover">
+                    <div className="spaceBetween">
+                      IN THEATERS
+                      <i className='bx bxs-chevron-right'></i>
+                    </div>
+                  </a>
+                  <a href="#"
+                    className="hover">
+                    <div className="spaceBetween">
+                      COMING SOON
+                      <i className='bx bxs-chevron-right'></i>
+                    </div>
+                  </a>
+                  <a href="#"
+                    className="hover">
+                    <div className="spaceBetween">
+                      CONTACT
+                      <i className='bx bxs-chevron-right'></i>
+                    </div>
+                  </a>
+                  <a href="#"
+                    className="hover">
+                    <div className="spaceBetween">
+                      ADVERTISE
+                      <i className='bx bxs-chevron-right'></i>
+                    </div>
+                  </a>
+                </div>
+              </summary>
             )}
           </div>
         </div>
