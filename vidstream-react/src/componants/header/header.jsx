@@ -1,9 +1,16 @@
 import './header.css';
 import React, { useState, useEffect } from 'react';
 
+import useSWR from 'swr';
+
+import { Route } from 'react-router-dom';
+// const fetcher = (...args) => fetch(...args).then((res) => res.json());
+
 function Header() {
   const [menuActive, setMenuActive] = useState(window.innerWidth > 1586);
   const [searchActive, setSearchActive] = useState(window.innerWidth > 700);
+
+  const [searchInput, setSearchInput] = useState("");
 
   const menuStyle = () => {
     setMenuActive(!menuActive);
@@ -33,6 +40,28 @@ function Header() {
     //   window.removeEventListener('resize', handleResize);
     // };
   }, []);
+
+const fetcher = (...args) => fetch(...args).then((res) => res.json());
+
+const {
+  data: allMovies,
+  error,
+  isValidating,
+} = useSWR('https://vidstream-api.vercel.app/home', fetcher, { // settings to stop swr from reloading.
+  revalidateIfStale: false,
+  revalidateOnFocus: false,
+  revalidateOnReconnect: false
+});
+
+function handleSubmit (e) {
+  e.preventDefault()
+  console.log(searchInput)
+
+  if(searchInput) {
+    console.log(allMovies)
+    return <Route path='/update/:id' />
+  }
+}
 
   return (
     <div id="navigation">
@@ -104,16 +133,22 @@ function Header() {
             onClick={searchStyle}
           ></i>
           {searchActive && (
-            <div id="search">
+            <form id="search"
+            onSubmit={handleSubmit}
+            >
               <input
                 type="text"
-                name="search-field"
-                placeholder="Zoeken..."
+                placeholder="Search..."
                 id="search-field"
                 className="blink search-field"
+                // onChange={(e) => setSearchQuery(e.allMovies.value)}
+                // onChange={handleChange}
+                value={searchInput}
+                name="searchInput"
+                onChange={(e) => setSearchInput(e.target.value)} 
               />
               <i id="IconNoClick" className="bx bx-search bx-tada"></i>
-            </div>
+            </form>
           )}
         </div>
       </div>

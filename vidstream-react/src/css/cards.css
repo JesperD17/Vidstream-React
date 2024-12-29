@@ -92,5 +92,6 @@
         overflow: auto;
         overflow-x: scroll;
         flex-wrap: unset;
+        justify-content: flex-start;
     }
 }

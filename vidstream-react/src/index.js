@@ -10,14 +10,12 @@ import Footer from './componants/footer/footer';
 import Homepage from './componants/api/Allapi';
 
 // pages components
-// import Timer from './componants/timerTest/timer';
 
 
 const homepage = ReactDOM.createRoot(document.getElementById('all_homepage'));
 homepage.render(
   <div>
     <Header />
-      {/* <Timer /> */}
       <Homepage />
     <Footer />
   </div> 

@@ -39,8 +39,6 @@ function Homepage() {
   var ratingsTrendingMovies = []; // making an object for updated strings.
   for (var i = 0; i < allMovies.trending.movies.length; i++) {
     var movieRating = allMovies.trending.movies[i].stats.rating;
-    var isTrue = false;
-
     if (movieRating == "?") {
       movieRating = ""; // empties string
     } // sends the new strings to the object
@@ -68,12 +66,9 @@ function Homepage() {
   var ratingsLatestMovies = [];
   for (var i = 0; i < allMovies.latestMovies.length; i++) {
     var movieRating = allMovies.latestMovies[i].stats.rating;
-    var isTrueoOrFalse = false;
     if (movieRating == "?") {
       movieRating = "";
-    } else {
-      isTrueoOrFalse = true;
-    }
+    } 
     ratingsLatestMovies.push(movieRating);
   }
 
@@ -86,7 +81,6 @@ function Homepage() {
 
     if (serieRating == "?") {
       serieRating = "";
-      
     }
 
     if (serieSeasons.includes("SS", "/ EPS")) {
