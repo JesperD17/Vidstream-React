@@ -3,7 +3,8 @@ import React, { useState, useEffect } from 'react';
 
 import useSWR from 'swr';
 
-import { Route } from 'react-router-dom';
+import Searching from '../Pages/searchPage/Search';
+
 // const fetcher = (...args) => fetch(...args).then((res) => res.json());
 
 function Header() {
@@ -59,13 +60,13 @@ function handleSubmit (e) {
 
   if(searchInput) {
     console.log(allMovies)
-    return <Route path='/update/:id' />
+    return <Searching />
   }
 }
 
   return (
     <div id="navigation">
-      <a href="http://localhost/Vidstream/Vidstream/Onscreen/html/homepage.php">
+      <a href="/">
         <img id="logo" src="../pics/2e logo kopie.png" />
         <img id="logo2" src="../pics/Logo Icon.png" />
       </a>
@@ -79,45 +80,45 @@ function handleSubmit (e) {
             {menuActive && (
               <summary>
                 <div className="links">
-                  <a href="http://localhost/Vidstream/Vidstream/Onscreen/html/homepage.php"
+                  <a href="/"
                     className="hover">
                     <div className="spaceBetween">
                       HOME
                       <i className='bx bxs-chevron-right'></i>
                     </div>
                   </a>
-                  <a href="#"
+                  <a href="/News"
                     className="hover">
                     <div className="spaceBetween">
                       NEWS
                       <i className='bx bxs-chevron-right'></i>
                     </div>
                   </a>
-                  <a href="#"
+                  <a href="Movies"
                     className="hover">
                     <div className="spaceBetween">
-                      IN THEATERS
+                      ALL MOVIES
                       <i className='bx bxs-chevron-right'></i>
                     </div>
                   </a>
-                  <a href="#"
+                  <a href="Series"
                     className="hover">
                     <div className="spaceBetween">
-                      COMING SOON
+                      ALL SERIES
                       <i className='bx bxs-chevron-right'></i>
                     </div>
                   </a>
-                  <a href="#"
+                  <a href="Info"
                     className="hover">
                     <div className="spaceBetween">
-                      CONTACT
+                      INFO
                       <i className='bx bxs-chevron-right'></i>
                     </div>
                   </a>
-                  <a href="#"
+                  <a href="Sources"
                     className="hover">
                     <div className="spaceBetween">
-                      ADVERTISE
+                      SOURCES
                       <i className='bx bxs-chevron-right'></i>
                     </div>
                   </a>

@@ -1,5 +1,5 @@
 import useSWR from 'swr';
-import Skeleton from '../skeleton/skeleton';
+import Skeleton from '../../skeleton/skeleton';
 
 
 // created function to handle API request

@@ -3,22 +3,41 @@ import './css/cards.css';
 
 import React from 'react';
 import ReactDOM from 'react-dom/client';
+import { BrowserRouter as Router, Route, Routes } from 'react-router-dom';
 
 // standard components
 import Header from './componants/header/header';
 import Footer from './componants/footer/footer';
-import Homepage from './componants/api/Allapi';
+import Homepage from './componants/Pages/HomePage/Homepage';
 
-// pages components
-
+// page 
+import News from "./componants/Pages/NewsPage/News";
+import Movies from "./componants/Pages/MoviesPage/Movies";
+import Series from "./componants/Pages/SeriesPage/Series";
+import Info from "./componants/Pages/InfoPage/Info";
+import Sources from "./componants/Pages/SourcesPage/Sources";
 
 const homepage = ReactDOM.createRoot(document.getElementById('all_homepage'));
 homepage.render(
   <div>
-    <Header />
-      <Homepage />
-    <Footer />
-  </div> 
+    <Router>
+      <div className="App">
+        <Header />
+        <div className="content">
+          <Routes>
+            <Route path="/" element={<Homepage />}>
+              <Route path="News" element={<News />} />
+              <Route path="Movies" element={<Movies />} />
+              <Route path="Series" element={<Series />} />
+              <Route path="Info" element={<Info />} />
+              <Route path="Sources" element={<Sources />} />
+            </Route>
+          </Routes>
+        </div>
+        <Footer />
+      </div>
+    </Router>
+  </div>
 );
 
 
@@ -35,7 +54,7 @@ homepage.render(
 // homepage.render(
 //   <div>
 //     <Demo />
-//   </div> 
+//   </div>
 // );
 
 
