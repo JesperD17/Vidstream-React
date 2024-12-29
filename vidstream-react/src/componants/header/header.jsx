@@ -1,11 +1,12 @@
 import './header.css';
 import React, { useState, useEffect } from 'react';
-
 import useSWR from 'swr';
 
 import Searching from '../Pages/searchPage/Search';
 
-// const fetcher = (...args) => fetch(...args).then((res) => res.json());
+import { Outlet, Link } from "react-router-dom";
+
+const fetcher = (...args) => fetch(...args).then((res) => res.json());
 
 function Header() {
   const [menuActive, setMenuActive] = useState(window.innerWidth > 1586);
@@ -16,24 +17,24 @@ function Header() {
   const menuStyle = () => {
     setMenuActive(!menuActive);
     console.log(window.innerWidth)
-    if(window.innerWidth < 700 && searchActive) { // if searchbar is open - close searchbar
+    if (window.innerWidth < 700 && searchActive) { // if searchbar is open - close searchbar
       setSearchActive(!searchActive)
     }
   };
-  
+
   const searchStyle = () => {
     setSearchActive(!searchActive);
 
-    if(menuActive) { // if collapsible items is open - close collapse
+    if (menuActive) { // if collapsible items is open - close collapse
       setMenuActive(!menuActive)
     }
   };
-  
-  
+
+
   useEffect(() => {
     const handleResize = () => {
-      setMenuActive(window.innerWidth > 1586);
-      setSearchActive(window.innerWidth > 700);
+      // setMenuActive(window.innerWidth > 1400);
+      // setSearchActive(window.innerWidth > 700);
     };
 
     window.addEventListener('resize', handleResize);
@@ -42,27 +43,27 @@ function Header() {
     // };
   }, []);
 
-const fetcher = (...args) => fetch(...args).then((res) => res.json());
+  const fetcher = (...args) => fetch(...args).then((res) => res.json());
 
-const {
-  data: allMovies,
-  error,
-  isValidating,
-} = useSWR('https://vidstream-api.vercel.app/home', fetcher, { // settings to stop swr from reloading.
-  revalidateIfStale: false,
-  revalidateOnFocus: false,
-  revalidateOnReconnect: false
-});
+  const {
+    data: allMovies,
+    error,
+    isValidating,
+  } = useSWR('https://vidstream-api.vercel.app/home', fetcher, { // settings to stop swr from reloading.
+    revalidateIfStale: false,
+    revalidateOnFocus: false,
+    revalidateOnReconnect: false
+  });
 
-function handleSubmit (e) {
-  e.preventDefault()
-  console.log(searchInput)
+  function handleSubmit(e) {
+    e.preventDefault()
+    console.log(searchInput)
 
-  if(searchInput) {
-    console.log(allMovies)
-    return <Searching />
+    if (searchInput) {
+      console.log(allMovies)
+      return <Searching />
+    }
   }
-}
 
   return (
     <div id="navigation">
@@ -82,44 +83,38 @@ function handleSubmit (e) {
                 <div className="links">
                   <a href="/"
                     className="hover">
-                    <div className="spaceBetween">
-                      HOME
-                      <i className='bx bxs-chevron-right'></i>
+                    <div className="Link_Icon_alignment">
+                      HOME <i className='bx bxs-chevron-right'></i>
                     </div>
                   </a>
                   <a href="/News"
                     className="hover">
-                    <div className="spaceBetween">
-                      NEWS
-                      <i className='bx bxs-chevron-right'></i>
+                    <div className="Link_Icon_alignment">
+                      NEWS <i className='bx bxs-chevron-right'></i>
                     </div>
                   </a>
                   <a href="Movies"
                     className="hover">
-                    <div className="spaceBetween">
-                      ALL MOVIES
-                      <i className='bx bxs-chevron-right'></i>
+                    <div className="Link_Icon_alignment">
+                      ALL MOVIES <i className='bx bxs-chevron-right'></i>
                     </div>
                   </a>
                   <a href="Series"
                     className="hover">
-                    <div className="spaceBetween">
-                      ALL SERIES
-                      <i className='bx bxs-chevron-right'></i>
+                    <div className="Link_Icon_alignment">
+                      ALL SERIES <i className='bx bxs-chevron-right'></i>
                     </div>
                   </a>
                   <a href="Info"
                     className="hover">
-                    <div className="spaceBetween">
-                      INFO
-                      <i className='bx bxs-chevron-right'></i>
+                    <div className="Link_Icon_alignment">
+                      INFO <i className='bx bxs-chevron-right'></i>
                     </div>
                   </a>
                   <a href="Sources"
                     className="hover">
-                    <div className="spaceBetween">
-                      SOURCES
-                      <i className='bx bxs-chevron-right'></i>
+                    <div className="Link_Icon_alignment">
+                      SOURCES <i className='bx bxs-chevron-right'></i>
                     </div>
                   </a>
                 </div>
@@ -135,7 +130,7 @@ function handleSubmit (e) {
           ></i>
           {searchActive && (
             <form id="search"
-            onSubmit={handleSubmit}
+              onSubmit={handleSubmit}
             >
               <input
                 type="text"
@@ -146,7 +141,7 @@ function handleSubmit (e) {
                 // onChange={handleChange}
                 value={searchInput}
                 name="searchInput"
-                onChange={(e) => setSearchInput(e.target.value)} 
+                onChange={(e) => setSearchInput(e.target.value)}
               />
               <i id="IconNoClick" className="bx bx-search bx-tada"></i>
             </form>

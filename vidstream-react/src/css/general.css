@@ -32,11 +32,21 @@ body, html {
 }
 
 i {
-	cursor: pointer
+	cursor: pointer;
+	font-size: 35px;
 }
 
 .hover:hover {
     color: var(--fourth-color) !important;
+}
+
+/* placholder for input */
+::placeholder { 
+	color: var(--sixth-color) !important;
+  }
+
+::-ms-input-placeholder {
+	color: var(--sixth-color) !important;
 }
 
 /* scrollbar style */

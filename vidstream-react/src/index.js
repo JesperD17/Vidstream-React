@@ -3,7 +3,7 @@ import './css/cards.css';
 
 import React from 'react';
 import ReactDOM from 'react-dom/client';
-import { BrowserRouter as Router, Route, Routes } from 'react-router-dom';
+import { BrowserRouter, Routes, Route } from "react-router-dom";
 
 // standard components
 import Header from './componants/header/header';
@@ -20,23 +20,21 @@ import Sources from "./componants/Pages/SourcesPage/Sources";
 const homepage = ReactDOM.createRoot(document.getElementById('all_homepage'));
 homepage.render(
   <div>
-    <Router>
-      <div className="App">
-        <Header />
-        <div className="content">
-          <Routes>
-            <Route path="/" element={<Homepage />}>
-              <Route path="News" element={<News />} />
-              <Route path="Movies" element={<Movies />} />
-              <Route path="Series" element={<Series />} />
-              <Route path="Info" element={<Info />} />
-              <Route path="Sources" element={<Sources />} />
-            </Route>
-          </Routes>
-        </div>
-        <Footer />
-      </div>
-    </Router>
+    <BrowserRouter>
+      <Header />
+      <Routes>
+        <Route>
+          <Route path="/" element={<Homepage />}>
+            <Route path="News" element={<News />} />
+            <Route path="Movies" element={<Movies />} />
+            <Route path="Series" element={<Series />} />
+            <Route path="Info" element={<Info />} />
+            <Route path="Sources" element={<Sources />} />
+          </Route>
+        </Route>
+      </Routes>
+      <Footer />
+    </BrowserRouter>
   </div>
 );
 

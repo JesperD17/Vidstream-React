@@ -33,7 +33,7 @@
 
 /* footer_logo  */
 img.footer_Logo {
-    height: calc(15vh - 17px);
+    height: calc(8vh - 17px);
 }
 
 /* align logo */
@@ -80,6 +80,10 @@ img.footer_Logo {
     opacity: 1; /* Fade-in on hover */
     /* animation: fadeOut 1s forwards; */
     animation: fadeIn 1s forwards
+}
+
+.footer .bx.bxs-copyright {
+    font-size: 15px;
 }
 
 @keyframes fadeIn {
