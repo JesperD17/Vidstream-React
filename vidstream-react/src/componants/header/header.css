@@ -54,6 +54,11 @@
 	display: flex;
 }
 
+.Full_collapsible_content i {
+    font-size: 35px;
+	display: contents;
+}
+
 #content .hover:hover {
     color: var(--fourth-color);
 }
@@ -185,7 +190,8 @@
 @media (max-width: 700px) {
 	/* searchbar */
 	#searchIcon1 {
-		display: block !important;
+		display: contents !important;
+		font-size: 35px;
 	}
 
 	#IconNoClick {
@@ -194,7 +200,7 @@
 
 	#search {
 		position: absolute;
-		top: 9vh;
+		top: 10vh;
 		left: 0;
 		background: var(--second-color);
 		width: 95%;
@@ -209,8 +215,5 @@
 
 
 	/* searchbar */
-	#searchIcon1 {
-		display: contents !important;
-	}
 	
 }
