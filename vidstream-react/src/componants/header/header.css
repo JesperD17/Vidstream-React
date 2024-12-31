@@ -39,7 +39,7 @@
 	display: flex;
 }
 
-#content .links a:not(:last-child):after {
+#content .links .hover:not(:last-child):after {
     border: 1px solid #e2e2e2;
     border-width: 1px 1px 0 0;
     content: "";
@@ -61,6 +61,11 @@
 
 #content .hover:hover {
     color: var(--fourth-color);
+}
+
+a.Link_Icon_alignment {
+    text-decoration: none;
+    color: var(--sixth-color);
 }
 
 /* searchbar */
@@ -157,11 +162,11 @@
 		background: var(--second-color);
 	}
 
-	#content .links a:not(:last-child):after {
+	#content .links a.hover:not(:last-child):after {
 		display: none;
 	}
 
-	#content .links a:before {
+	#content .links .hover:before {
         border: 2px solid #e2e2e2;
         content: "";
         height: 40px;
@@ -200,7 +205,7 @@
 
 	#search {
 		position: absolute;
-		top: 10vh;
+		top: 100px;
 		left: 0;
 		background: var(--second-color);
 		width: 95%;

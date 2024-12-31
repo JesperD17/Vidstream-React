@@ -23,15 +23,12 @@ homepage.render(
     <BrowserRouter>
       <Header />
       <Routes>
-        <Route>
-          <Route path="/" element={<Homepage />}>
-            <Route path="News" element={<News />} />
-            <Route path="Movies" element={<Movies />} />
-            <Route path="Series" element={<Series />} />
-            <Route path="Info" element={<Info />} />
-            <Route path="Sources" element={<Sources />} />
-          </Route>
-        </Route>
+        <Route path="/" element={<Homepage />} />
+        <Route path="/News" element={<News />} />
+        <Route path="/Movies" element={<Movies />} />
+        <Route path="/Series" element={<Series />} />
+        <Route path="/Info" element={<Info />} />
+        <Route path="/Sources" element={<Sources />} />
       </Routes>
       <Footer />
     </BrowserRouter>

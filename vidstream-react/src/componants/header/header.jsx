@@ -33,8 +33,8 @@ function Header() {
 
   useEffect(() => {
     const handleResize = () => {
-      // setMenuActive(window.innerWidth > 1400);
-      // setSearchActive(window.innerWidth > 700);
+      setMenuActive(window.innerWidth > 1400);
+      setSearchActive(window.innerWidth > 700);
     };
 
     window.addEventListener('resize', handleResize);
@@ -81,42 +81,42 @@ function Header() {
             {menuActive && (
               <summary>
                 <div className="links">
-                  <a href="/"
+                  <div 
                     className="hover">
-                    <div className="Link_Icon_alignment">
+                    <Link to="/" className="Link_Icon_alignment">
                       HOME <i className='bx bxs-chevron-right'></i>
-                    </div>
-                  </a>
-                  <a href="/News"
+                    </Link>
+                  </div>
+                  <div 
                     className="hover">
-                    <div className="Link_Icon_alignment">
+                    <Link to="News" className="Link_Icon_alignment">
                       NEWS <i className='bx bxs-chevron-right'></i>
-                    </div>
-                  </a>
-                  <a href="Movies"
+                    </Link>
+                  </div>
+                  <div 
                     className="hover">
-                    <div className="Link_Icon_alignment">
+                    <Link to="/Movies" className="Link_Icon_alignment">
                       ALL MOVIES <i className='bx bxs-chevron-right'></i>
-                    </div>
-                  </a>
-                  <a href="Series"
+                    </Link>
+                  </div>
+                  <div 
                     className="hover">
-                    <div className="Link_Icon_alignment">
+                    <Link to="/Series" className="Link_Icon_alignment">
                       ALL SERIES <i className='bx bxs-chevron-right'></i>
-                    </div>
-                  </a>
-                  <a href="Info"
+                    </Link>
+                  </div>
+                  <div
                     className="hover">
-                    <div className="Link_Icon_alignment">
+                    <Link to="/Info" className="Link_Icon_alignment">
                       INFO <i className='bx bxs-chevron-right'></i>
-                    </div>
-                  </a>
-                  <a href="Sources"
+                    </Link>
+                  </div>
+                  <div 
                     className="hover">
-                    <div className="Link_Icon_alignment">
+                    <Link to="/Sources" className="Link_Icon_alignment">
                       SOURCES <i className='bx bxs-chevron-right'></i>
-                    </div>
-                  </a>
+                    </Link>
+                  </div>
                 </div>
               </summary>
             )}
