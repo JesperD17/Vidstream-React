@@ -34,24 +34,3 @@ homepage.render(
     </BrowserRouter>
   </div>
 );
-
-
-// import React from 'react';
-// import ReactDOM from 'react-dom/client';
-
-// // standard components
-// import { Demo } from './componants/global functions/buttonForCards';
-// // pages components
-// // import Timer from './componants/timerTest/timer';
-
-
-// const homepage = ReactDOM.createRoot(document.getElementById('all_homepage'));
-// homepage.render(
-//   <div>
-//     <Demo />
-//   </div>
-// );
-
-
-
-

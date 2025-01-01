@@ -1,0 +1,106 @@
+/* banner */
+#allSlideshows {
+    display: flex;
+    flex-direction: row;
+    overflow: hidden;
+    scroll-snap-type: x mandatory;
+    position: relative;
+    height: 600px;
+}
+
+#allSlideshows .slideshow_wraper {
+    flex: 0 0 100%;
+    width: 100%;
+    height: 100%;
+    transition: visibility 0.2s, opacity 0.2s linear;
+}
+
+#allSlideshows .slide_banner_wrapper {
+    position: relative;
+}
+
+#allSlideshows .slide_banner_wrapper img {
+    width: 100%;
+    height: 600px;
+    object-fit: cover;
+}
+
+/* innertext & innercolors */
+#allSlideshows .color_to_banner1 {
+    background: var(--third-color);
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 40%;
+    height: 100%;
+}
+
+.color_to_banner2 {
+    background: linear-gradient(90deg, rgba(80, 80, 80, 1) 0%, rgba(167, 172, 176, 0) 100%);
+    position: absolute;
+    bottom: 0;
+    left: 40%;
+    width: 60%;
+    height: 100%;
+}
+
+#allSlideshows .slide_info_inner {
+    display: flex;
+    flex-direction: column;
+    justify-content: end;
+    height: -webkit-fill-available;
+    padding: 20px;
+    font-size: 25px;
+}
+
+.slide_info_inner .titel {
+    font-size: calc(3vw + 15px);
+}
+
+/* buttons slideshow */
+#buttons {
+    position: absolute;
+    z-index: 10;
+    right: 40px;
+    font-size: 60px;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-evenly;
+}
+
+#buttons button {
+    font-size: 35px;
+    align-items: center;
+    display: flex;
+    background: none;
+    border: none;
+}
+
+#buttons .slide_to_left, #buttons .slide_to_right {
+    background: yellow;
+    border: none;
+    border-radius: 25%;
+    display: block;
+}
+
+#buttons .active_style_slide {
+    opacity: 1;
+}
+
+#buttons i {
+    padding: 10px;
+}
+
+@media (max-width: 700px) {
+    /* innertext & innercolors */
+    #allSlideshows .color_to_banner1 {
+        width: 100%;
+        height: 100%;
+        background: linear-gradient(90deg, rgba(80, 80, 80, 0.8150035014005602) 100%, rgba(167, 172, 176, 0) 100%);
+    }
+
+    #allSlideshows .color_to_banner2 {
+        display: none;
+    }
+}

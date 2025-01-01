@@ -1,6 +1,9 @@
 import useSWR from 'swr';
 import Skeleton from '../../skeleton/skeleton';
 
+import { useState, useEffect } from 'react';
+
+import "./slideshow.css";
 
 // created function to handle API request
 const fetcher = (...args) => fetch(...args).then((res) => res.json());
@@ -24,8 +27,72 @@ function Homepage() {
     return <Skeleton />;
   }
 
+  // repeating amount of banners for the div structure from the api.
+  const spotlightLength = allMovies.spotlight.length;
+  const repeatSpotlightBannerDivs = new Array(spotlightLength).fill(null);
 
-  // repeating the cards for the api.
+  // if a string has "?", function changes it to empty string.
+  var ratingsSpotlight = []; // making an object for updated strings.
+  for (var i = 0; i < allMovies.spotlight.length; i++) {
+    var spotlightRating = allMovies.spotlight[i].rating;
+
+    // spotlightRating[i].classList.add("active_style_slide");
+
+    if (spotlightRating == "?") {
+      spotlightRating = ""; // empties string
+    } // sends the new strings to the object
+    ratingsSpotlight.push(spotlightRating);
+  }
+
+  // const fullTimer = () => {
+  //   const slideTimer = (left = false) => {
+  //     // shows next image
+        
+  //       let i;
+  //       let slides = document.getElementsByClassName("slide-Card"); // Grabs every slide
+  
+  //       for (i = 0; i < slides.length; i++) {
+  //         // slides[i].style.display = "none";
+  //         slides[i].classList.remove("active_style_slide");
+  //       }
+  //     if (left) {
+  //       slideIndex--;
+        
+  //       if (slideIndex < 1) {
+  //         slideIndex = slides.length;
+  //       }
+  //     } 
+  //     else {
+  //       slideIndex++;
+        
+  //       if (slideIndex > slides.length) {
+  //         slideIndex = 1;
+  //       }
+  //     }
+  //       slides[slideIndex - 1].classList.add("active_style_slide");
+  
+  //       slideTime = setTimeout(slideTimer, 3000); // changing seconds
+  //   }
+  //   // restart timer
+  //   clearTimeout(slideTime);
+  //   slideTimer();
+  // }
+
+  function toLeftItem() {
+    console.log("left");
+    // clearTimeout(slideTime);
+
+    // slide(true);
+  }
+
+  function toRightItem() {
+    console.log("right");
+    // clearTimeout(slideTime);
+
+    // slide();
+  }
+
+  // repeating amount of cards for the div structure from the api.
   const trendingMoviesLength = allMovies.trending.movies.length;
   const repeatTrendingMoviesCardDivs = new Array(trendingMoviesLength).fill(null);
   const trendingSeriesLength = allMovies.trending.tvSeries.length;
@@ -35,13 +102,13 @@ function Homepage() {
   const seriesLength = allMovies.latestTvSeries.length;
   const repeatSerieCardDivs = new Array(seriesLength).fill(null);
 
-  // if a string has "?", function changes it to empty string.
-  var ratingsTrendingMovies = []; // making an object for updated strings.
+
+  var ratingsTrendingMovies = [];
   for (var i = 0; i < allMovies.trending.movies.length; i++) {
     var movieRating = allMovies.trending.movies[i].stats.rating;
     if (movieRating == "?") {
-      movieRating = ""; // empties string
-    } // sends the new strings to the object
+      movieRating = "";
+    }
     ratingsTrendingMovies.push(movieRating);
   }
 
@@ -62,13 +129,12 @@ function Homepage() {
   }
 
 
-
   var ratingsLatestMovies = [];
   for (var i = 0; i < allMovies.latestMovies.length; i++) {
     var movieRating = allMovies.latestMovies[i].stats.rating;
     if (movieRating == "?") {
       movieRating = "";
-    } 
+    }
     ratingsLatestMovies.push(movieRating);
   }
 
@@ -91,8 +157,37 @@ function Homepage() {
   }
 
 
+
   return (
     <>
+      <div id="allSlideshows">
+        {repeatSpotlightBannerDivs.map((_, number) => (
+          <div key={number} className={"slideshow_wraper " + [number]}>
+            <div className="slide_banner_wrapper">
+              <img src={allMovies.spotlight[number].banner} draggable="false" />
+              <div className="color_to_banner1">
+                <div className="slide_info_inner">
+                  <div className="titel">{allMovies.spotlight[number].title}</div>
+                  <div className="review">{ratingsSpotlight[number]} <i className='bx bxs-star'></i></div>
+                  <div className="year">{allMovies.spotlight[number].year}</div>
+                </div>
+              </div>
+              <div className="color_to_banner2"></div>
+            </div>
+
+          </div>
+        ))}
+        <div id="buttons">
+          <div className="slide_to_left">
+            <button onClick={toLeftItem}><i className='bx bxs-left-arrow-alt'></i></button>
+          </div>
+          <div className="slide_to_right">
+            <button onClick={toRightItem}><i className='bx bxs-right-arrow-alt' ></i></button>
+          </div>
+        </div>
+      </div>
+
+
       <div className="Titles_wrapper">
         <div className="MainTitles">Most trending movies & series.</div>
         <div className="See_all_Links">See all. <i className='bx bx-right-arrow-alt'></i></div>

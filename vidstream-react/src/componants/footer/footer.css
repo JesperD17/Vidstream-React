@@ -9,7 +9,7 @@
 }
 
 .footer summary {
-    display: contents;
+    display: flex;
 }
 
 /* footer_links */

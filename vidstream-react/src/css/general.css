@@ -12,12 +12,14 @@
 	--search-field-width: 500px;
 	--search-field-height: 50px;
 	--search-field-border-radius: 30px;
-
+	
 	--padding-search-text: 20px;
 	--padding-search-right: calc(var(--search-field-width) - var(--padding-search-text));
-
+	
 	--card-height: 378px;
     --card-width: 250px;
+	
+	--font-color: #a7acb0;
 }
 
 body, html {
@@ -28,7 +30,7 @@ body, html {
 }
 
 #shell {
-	color: #a7acb0;
+	color: var(--font-color);
 }
 
 i {

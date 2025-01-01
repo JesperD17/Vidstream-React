@@ -56,7 +56,7 @@
 
 .Full_collapsible_content i {
     font-size: 35px;
-	display: contents;
+	display: flex;
 }
 
 #content .hover:hover {
@@ -79,11 +79,12 @@ a.Link_Icon_alignment {
 
 #search {
     border-radius: var(--search-field-border-radius);
-	border: solid var(--fourth-color);
+	border: solid 4px var(--fourth-color);
 	flex-direction: row;
     display: flex;
     align-items: center;
 	width: 500px;
+	z-index: 1;
 }
 
 #search:hover {
@@ -101,7 +102,7 @@ a.Link_Icon_alignment {
 
 #search-field {
     width: 89%;
-    height: 45px;
+    height: 50px;
     background: transparent;
     border: none;
     font-size: 20px;
@@ -195,7 +196,7 @@ a.Link_Icon_alignment {
 @media (max-width: 700px) {
 	/* searchbar */
 	#searchIcon1 {
-		display: contents !important;
+		display: flex !important;
 		font-size: 35px;
 	}
 
