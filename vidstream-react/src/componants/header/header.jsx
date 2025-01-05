@@ -1,13 +1,11 @@
 import './header.css';
 import React, { useState, useEffect } from 'react';
-import useSWR from 'swr';
 
-import { useNavigate } from 'react-router-dom';
 
+import { SearchBar } from './searchBar';
 // import Searching from '../Pages/searchPage/Search';
 
 import { Link } from "react-router-dom";
-import { Outlet } from 'react-router-dom';
 
 function Header() {
 
@@ -17,7 +15,7 @@ function Header() {
 
   const menuStyle = () => {
     setMenuActive(!menuActive);
-    console.log(window.innerWidth)
+    // console.log(window.innerWidth)
     if (window.innerWidth < 700 && searchActive) { // if searchbar is open - close searchbar
       setSearchActive(!searchActive)
     }
@@ -48,31 +46,8 @@ function Header() {
   }, []);
 
 
-  const navigate = useNavigate();
-  const [value, setValue] = useState("");
-  const [result, setResult] = useState("");
-  function handleSubmit(e) {
-    e.preventDefault();
-    setResult(
-      value
-    );
-    var searchendvalue = `https://vidstream-api.vercel.app/search?q=${value}`
 
-    if(value) {
-      // this.history.push('/Search')
-      console.log("redirected")
-      // return <Link to={"/Search"}></Link>
-      navigate("/Search");
-
-    }
-
-    console.log(searchendvalue)
-  }
-  function handleChange(e) {
-    setValue(e.target.value);
-    setResult("");
-  }
-  
+const { handleSubmit, handleChange, value, result } = SearchBar();
   return (
     <div id="navigation">
       <a href="/">
