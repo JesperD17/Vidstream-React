@@ -109,6 +109,7 @@ a.Link_Icon_alignment {
     padding-left: 15px;
     font-family: sans-serif;
 	color: var(--fourth-color);
+	border-radius: 16px;
 }
 
 #search-field:active,

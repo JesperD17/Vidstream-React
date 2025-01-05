@@ -17,6 +17,8 @@ import Series from "./componants/Pages/SeriesPage/Series";
 import Info from "./componants/Pages/InfoPage/Info";
 import Sources from "./componants/Pages/SourcesPage/Sources";
 
+import Search from './componants/Pages/searchPage/Search';
+
 const homepage = ReactDOM.createRoot(document.getElementById('all_homepage'));
 homepage.render(
   <div>
@@ -29,6 +31,8 @@ homepage.render(
         <Route path="/Series" element={<Series />} />
         <Route path="/Info" element={<Info />} />
         <Route path="/Sources" element={<Sources />} />
+
+        <Route path="/Search" element={<Search />} />
       </Routes>
       <Footer />
     </BrowserRouter>

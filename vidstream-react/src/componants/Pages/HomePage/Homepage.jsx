@@ -45,6 +45,33 @@ function Homepage() {
   const spotlightLength = allMovies.spotlight.length;
   const repeatSpotlightBannerDivs = new Array(spotlightLength).fill(null);
 
+  
+  function toLeftImage() {
+    setslideIndex(index => {
+      console.log(index)
+      if (index === 0) return spotlightLength - 1 // if below 0 of spotlight list, returns last spotlight.
+      return index - 1;
+    })
+  }
+  
+  function toRightImage() {
+    setslideIndex(index => {
+      if (index === spotlightLength - 1) return 0
+      return index + 1;
+    })
+  }
+  
+  function leftAndClear() { // stops the timer when using buttons
+    toLeftImage();
+    clearInterval(intervalRef.current);
+  }
+  
+  function rightAndClear() {
+    toRightImage();
+    clearInterval(intervalRef.current);
+  }
+  
+  
   // if a string has "?", function changes it to empty string.
   var ratingsSpotlight = []; // making an object for updated strings.
   for (var i = 0; i < allMovies.spotlight.length; i++) {
@@ -57,33 +84,6 @@ function Homepage() {
     } // sends the new strings to the object
     ratingsSpotlight.push(spotlightRating);
   }
-
-  function toLeftImage() {
-    setslideIndex(index => {
-      console.log(index)
-      if (index === 0) return spotlightLength - 1 // if below 0 of spotlight list, returns last spotlight.
-      return index - 1;
-    })
-  }
-
-  function toRightImage() {
-    setslideIndex(index => {
-      if (index === spotlightLength - 1) return 0
-      return index + 1;
-    })
-  }
-
-  function leftAndClear() { // stops the timer when using buttons
-    toLeftImage();
-    clearInterval(intervalRef.current);
-  }
-
-  function rightAndClear() {
-    toRightImage();
-    clearInterval(intervalRef.current);
-  }
-
-
 
   // repeating amount of cards for the div structure from the api.
   const trendingMoviesLength = allMovies.trending.movies.length;
@@ -162,7 +162,7 @@ function Homepage() {
                 <div className="slide_info_inner">
                   <div className="titel">{allMovies.spotlight[number].title}</div>
                   <div className="watch_button"><button>Watch now</button><i className='bx bx-play bx-tada' ></i></div>
-                  <div className="review">{allMovies.spotlight[number].rating} <i className='bx bxs-star'></i></div>
+                  <div className="review">{ratingsSpotlight[number]} <i className='bx bxs-star'></i></div>
                   <div className="year">{allMovies.spotlight[number].year}</div>
                 </div>
               </div>

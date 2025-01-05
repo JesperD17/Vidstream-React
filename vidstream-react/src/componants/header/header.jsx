@@ -2,23 +2,27 @@ import './header.css';
 import React, { useState, useEffect } from 'react';
 import useSWR from 'swr';
 
-import Searching from '../Pages/searchPage/Search';
+import { useNavigate } from 'react-router-dom';
 
-import { Outlet, Link } from "react-router-dom";
+// import Searching from '../Pages/searchPage/Search';
 
-const fetcher = (...args) => fetch(...args).then((res) => res.json());
+import { Link } from "react-router-dom";
+import { Outlet } from 'react-router-dom';
 
 function Header() {
+
+  // collapsible items.
   const [menuActive, setMenuActive] = useState(window.innerWidth > 1586);
   const [searchActive, setSearchActive] = useState(window.innerWidth > 700);
-
-  const [searchInput, setSearchInput] = useState("");
 
   const menuStyle = () => {
     setMenuActive(!menuActive);
     console.log(window.innerWidth)
     if (window.innerWidth < 700 && searchActive) { // if searchbar is open - close searchbar
       setSearchActive(!searchActive)
+    }
+    if (window.innerWidth > 700) {
+      setMenuActive(menuActive);
     }
   };
 
@@ -43,28 +47,32 @@ function Header() {
     // };
   }, []);
 
-  const fetcher = (...args) => fetch(...args).then((res) => res.json());
 
-  const {
-    data: allMovies,
-    error,
-    isValidating,
-  } = useSWR('https://vidstream-api.vercel.app/home', fetcher, { // settings to stop swr from reloading.
-    revalidateIfStale: false,
-    revalidateOnFocus: false,
-    revalidateOnReconnect: false
-  });
-
+  const navigate = useNavigate();
+  const [value, setValue] = useState("");
+  const [result, setResult] = useState("");
   function handleSubmit(e) {
-    e.preventDefault()
-    console.log(searchInput)
+    e.preventDefault();
+    setResult(
+      value
+    );
+    var searchendvalue = `https://vidstream-api.vercel.app/search?q=${value}`
 
-    if (searchInput) {
-      console.log(allMovies)
-      return <Searching />
+    if(value) {
+      // this.history.push('/Search')
+      console.log("redirected")
+      // return <Link to={"/Search"}></Link>
+      navigate("/Search");
+
     }
-  }
 
+    console.log(searchendvalue)
+  }
+  function handleChange(e) {
+    setValue(e.target.value);
+    setResult("");
+  }
+  
   return (
     <div id="navigation">
       <a href="/">
@@ -81,39 +89,39 @@ function Header() {
             {menuActive && (
               <summary>
                 <div className="links">
-                  <div 
+                  <div
                     className="hover">
-                    <Link to="/" className="Link_Icon_alignment">
+                    <Link to="/" className="Link_Icon_alignment" onClick={menuStyle}>
                       HOME <i className='bx bxs-chevron-right'></i>
                     </Link>
                   </div>
-                  <div 
+                  <div
                     className="hover">
-                    <Link to="News" className="Link_Icon_alignment">
+                    <Link to="News" className="Link_Icon_alignment" onClick={menuStyle}>
                       NEWS <i className='bx bxs-chevron-right'></i>
                     </Link>
                   </div>
-                  <div 
+                  <div
                     className="hover">
-                    <Link to="/Movies" className="Link_Icon_alignment">
+                    <Link to="/Movies" className="Link_Icon_alignment" onClick={menuStyle}>
                       ALL MOVIES <i className='bx bxs-chevron-right'></i>
                     </Link>
                   </div>
-                  <div 
+                  <div
                     className="hover">
-                    <Link to="/Series" className="Link_Icon_alignment">
+                    <Link to="/Series" className="Link_Icon_alignment" onClick={menuStyle}>
                       ALL SERIES <i className='bx bxs-chevron-right'></i>
                     </Link>
                   </div>
                   <div
                     className="hover">
-                    <Link to="/Info" className="Link_Icon_alignment">
+                    <Link to="/Info" className="Link_Icon_alignment" onClick={menuStyle}>
                       INFO <i className='bx bxs-chevron-right'></i>
                     </Link>
                   </div>
-                  <div 
+                  <div
                     className="hover">
-                    <Link to="/Sources" className="Link_Icon_alignment">
+                    <Link to="/Sources" className="Link_Icon_alignment" onClick={menuStyle}>
                       SOURCES <i className='bx bxs-chevron-right'></i>
                     </Link>
                   </div>
@@ -129,25 +137,29 @@ function Header() {
             onClick={searchStyle}
           ></i>
           {searchActive && (
-            <form id="search"
-              onSubmit={handleSubmit}
-            >
-              <input
-                type="text"
-                placeholder="Search..."
-                id="search-field"
-                className="blink search-field"
-                // onChange={(e) => setSearchQuery(e.allMovies.value)}
-                // onChange={handleChange}
-                value={searchInput}
-                name="searchInput"
-                onChange={(e) => setSearchInput(e.target.value)}
-              />
-              <i id="IconNoClick" className="bx bx-search bx-tada"></i>
-            </form>
+            <>
+              <form id="search"
+                onSubmit={handleSubmit}
+              >
+                <input
+                  type="text"
+                  placeholder="Search..."
+                  id="search-field"
+                  className="blink search-field"
+
+                  value={value}
+                  onInput={handleChange}
+                  required
+
+                />
+                <i id="IconNoClick" className="bx bx-search bx-tada" ></i>
+              </form>
+              <h4>{result}</h4>
+            </>
           )}
         </div>
       </div>
+
     </div>
   );
 }
