@@ -1,7 +1,8 @@
 import useSWR from 'swr';
 import Skeleton from '../../skeleton/skeleton';
+import { useState, useRef, useEffect } from 'react';
 
-import { useState, useEffect } from 'react';
+// import { useState, useEffect } from 'react';
 
 import "./slideshow.css";
 
@@ -19,7 +20,20 @@ function Homepage() {
     revalidateOnReconnect: false
   });
 
+  const [slideIndex, setslideIndex] = useState(0); // first image is 0
+  const intervalRef = useRef(null); // using ref to clearinterval in other functions
   console.log(allMovies);
+
+
+  useEffect(() => { // timer for the spotlight slideshow
+    if (!allMovies) return; // waits until allMovies isnt empty
+    intervalRef.current = setInterval(() => {
+      toRightImage();
+    }, 5000);
+    return () => clearInterval(intervalRef.current);
+
+  }, [allMovies]) // sees changes when loaded.
+
 
   // Handles error and loading/Skeleton.
   if (error) return console.log("FAILED OR INCOMPLETE API!");
@@ -44,53 +58,32 @@ function Homepage() {
     ratingsSpotlight.push(spotlightRating);
   }
 
-  // const fullTimer = () => {
-  //   const slideTimer = (left = false) => {
-  //     // shows next image
-        
-  //       let i;
-  //       let slides = document.getElementsByClassName("slide-Card"); // Grabs every slide
-  
-  //       for (i = 0; i < slides.length; i++) {
-  //         // slides[i].style.display = "none";
-  //         slides[i].classList.remove("active_style_slide");
-  //       }
-  //     if (left) {
-  //       slideIndex--;
-        
-  //       if (slideIndex < 1) {
-  //         slideIndex = slides.length;
-  //       }
-  //     } 
-  //     else {
-  //       slideIndex++;
-        
-  //       if (slideIndex > slides.length) {
-  //         slideIndex = 1;
-  //       }
-  //     }
-  //       slides[slideIndex - 1].classList.add("active_style_slide");
-  
-  //       slideTime = setTimeout(slideTimer, 3000); // changing seconds
-  //   }
-  //   // restart timer
-  //   clearTimeout(slideTime);
-  //   slideTimer();
-  // }
-
-  function toLeftItem() {
-    console.log("left");
-    // clearTimeout(slideTime);
-
-    // slide(true);
+  function toLeftImage() {
+    setslideIndex(index => {
+      console.log(index)
+      if (index === 0) return spotlightLength - 1 // if below 0 of spotlight list, returns last spotlight.
+      return index - 1;
+    })
   }
 
-  function toRightItem() {
-    console.log("right");
-    // clearTimeout(slideTime);
-
-    // slide();
+  function toRightImage() {
+    setslideIndex(index => {
+      if (index === spotlightLength - 1) return 0
+      return index + 1;
+    })
   }
+
+  function leftAndClear() { // stops the timer when using buttons
+    toLeftImage();
+    clearInterval(intervalRef.current);
+  }
+
+  function rightAndClear() {
+    toRightImage();
+    clearInterval(intervalRef.current);
+  }
+
+
 
   // repeating amount of cards for the div structure from the api.
   const trendingMoviesLength = allMovies.trending.movies.length;
@@ -162,13 +155,14 @@ function Homepage() {
     <>
       <div id="allSlideshows">
         {repeatSpotlightBannerDivs.map((_, number) => (
-          <div key={number} className={"slideshow_wraper " + [number]}>
+          <div key={number} style={{ translate: `${-100 * slideIndex}%` }} className={"slideshow_wraper " + [number]}> {/* using translate to get a animation */}
             <div className="slide_banner_wrapper">
               <img src={allMovies.spotlight[number].banner} draggable="false" />
               <div className="color_to_banner1">
                 <div className="slide_info_inner">
                   <div className="titel">{allMovies.spotlight[number].title}</div>
-                  <div className="review">{ratingsSpotlight[number]} <i className='bx bxs-star'></i></div>
+                  <div className="watch_button"><button>Watch now</button><i className='bx bx-play bx-tada' ></i></div>
+                  <div className="review">{allMovies.spotlight[number].rating} <i className='bx bxs-star'></i></div>
                   <div className="year">{allMovies.spotlight[number].year}</div>
                 </div>
               </div>
@@ -177,12 +171,13 @@ function Homepage() {
 
           </div>
         ))}
+
         <div id="buttons">
           <div className="slide_to_left">
-            <button onClick={toLeftItem}><i className='bx bxs-left-arrow-alt'></i></button>
+            <button onClick={leftAndClear}><i className='bx bxs-left-arrow-alt'></i></button>
           </div>
           <div className="slide_to_right">
-            <button onClick={toRightItem}><i className='bx bxs-right-arrow-alt' ></i></button>
+            <button onClick={rightAndClear}><i className='bx bxs-right-arrow-alt' ></i></button>
           </div>
         </div>
       </div>
