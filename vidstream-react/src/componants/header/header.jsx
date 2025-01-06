@@ -2,6 +2,7 @@ import './header.css';
 import React, { useState, useEffect } from 'react';
 
 
+
 import { SearchBar } from './searchBar';
 // import Searching from '../Pages/searchPage/Search';
 
@@ -47,7 +48,7 @@ function Header() {
 
 
 
-const { handleSubmit, handleChange, value, result } = SearchBar();
+const { handleSubmit, handleChange } = SearchBar();
   return (
     <div id="navigation">
       <a href="/">
@@ -122,14 +123,12 @@ const { handleSubmit, handleChange, value, result } = SearchBar();
                   id="search-field"
                   className="blink search-field"
 
-                  value={value}
                   onInput={handleChange}
                   required
 
                 />
                 <i id="IconNoClick" className="bx bx-search bx-tada" ></i>
               </form>
-              <h4>{result}</h4>
             </>
           )}
         </div>

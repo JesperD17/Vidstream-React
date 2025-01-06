@@ -14,7 +14,7 @@ export function SearchBar() {
   
   
       if (value) {
-        navigate("/Search");
+        navigate(`/Search?q=${value}`);
       }
     }
     
@@ -26,8 +26,8 @@ export function SearchBar() {
 
 
     
-    return ( 
-        handleSubmit, handleChange, value, result 
-    );
+    return {
+        handleSubmit, handleChange
+    };
     
 }
