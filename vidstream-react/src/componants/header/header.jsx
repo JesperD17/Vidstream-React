@@ -1,8 +1,7 @@
 import './header.css';
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useRef } from 'react';
 
-
-
+import { useLocation } from 'react-router-dom';
 import { SearchBar } from './searchBar';
 // import Searching from '../Pages/searchPage/Search';
 
@@ -14,41 +13,68 @@ function Header() {
   const [menuActive, setMenuActive] = useState(window.innerWidth > 1586);
   const [searchActive, setSearchActive] = useState(window.innerWidth > 700);
 
-  const menuStyle = () => {
-    setMenuActive(!menuActive);
-    // console.log(window.innerWidth)
-    if (window.innerWidth < 700 && searchActive) { // if searchbar is open - close searchbar
+  function menuStyle() {
+    if (searchActive) { // if Search is active closes it
       setSearchActive(!searchActive)
     }
-    if (window.innerWidth > 700) {
-      setMenuActive(menuActive);
-    }
-  };
+    setMenuActive(!menuActive)
+  }
 
-  const searchStyle = () => {
-    setSearchActive(!searchActive);
-
-    if (menuActive) { // if collapsible items is open - close collapse
+  function searchStyle() {
+    if (menuActive) { // if Menu is active closes it
       setMenuActive(!menuActive)
     }
-  };
+    setSearchActive(!searchActive)
+  }
 
-
+  const location = useLocation();
   useEffect(() => {
-    const handleResize = () => {
-      setMenuActive(window.innerWidth > 1400);
-      setSearchActive(window.innerWidth > 700);
+    const handleResize = () => { // if the screen resizes.
+      console.log(window.innerWidth)
+      if (window.innerWidth) {
+        if (window.innerWidth > 1400) {
+          setMenuActive(!menuActive)
+        } else {
+          setMenuActive(menuActive)
+        }
+      }
+      if (window.innerWidth) {
+        if (window.innerWidth > 700) {
+          setSearchActive(searchActive)
+        }
+        else {
+          setSearchActive(!searchActive)
+        }
+      }
     };
-
     window.addEventListener('resize', handleResize);
-    // return () => {
-    //   window.removeEventListener('resize', handleResize);
-    // };
+    return () => {
+      window.removeEventListener('resize', handleResize);
+    };
   }, []);
 
 
+  const isFirstRender = useRef(true);
 
-const { handleSubmit, handleChange } = SearchBar();
+  useEffect(() => { // hides the searchbar onUrl change to "/Search"
+    if (isFirstRender.current) {
+      // Skip running the function on the first render.
+      isFirstRender.current = false;
+      return; // returns nothing which blocks the function underneath.
+    }
+
+    var urlPath = location.pathname;
+    console.log(location.search) //urlSearch === "?q="
+    if (urlPath === "/Search" && window.innerWidth < 700) {
+      console.log(urlPath);
+      setSearchActive(!searchActive);
+      console.log("url changed");
+    }
+
+  }, [location.search]) // if location.search changes ("?q=searched item")
+
+  const { handleSubmit, handleChange } = SearchBar();
+
   return (
     <div id="navigation">
       <a href="/">
@@ -59,7 +85,7 @@ const { handleSubmit, handleChange } = SearchBar();
         <div className="Full_collapsible_content">
           <div id="content">
             <i
-              className={`bx ${!menuActive ? 'bx-align-left' : 'bx-align-middle'}`}
+              className={`bx ${menuActive ? 'bx-align-middle' : 'bx-align-left'}`}
               onClick={menuStyle}
             ></i>
             {menuActive && (
@@ -109,7 +135,7 @@ const { handleSubmit, handleChange } = SearchBar();
         <div className="full_search_bar">
           <i
             id="searchIcon1"
-            className={`bx ${!searchActive ? 'bx-search bx-tada' : 'bxs-search'}`}
+            className={`bx ${searchActive ? 'bxs-search' : 'bx-search bx-tada'}`}
             onClick={searchStyle}
           ></i>
           {searchActive && (
@@ -121,9 +147,9 @@ const { handleSubmit, handleChange } = SearchBar();
                   type="text"
                   placeholder="Search..."
                   id="search-field"
-                  className="blink search-field"
 
                   onInput={handleChange}
+                  // onSubmit={closeBar}
                   required
 
                 />
