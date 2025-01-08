@@ -10,65 +10,55 @@ import { Link } from "react-router-dom";
 function Header() {
 
   // collapsible items.
-  const [menuActive, setMenuActive] = useState(window.innerWidth > 1586);
-  const [searchActive, setSearchActive] = useState(window.innerWidth > 700);
+  var itemOneBoolean;
+  if (window.innerWidth > 1400) {
+    itemOneBoolean = true
+  } else {
+    itemOneBoolean = false
+  }
+
+  var itemTwoBoolean;
+  if (window.innerWidth > 700) {
+    itemTwoBoolean = true
+  } else {
+    itemTwoBoolean = false
+  }
+  
+  const [menuActive, setMenuActive] = useState(itemOneBoolean);
+  const [searchActive, setSearchActive] = useState(itemTwoBoolean);
 
   function menuStyle() {
-    if (searchActive) { // if Search is active closes it
+    if (searchActive && window.innerWidth < 700) { // if Search is active closes it
       setSearchActive(!searchActive)
     }
     setMenuActive(!menuActive)
   }
 
   function searchStyle() {
-    if (menuActive) { // if Menu is active closes it
+    if (menuActive && window.innerWidth < 1400) { // if Menu is active closes it
       setMenuActive(!menuActive)
     }
     setSearchActive(!searchActive)
   }
 
   const location = useLocation();
-  useEffect(() => {
-    const handleResize = () => { // if the screen resizes.
-      console.log(window.innerWidth)
-      if (window.innerWidth) {
-        if (window.innerWidth > 1400) {
-          setMenuActive(!menuActive)
-        } else {
-          setMenuActive(menuActive)
-        }
-      }
-      if (window.innerWidth) {
-        if (window.innerWidth > 700) {
-          setSearchActive(searchActive)
-        }
-        else {
-          setSearchActive(!searchActive)
-        }
-      }
-    };
-    window.addEventListener('resize', handleResize);
-    return () => {
-      window.removeEventListener('resize', handleResize);
-    };
-  }, []);
-
-
   const isFirstRender = useRef(true);
 
   useEffect(() => { // hides the searchbar onUrl change to "/Search"
     if (isFirstRender.current) {
-      // Skip running the function on the first render.
+      // Skips running the if statment on the first render.
       isFirstRender.current = false;
       return; // returns nothing which blocks the function underneath.
     }
 
     var urlPath = location.pathname;
-    console.log(location.search) //urlSearch === "?q="
-    if (urlPath === "/Search" && window.innerWidth < 700) {
+    // console.log(location.search) //urlSearch === "?q="
+    
+    if (urlPath === "/Search" && window.innerWidth < 700 && menuActive === false) {
       console.log(urlPath);
-      setSearchActive(!searchActive);
-      console.log("url changed");
+      setMenuActive(menuActive)
+      searchStyle(); 
+      // console.log("url changed");
     }
 
   }, [location.search]) // if location.search changes ("?q=searched item")
