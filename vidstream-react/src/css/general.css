@@ -25,8 +25,9 @@
 body, html {
     background: var(--first-color);
 	margin: 0px;
-	font-family: sans-serif;
+	font-family: "poppins", sans-serif;
     font-weight: bold;
+	line-height: 1.2;
 }
 
 #shell {
@@ -69,3 +70,13 @@ i {
 ::-webkit-scrollbar:vertical {
 	background: transparent;
 }
+
+/* skeleton loading animation */
+@keyframes skeleton-loading {
+    0% {
+      background-color: hsl(200, 20%, 80%);
+    }
+    100% {
+      background-color: hsl(200, 20%, 95%);
+    }
+  }

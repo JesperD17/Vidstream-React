@@ -1,10 +1,4 @@
-
-// import './homePage.css';
-import './skeleton.css';
-
-import Drag from '../global functions/draggableItems';
-
-function Skeleton() {
+function SkeletonHome() {
 
     // number of cards preloaded
     const amountOfCards = 20;
@@ -12,8 +6,6 @@ function Skeleton() {
 
     const amountOfStructures = 4;
     const totalStructures = new Array(amountOfStructures).fill(null);
-
-    Drag()
     return (
         <>
         {totalStructures.map((_, structures) => (
@@ -66,4 +58,4 @@ function Skeleton() {
     );
 }
 
-export default Skeleton;
+export default SkeletonHome;

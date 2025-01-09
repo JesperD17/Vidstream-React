@@ -1,5 +1,5 @@
 import useSWR from 'swr';
-import Skeleton from '../../skeleton/skeleton';
+import SkeletonHome from '../../skeletonS/skeletonHome';
 import { useState, useRef, useEffect } from 'react';
 
 // import { useState, useEffect } from 'react';
@@ -38,7 +38,7 @@ function Homepage() {
   // Handles error and loading/Skeleton.
   if (error) return console.log("FAILED OR INCOMPLETE API!");
   if (isValidating | !allMovies) { // || allMovies.latestMovies.length === 0 || allMovies.latestTvSeries.length === 0 || allMovies.trending.movies.length === 0 || allMovies.trending.tvSeries.length === 0
-    return <Skeleton />;
+    return <SkeletonHome />;
   }
 
   // repeating amount of banners for the div structure from the api.
@@ -221,7 +221,7 @@ function Homepage() {
               <div className="titel">{allMovies.trending.tvSeries[number].title} </div>
               <div className="card_info_inner">
                 <div className="review">{ratingsTrendingSeries[number]} <i className='bx bxs-star'></i></div>
-                <div className="year">{seasonsTrendingSeries[number]}</div>
+                <div className="seasons">{seasonsTrendingSeries[number]}</div>
               </div>
             </div>
           </div>
