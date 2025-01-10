@@ -95,18 +95,28 @@ function Homepage() {
   const seriesLength = allMovies.latestTvSeries.length;
   const repeatSerieCardDivs = new Array(seriesLength).fill(null);
 
-
+  var endEllipsis = 18;
+  var ending = '...'
+  
   var ratingsTrendingMovies = [];
+  var titlesTrendingMovies = [];
   for (var i = 0; i < allMovies.trending.movies.length; i++) {
     var movieRating = allMovies.trending.movies[i].stats.rating;
     if (movieRating == "?") {
       movieRating = "";
     }
     ratingsTrendingMovies.push(movieRating);
+
+    var titles = allMovies.trending.movies[i].title;
+    if(titles.length > endEllipsis && window.screen.width < 700) {
+      titles = titles.substring(0, endEllipsis) + ending;
+    }
+    titlesTrendingMovies.push(titles)
   }
 
   var ratingsTrendingSeries = [];
   var seasonsTrendingSeries = [];
+  var titlesTrendingSeries = [];
   for (var i = 0; i < allMovies.trending.tvSeries.length; i++) {
     var serieRating = allMovies.trending.tvSeries[i].stats.rating;
     var serieSeasons = allMovies.trending.tvSeries[i].stats.seasons;
@@ -114,26 +124,42 @@ function Homepage() {
     if (serieRating == "?") {
       serieRating = "";
     }
+    ratingsTrendingSeries.push(serieRating);
+
     if (serieSeasons.includes("SS", "/ EPS")) {
       serieSeasons = serieSeasons.replace("SS ", "S",).replace("EPS ", "EP");
     }
-    ratingsTrendingSeries.push(serieRating);
     seasonsTrendingSeries.push(serieSeasons);
+
+    var titles = allMovies.trending.tvSeries[i].title;
+    if(titles.length > endEllipsis && window.screen.width < 700) {
+      titles = titles.substring(0, endEllipsis) + ending;
+    }
+    titlesTrendingSeries.push(titles)
   }
 
 
   var ratingsLatestMovies = [];
+  var titlesLatestMovies = [];
   for (var i = 0; i < allMovies.latestMovies.length; i++) {
     var movieRating = allMovies.latestMovies[i].stats.rating;
     if (movieRating == "?") {
       movieRating = "";
     }
     ratingsLatestMovies.push(movieRating);
+
+    var titles = allMovies.latestMovies[i].title;
+    if(titles.length > endEllipsis && window.screen.width < 700) {
+      titles = titles.substring(0, endEllipsis) + ending;
+    }
+    titlesLatestMovies.push(titles)
   }
 
 
   var ratingsLatestTvSeries = [];
   var seasonsLatestTvSeries = [];
+  var titlesLatestSeries = [];
+
   for (var i = 0; i < allMovies.latestTvSeries.length; i++) {
     var serieRating = allMovies.latestTvSeries[i].stats.rating;
     serieSeasons = allMovies.latestTvSeries[i].stats.seasons;
@@ -141,12 +167,18 @@ function Homepage() {
     if (serieRating == "?") {
       serieRating = "";
     }
+    ratingsLatestTvSeries.push(serieRating);
 
     if (serieSeasons.includes("SS", "/ EPS")) {
       serieSeasons = serieSeasons.replace("SS ", "S",).replace("EPS ", "EP");
     }
-    ratingsLatestTvSeries.push(serieRating);
     seasonsLatestTvSeries.push(serieSeasons);
+
+    var titles = allMovies.latestTvSeries[i].title;
+    if(titles.length > endEllipsis && window.screen.width < 700) {
+      titles = titles.substring(0, endEllipsis) + ending;
+    }
+    titlesLatestSeries.push(titles)
   }
 
 
@@ -197,7 +229,7 @@ function Homepage() {
               <img src={allMovies.trending.movies[number].poster} draggable="false" />
             </div>
             <div className="card_info">
-              <div className="titel">{allMovies.trending.movies[number].title} </div>
+              <div className="titel">{titlesTrendingMovies[number]} </div>
               <div className="card_info_inner">
                 <div className="review">{ratingsTrendingMovies[number]} <i className='bx bxs-star'></i></div>
                 <div className="duration">{allMovies.trending.movies[number].stats.duration}</div>
@@ -218,7 +250,7 @@ function Homepage() {
               <img src={allMovies.trending.tvSeries[number].poster} draggable="false" />
             </div>
             <div className="card_info">
-              <div className="titel">{allMovies.trending.tvSeries[number].title} </div>
+              <div className="titel">{titlesTrendingSeries[number]} </div>
               <div className="card_info_inner">
                 <div className="review">{ratingsTrendingSeries[number]} <i className='bx bxs-star'></i></div>
                 <div className="seasons">{seasonsTrendingSeries[number]}</div>
@@ -243,7 +275,7 @@ function Homepage() {
               <img src={allMovies.latestMovies[number].poster} draggable="false" />
             </div>
             <div className="card_info">
-              <div className="titel">{allMovies.latestMovies[number].title} </div>
+              <div className="titel">{titlesLatestMovies[number]} </div>
               <div className="card_info_inner">
                 <div className="review">{ratingsLatestMovies[number]} <i className='bx bxs-star'></i></div>
                 <div className="duration">{allMovies.latestMovies[number].stats.duration}</div>
@@ -270,7 +302,7 @@ function Homepage() {
               <img src={allMovies.latestTvSeries[number].poster} draggable="false" />
             </div>
             <div className="card_info">
-              <div className="titel">{allMovies.latestTvSeries[number].title} </div>
+              <div className="titel">{titlesLatestSeries[number]} </div>
               <div className="card_info_inner">
                 <div className="review">{ratingsLatestTvSeries[number]} <i className='bx bxs-star'></i></div>
                 <div className="seasons">{seasonsLatestTvSeries[number]}</div>

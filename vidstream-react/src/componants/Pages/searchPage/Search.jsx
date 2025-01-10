@@ -10,8 +10,10 @@ function Search() {
   // grabs the url afer /Search
   const location = useLocation();
   const searchQuery = location.search;
-  var newQuery = searchQuery.replace('?q=', '').replace('%20', ' ') // onscreen search result
-
+  var newQuery = searchQuery.replace('?q=', '').replaceAll('%20', ' ') // onscreen search result
+  var endQuery = 30
+  if (newQuery.length > endQuery)
+  newQuery = newQuery.substring(0, endQuery) + "..."
   const {
     data: allMovies,
     error,
@@ -32,6 +34,7 @@ function Search() {
 
   var ratingsSearchPage = [];
   var seasonsSearchPage = [];
+  var titlesSearchPage = [];
   var stats = [];
   for (let i = 0; i < allLength; i++) {
     stats.push(allMovies.items[i].stats); // pushes all the stats to var
@@ -43,11 +46,19 @@ function Search() {
     ratingsSearchPage.push(allRating);
 
     var allSeasons = allMovies.items[i].stats.seasons;
-    console.log(allSeasons)
     if (allSeasons && allSeasons.includes("SS", "/ EPS")) {
       allSeasons = allSeasons.replace("SS ", "S",).replace("EPS ", "EP");
     }
     seasonsSearchPage.push(allSeasons);
+
+    // Adds max length to titles
+    var endEllipsis = 18;
+    var ending = '...'
+    var allTitles = allMovies.items[i].title;
+    if(allTitles.length > endEllipsis && window.screen.width < 700) {
+      allTitles = allTitles.substring(0, endEllipsis) + ending;
+    }
+    titlesSearchPage.push(allTitles)
   }
 
   return (
@@ -61,7 +72,7 @@ function Search() {
               <img src={allMovies.items[number].poster} draggable="false" />
             </div>
             <div className="card_info">
-              <div className="titel">{allMovies.items[number].title} </div>
+              <div className="titel">{titlesSearchPage[number]} </div>
               <div className="card_info_inner">
                 <div>{stats[number].hasOwnProperty("duration", 'year', 'rating') ? // if stats contains strings its a movie, else its a serie.
                   <>

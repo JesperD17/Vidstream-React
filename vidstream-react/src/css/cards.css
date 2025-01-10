@@ -1,9 +1,10 @@
 /* card titles etc */
+
 .Titles_wrapper {
     display: flex;
     flex-direction: column;
     align-items: start;
-    padding: 20px 20px; /* change to 20px 20px after api is fixed */
+    padding: 20px 20px;
 }
 
 .Titles_wrapper .MainTitles {
@@ -17,21 +18,11 @@
 
 /* cards */
 .allCards {
-    display: inline-flex;
+    display: flex;
     flex-wrap: wrap;
     justify-content: center;
-    margin: 10px;
     gap: 10px;
-    position: relative;
-    padding-bottom: 10px;
-}
-
-.allCards:hover {
-    cursor: grab;
-}
-
-.allCards:active {
-    cursor: grabbing;
+    margin: 10px;
 }
 
 .card {
@@ -87,11 +78,13 @@
 }
 
 @media (max-width: 780px) {
-    .allCards {
-        display: flex;
-        overflow: auto;
-        overflow-x: scroll;
-        flex-wrap: unset;
-        justify-content: flex-start;
+    .card_info {
+        margin: 0;
+        padding: 10px;
+    }
+
+    .banner img {
+        width: 140px;
+        height: 215px;
     }
 }

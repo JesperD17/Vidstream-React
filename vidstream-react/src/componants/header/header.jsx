@@ -67,10 +67,10 @@ function Header() {
 
   return (
     <div id="navigation">
-      <a href="/">
+      <Link to="/">
         <img id="logo" src="../pics/2e logo kopie.png" />
         <img id="logo2" src="../pics/Logo Icon.png" />
-      </a>
+      </Link>
       <div className="alignBars">
         <div className="Full_collapsible_content">
           <div id="content">
