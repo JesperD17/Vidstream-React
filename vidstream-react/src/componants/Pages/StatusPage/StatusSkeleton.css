@@ -1,0 +1,20 @@
+#WrapperSkeleton {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    height: 65vh;
+    margin: 20px;
+    text-align: center;
+}
+
+#WrapperSkeleton .ActiveSkeleton {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 20px;
+}
+
+#WrapperSkeleton .loadingText {
+    font-size: 100px;
+}

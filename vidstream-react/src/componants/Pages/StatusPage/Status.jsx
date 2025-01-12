@@ -1,5 +1,4 @@
-import "./Status.css";
-
+import './Status.css';
 import StatusSkeleton from "./StatusSkeleton";
 
 import useSWR from 'swr';
@@ -21,9 +20,9 @@ function Status() {
     const [messageState, setMessageState] = useState(true); // first image is 0
 
     useEffect(() => {
-        // if(allMovies) {
-        //     setMessageState(true)
-        // }
+        if(allMovies) {
+            setMessageState(true)
+        }
         if (error) {
             console.log("FAILED OR INCOMPLETE API!")
             setMessageState(false)
@@ -32,7 +31,7 @@ function Status() {
     }, [allMovies, isValidating, error])
     
     if (isValidating) { 
-        <StatusSkeleton />
+        return <StatusSkeleton />
     }
     
     var titleMessage = "This web is a personal code project."
