@@ -26,7 +26,7 @@
 }
 
 .footer .links {
-    gap: 10px;
+    /* gap: 10px; */
     display: flex;
     flex-direction: column;
 }
@@ -39,6 +39,7 @@ img.footer_Logo {
 /* align logo */
 .footer .logo_links a {
     display: flex;
+    flex-direction: column;
 }
 
 /* collab text */
@@ -53,7 +54,6 @@ img.footer_Logo {
 
 
 #second_part, #fourth_part {
-    /* color: var(--first-color); */
     color: var(--fourth-color);
 }
 
@@ -70,6 +70,7 @@ img.footer_Logo {
     display: block; 
     width: 100%; 
     top: 5px;
+    transition: all 0.3s ease-in-out
 }
 
 .WBR_collab_text a:hover::after {
@@ -77,17 +78,10 @@ img.footer_Logo {
 }
 
 .WBR_collab_text a:hover::after {
-    opacity: 1; /* Fade-in on hover */
-    /* animation: fadeOut 1s forwards; */
-    animation: fadeIn 1s forwards
+    width: 100%;
+    transition: all 0.3s ease-in-out;
 }
 
 .footer .bx.bxs-copyright {
     font-size: 15px;
 }
-
-@keyframes fadeIn {
-    0% { opacity: 0; }
-    100% { opacity: 1; }
-}
-

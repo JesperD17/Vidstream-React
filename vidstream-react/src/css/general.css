@@ -71,6 +71,25 @@ i {
 	background: transparent;
 }
 
+/* links */
+summary .Link_Icon_alignment:after {
+    position: relative;
+    height: 2px;
+    content: "";
+    background: var(--third-color);
+    display: block;
+    width: 0%;
+    top: 5px;
+    transition: all 0.3s ease-in-out
+}
+
+summary .Link_Icon_alignment:hover::after {
+    opacity: 1;
+    background: var(--fourth-color);
+	transition: all 0.3s ease-in-out;
+	width: 100%;
+}
+
 /* skeleton loading animation */
 @keyframes skeleton-loading {
     0% {

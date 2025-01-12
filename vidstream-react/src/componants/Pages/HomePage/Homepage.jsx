@@ -22,7 +22,6 @@ function Homepage() {
 
   const [slideIndex, setslideIndex] = useState(0); // first image is 0
   const intervalRef = useRef(null); // using ref to clearinterval in other functions
-  console.log(allMovies);
 
 
   useEffect(() => { // timer for the spotlight slideshow
@@ -48,7 +47,6 @@ function Homepage() {
   
   function toLeftImage() {
     setslideIndex(index => {
-      console.log(index)
       if (index === 0) return spotlightLength - 1 // if below 0 of spotlight list, returns last spotlight.
       return index - 1;
     })

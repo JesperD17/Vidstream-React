@@ -1,0 +1,39 @@
+#WrapperActive {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    height: 50vh;
+    margin: 20px;
+    text-align: center;
+}
+
+#WrapperActive .projectMessage {
+    margin: 10px;
+}
+
+#WrapperActive .ActiveText {
+    color: lightgreen;
+}
+
+#WrapperActive .ActiveMessage i {
+    color: lightgreen;
+    font-size: 100px;
+}
+
+#WrapperActive .ActiveTextWrapper, .ErrorTextWrapper {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    margin: 10px;
+}
+
+#WrapperActive .ErrorMessage i {
+    color: red;
+    font-size: 100px;
+}
+
+#WrapperActive .ErrorText {
+    color: red;
+}
+

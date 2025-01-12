@@ -10,7 +10,7 @@ import Header from './componants/header/header';
 import Footer from './componants/footer/footer';
 import Homepage from './componants/Pages/HomePage/Homepage';
 // page 
-import News from "./componants/Pages/NewsPage/News";
+import Status from "./componants/Pages/StatusPage/Status";
 import Movies from "./componants/Pages/MoviesPage/Movies";
 import Series from "./componants/Pages/SeriesPage/Series";
 import Info from "./componants/Pages/InfoPage/Info";
@@ -25,7 +25,7 @@ homepage.render(
       <Header />
       <Routes>
         <Route path="/" element={<Homepage />} />
-        <Route path="/News" element={<News />} />
+        <Route path="/Status" element={<Status />} />
         <Route path="/Movies" element={<Movies />} />
         <Route path="/Series" element={<Series />} />
         <Route path="/Info" element={<Info />} />

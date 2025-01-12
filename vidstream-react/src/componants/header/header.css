@@ -64,8 +64,10 @@
 }
 
 a.Link_Icon_alignment {
-    text-decoration: none;
+	text-decoration: none;
     color: var(--sixth-color);
+	height: 35px;
+	width: fit-content;
 }
 
 /* searchbar */
