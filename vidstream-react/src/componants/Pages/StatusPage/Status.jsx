@@ -46,8 +46,7 @@ function Status() {
                             <i className='bx bxs-check-circle' ></i>
                             <div className="ActiveTextWrapper">
                                 <div className="ActiveText">This web IS receiving data right now</div>
-                                <div className="ActiveText">There are no errors seen right now</div>
-                                <div className="ActiveText"></div>
+                                <div className="ActiveText">There are no other errors seen right now</div>
                             </div>
                         </div>
                     </>
@@ -59,7 +58,6 @@ function Status() {
                             <div className="ErrorTextWrapper">
                                 <div className="ErrorText">This web is NOT receiving data at the moment</div>
                                 {/* <div className="ErrorText">There ARE errors seen at the moment</div> */}
-                                <div className="ActiveText">There are no errors seen right now</div>
                                 <div className="ActiveText">There are no other errors seen right now</div>
                             </div>
                         </div>

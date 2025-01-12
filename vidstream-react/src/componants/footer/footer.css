@@ -3,9 +3,6 @@
 .footer {
     background: var(--first-color); 
     height: 300px;
-    /* justify-content: center;
-    flex-direction: column;
-    display: flex; */
 }
 
 .footer summary {
@@ -29,6 +26,10 @@
     /* gap: 10px; */
     display: flex;
     flex-direction: column;
+}
+
+.footer .Link_Icon_alignment {
+    height: 35px;
 }
 
 /* footer_logo  */

@@ -5,9 +5,7 @@ function StatusSkeleton() {
                 <div className="projectMessage"
                 style={{ animation: "skeleton-loading 1s linear infinite alternate", color: "transparent" }}
                 >Lorem ipsum dolor sit amet</div>
-                <i className='bx bxs-error'
-                style={{ animation: "skeleton-loading 1s linear infinite alternate", color: "transparent" }}
-                ></i>
+                <i className='bx bxs-error'></i>
                 <div className="ErrorTextWrapper">
                     <div className="ErrorText"
                     style={{ animation: "skeleton-loading 1s linear infinite alternate", color: "transparent" }}

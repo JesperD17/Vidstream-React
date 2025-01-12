@@ -39,16 +39,6 @@
 	display: flex;
 }
 
-#content .links .hover:not(:last-child):after {
-    border: 1px solid #e2e2e2;
-    border-width: 1px 1px 0 0;
-    content: "";
-    height: 20px;
-    left: 9px;
-    position: relative;
-    top: 30%;
-}
-
 .Full_collapsible_content {
 	align-items: center;
 	display: flex;
@@ -67,7 +57,7 @@ a.Link_Icon_alignment {
 	text-decoration: none;
     color: var(--sixth-color);
 	height: 35px;
-	width: fit-content;
+	height: auto;
 }
 
 /* searchbar */
@@ -140,6 +130,16 @@ a.Link_Icon_alignment {
 		display: flex;
 		align-items: center;
 	}
+
+	#content .links .hover:not(:last-child):after {
+		border: 1px solid #e2e2e2;
+		border-width: 1px 1px 0 0;
+		content: "";
+		height: 20px;
+		left: 9px;
+		position: relative;
+		top: 30%;
+	}
 }
 
 @media (max-width: 1050px) {
@@ -182,17 +182,20 @@ a.Link_Icon_alignment {
 		margin: 0px 20px;
 		display: flex;
 		align-items: center;
-		width: 100%;
+		width: -webkit-fill-available;
 	}
 
 	#content .Link_Icon_alignment {
 		align-items: center;
 		display: flex;
 		justify-content: space-between;
-		width: 95%;
+		width: 98%;
 		line-height: 50px;
     	padding: 10px;
-		padding-right: 30px;
+	}
+
+	#navigation .Link_Icon_alignment:after {
+		display: none;
 	}
 }
 

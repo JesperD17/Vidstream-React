@@ -31,7 +31,7 @@ function Header() {
     if (searchActive && window.innerWidth < 700) { // if Search is active closes it
       setSearchActive(!searchActive)
     }
-    if(window.innerWidth < 700) {
+    if(window.innerWidth < 1400) {
 
       setMenuActive(!menuActive)
     }
@@ -93,7 +93,7 @@ function Header() {
                   <div
                     className="hover">
                     <Link to="/Status" className="Link_Icon_alignment" onClick={menuStyle}>
-                      Status <i className='bx bxs-chevron-right'></i>
+                      STATUS <i className='bx bxs-chevron-right'></i>
                     </Link>
                   </div>
                   <div

@@ -14,8 +14,8 @@ function Footer() {
               <Link to="/" className="Link_Icon_alignment">
                 HOME
               </Link>
-              <Link to="News" className="Link_Icon_alignment">
-                NEWS
+              <Link to="/Status" className="Link_Icon_alignment">
+                STATUS
               </Link>
               <Link to="/Movies" className="Link_Icon_alignment">
                 ALL MOVIES
