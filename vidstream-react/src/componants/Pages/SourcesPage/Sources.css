@@ -1,0 +1,90 @@
+/* wrappers */
+#Sources {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-bottom: 20px;
+}
+
+#Sources .sourcesWrapper {
+    width: 70vw;
+    display: flex;
+    flex-direction: column;
+}
+
+#Sources .SourceMainTitle {
+    margin: 25px 0px;
+}
+
+#Sources .Text_ImageWrapper {
+    height: 100px;
+    gap: 20px;
+    display: flex;
+    width: auto;
+    justify-content: unset;
+}
+
+#Sources .Text_ImageWrapper:nth-child(even) {
+    flex-direction: row-reverse;
+    justify-content: flex-end;
+}
+
+/* image */
+.imageWrapper {
+    display: flex;
+    align-items: center;
+}
+
+#Sources img {
+    height: 100px;
+}
+
+/* text & titles */
+#textBox {
+    display: flex;
+    align-items: center;
+}
+
+#textBox .title {
+    color: var(--fourth-color);
+}
+
+@media (min-width: 1100px) {
+    #Sources {
+        height: 67vh;
+    }
+}
+
+@media (max-width: 1100px) {
+    #Sources .Text_ImageWrapper {
+        height: 150px;
+    }
+}
+
+@media (max-width: 500px) {
+    /* wrappers */
+    #Sources .Text_ImageWrapper {
+        flex-direction: column-reverse !important;
+        height: auto;
+        gap: 0px;
+        margin-bottom: 25px;
+    }
+
+    #Sources img {
+        width: fit-content;
+    }
+
+    /* image */
+    .imageWrapper {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+    }
+
+    /* text & titles */
+    #textBox .textWrapper {
+        flex-direction: column;
+        gap: 0;
+    }
+
+}

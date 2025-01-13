@@ -3,11 +3,70 @@ import "./Sources.css";
 import { Outlet } from "react-router-dom";
 
 function Source() {
+    // json structure
+    // imports all the images
+    function importAll(_) {
+        return _.keys().map(_);
+    }
 
-    return(
+    var titleText = [
+        "Figma: ",
+        "React (CRA - Create React App): ",
+        "Vercel: ",
+        "CSS Loaders: ",
+        "Boxicons: "
+    ]
+
+    var innerText = [
+        "A collaborative interface design tool, used to conceptualize and design the user interface of this website. It helped in creating wireframes and prototypes for seamless user experience.",
+        "A robust JavaScript library/framework used for building the user interface. CRA provides a streamlined setup for developing single-page applications with modern configurations.",
+        "A powerful cloud platform for deploying and hosting web applications. This project is hosted on Vercel, leveraging its fast global CDN and seamless integration with Git for continuous deployment.",
+        "Utilized for creating smooth and visually appealing loading animations that enhance user experience by providing feedback while data fetching or transitions.",
+        "A vector icon library implemented across the application to add aesthetic and functional icons, ensuring a clean and professional design."
+    ]
+
+    var logoLinks = [
+        "https://www.figma.com/",
+        "https://create-react-app.dev/",
+        "https://vercel.com//",
+        "https://css-loaders.com/",
+        "https://boxicons.com/"
+    ]
+
+    
+    const sourceObj = {
+        images: importAll(require.context('./images/', false, /\.(png|jpe?g|svg)$/)),
+        title: titleText,
+        text: innerText,
+        link: logoLinks
+    }
+    var sourceObjLength = sourceObj.title.length
+    
+    const repeatSources = new Array(sourceObjLength).fill(null);
+    return (
         <>
-        <div>Sources</div>
-        <Outlet />
+            <div id="Sources">
+                <div className="sourcesWrapper">
+                    <div className="SourceMainTitle">This project is made using the following tools and technologies:</div>
+                    {repeatSources.map((_, number) => (
+                        <div className="Text_ImageWrapper" key={number}>
+                            <div id="textBox">
+                                <div className="textWrapper">
+                                    <div className="title">{sourceObj.title[number]}</div>
+                                    <div className="text">{sourceObj.text[number]}</div>
+                                    {/* <div className="viewMore">More...</div> */}
+                                </div>
+                            </div>
+                            <div className="imageWrapper">
+                                <a href={sourceObj.link[number]}>
+                                    <img src={sourceObj.images[number]} />
+                                </a>
+                            </div>
+                        </div>
+                    ))}
+                </div>
+            </div>
+            <Outlet />
         </>
     )
 }
