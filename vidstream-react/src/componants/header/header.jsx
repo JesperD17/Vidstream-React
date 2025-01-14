@@ -9,44 +9,48 @@ import { Link } from "react-router-dom";
 
 function Header() {
 
-  // collapsible items.
-  var itemOneBoolean;
-  if (window.innerWidth > 1400) {
-    itemOneBoolean = true
-  } else {
-    itemOneBoolean = false
-  }
-
-  var itemTwoBoolean;
-  if (window.innerWidth > 700) {
-    itemTwoBoolean = true
-  } else {
-    itemTwoBoolean = false
-  }
-  
-  const [menuActive, setMenuActive] = useState(itemOneBoolean);
-  const [searchActive, setSearchActive] = useState(itemTwoBoolean);
-
-  function menuStyle() {
-    if (searchActive && window.innerWidth < 700) { // if Search is active closes it
+  function openSearch() {
+    if (menuActive) {
+      console.log("search")
+      setMenuActive(!menuActive)
       setSearchActive(!searchActive)
-    }
-    if(window.innerWidth < 1400) {
-
-      setMenuActive(!menuActive)
-    }
-  }
-
-  function searchStyle() {
-    if (menuActive && window.innerWidth < 1400) { // if Menu is active closes it
-      setMenuActive(!menuActive)
     }
     setSearchActive(!searchActive)
   }
 
+  function openCollapse() {
+    if (searchActive) {
+      console.log("search")
+      setSearchActive(!searchActive)
+      setMenuActive(!menuActive)
+    }
+    setMenuActive(!menuActive)
+  }
+
+  // searchUrl
   const location = useLocation();
   const isFirstRender = useRef(true);
+  var urlPath = location.pathname;
 
+  // window resize collapsible content
+  const [menuActive, setMenuActive] = useState(window.innerWidth > 1400); // onpage load defines the width
+  const [searchActive, setSearchActive] = useState(window.innerWidth > 700);
+
+  useEffect(() => {
+    const handleResize = () => {
+      // collapsible items.
+      setMenuActive(window.innerWidth > 1400);
+      setSearchActive(window.innerWidth > 700);
+    };
+
+    window.addEventListener('resize', handleResize);
+
+    return () => {
+      window.removeEventListener('resize', handleResize);
+    };
+  }, []);
+
+  // searchUrl
   useEffect(() => { // hides the searchbar onUrl change to "/Search"
     if (isFirstRender.current) {
       // Skips running the if statment on the first render.
@@ -54,14 +58,10 @@ function Header() {
       return; // returns nothing which blocks the function underneath.
     }
 
-    var urlPath = location.pathname;
-    // console.log(location.search) //urlSearch === "?q="
-    
     if (urlPath === "/Search" && window.innerWidth < 700 && menuActive === false) {
       console.log(urlPath);
-      setMenuActive(menuActive)
-      searchStyle(); 
-      // console.log("url changed");
+      // setMenuActive(menuActive)
+      setSearchActive(!searchActive);
     }
 
   }, [location.search]) // if location.search changes ("?q=searched item")
@@ -79,44 +79,38 @@ function Header() {
           <div id="content">
             <i
               className={`bx ${menuActive ? 'bx-align-middle' : 'bx-align-left'}`}
-              onClick={menuStyle}
+              onClick={() => openCollapse()}
             ></i>
             {menuActive && (
               <summary>
                 <div className="links">
-                  <div
-                    className="hover">
-                    <Link to="/" className="Link_Icon_alignment" onClick={menuStyle}>
+                  <div className="hover">
+                    <Link to="/" className="Link_Icon_alignment" onClick={() => setMenuActive(!menuActive)}>
                       HOME <i className='bx bxs-chevron-right'></i>
                     </Link>
                   </div>
-                  <div
-                    className="hover">
-                    <Link to="/Status" className="Link_Icon_alignment" onClick={menuStyle}>
+                  <div className="hover">
+                    <Link to="/Status" className="Link_Icon_alignment" onClick={() => setMenuActive(!menuActive)}>
                       STATUS <i className='bx bxs-chevron-right'></i>
                     </Link>
                   </div>
-                  <div
-                    className="hover">
-                    <Link to="/Movies" className="Link_Icon_alignment" onClick={menuStyle}>
+                  <div className="hover">
+                    <Link to="/Movies" className="Link_Icon_alignment" onClick={() => setMenuActive(!menuActive)}>
                       ALL MOVIES <i className='bx bxs-chevron-right'></i>
                     </Link>
                   </div>
-                  <div
-                    className="hover">
-                    <Link to="/Series" className="Link_Icon_alignment" onClick={menuStyle}>
+                  <div className="hover">
+                    <Link to="/Series" className="Link_Icon_alignment" onClick={() => setMenuActive(!menuActive)}>
                       ALL SERIES <i className='bx bxs-chevron-right'></i>
                     </Link>
                   </div>
-                  <div
-                    className="hover">
-                    <Link to="/Info" className="Link_Icon_alignment" onClick={menuStyle}>
+                  <div className="hover">
+                    <Link to="/Info" className="Link_Icon_alignment" onClick={() => setMenuActive(!menuActive)}>
                       INFO <i className='bx bxs-chevron-right'></i>
                     </Link>
                   </div>
-                  <div
-                    className="hover">
-                    <Link to="/Sources" className="Link_Icon_alignment" onClick={menuStyle}>
+                  <div className="hover">
+                    <Link to="/Sources" className="Link_Icon_alignment" onClick={() => setMenuActive(!menuActive)}>
                       SOURCES <i className='bx bxs-chevron-right'></i>
                     </Link>
                   </div>
@@ -129,7 +123,7 @@ function Header() {
           <i
             id="searchIcon1"
             className={`bx ${searchActive ? 'bxs-search' : 'bx-search bx-tada'}`}
-            onClick={searchStyle}
+            onClick={() => openSearch()}
           ></i>
           {searchActive && (
             <>
@@ -140,9 +134,7 @@ function Header() {
                   type="text"
                   placeholder="Search..."
                   id="search-field"
-
                   onInput={handleChange}
-                  // onSubmit={closeBar}
                   required
 
                 />
