@@ -1,7 +1,7 @@
 /* wrappers */
 #Sources {
     display: flex;
-    align-items: center;
+    align-items: baseline;
     justify-content: center;
     margin-bottom: 20px;
 }
@@ -13,7 +13,9 @@
 }
 
 #Sources .SourceMainTitle {
-    margin: 25px 0px;
+    margin: 50px 0px;
+    font-size: 1.5rem;
+    text-align: center;
 }
 
 #Sources .Text_ImageWrapper {
@@ -67,7 +69,9 @@
         flex-direction: column-reverse !important;
         height: auto;
         gap: 0px;
+        margin-top: 25px;
         margin-bottom: 25px;
+        gap: 15px;
     }
 
     #Sources img {
