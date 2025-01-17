@@ -7,7 +7,7 @@ function StatusSkeleton() {
             <div id="WrapperSkeleton">
                 <div className="ActiveSkeleton">
                         <div className="projectMessage">Loading status.</div>
-                        <div class="loadingText"></div>
+                        <div className="loadingText"></div>
                 </div>
             </div>
         </>

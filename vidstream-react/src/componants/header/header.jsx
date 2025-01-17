@@ -19,7 +19,7 @@ function Header() {
   }
 
   function openCollapse() {
-    if (searchActive) {
+    if (searchActive && window.innerWidth < 700) {
       console.log("search")
       setSearchActive(!searchActive)
       setMenuActive(!menuActive)
@@ -38,19 +38,20 @@ function Header() {
 
   useEffect(() => {
     const handleResize = () => {
-      // collapsible items.
-      setMenuActive(window.innerWidth > 1400);
-      setSearchActive(window.innerWidth > 700);
+      // collapsible items updated on resize.
+      var lastWidth = window.innerWidth;
+      if (window.innerWidth === lastWidth && window.innerWidth > 600) {
+        setMenuActive(window.innerWidth > 1400);
+        setSearchActive(window.innerWidth > 700);
+      }
     };
-
     window.addEventListener('resize', handleResize);
-
     return () => {
       window.removeEventListener('resize', handleResize);
     };
   }, []);
 
-  // searchUrl
+  // searchUrl 
   useEffect(() => { // hides the searchbar onUrl change to "/Search"
     if (isFirstRender.current) {
       // Skips running the if statment on the first render.
@@ -63,7 +64,6 @@ function Header() {
       // setMenuActive(menuActive)
       setSearchActive(!searchActive);
     }
-
   }, [location.search]) // if location.search changes ("?q=searched item")
 
   const { handleSubmit, handleChange } = SearchBar();
@@ -85,32 +85,32 @@ function Header() {
               <summary>
                 <div className="links">
                   <div className="hover">
-                    <Link to="/" className="Link_Icon_alignment" onClick={() => setMenuActive(!menuActive)}>
+                    <Link to="/" className="Link_Icon_alignment" onClick={() => window.innerWidth < 1400 && setMenuActive(!menuActive)}>
                       HOME <i className='bx bxs-chevron-right'></i>
                     </Link>
                   </div>
                   <div className="hover">
-                    <Link to="/Status" className="Link_Icon_alignment" onClick={() => setMenuActive(!menuActive)}>
+                    <Link to="/Status" className="Link_Icon_alignment" onClick={() => window.innerWidth < 1400 && setMenuActive(!menuActive)}>
                       STATUS <i className='bx bxs-chevron-right'></i>
                     </Link>
                   </div>
                   <div className="hover">
-                    <Link to="/Movies" className="Link_Icon_alignment" onClick={() => setMenuActive(!menuActive)}>
+                    <Link to="/Movies" className="Link_Icon_alignment" onClick={() => window.innerWidth < 1400 && setMenuActive(!menuActive)}>
                       ALL MOVIES <i className='bx bxs-chevron-right'></i>
                     </Link>
                   </div>
                   <div className="hover">
-                    <Link to="/Series" className="Link_Icon_alignment" onClick={() => setMenuActive(!menuActive)}>
+                    <Link to="/Series" className="Link_Icon_alignment" onClick={() => window.innerWidth < 1400 && setMenuActive(!menuActive)}>
                       ALL SERIES <i className='bx bxs-chevron-right'></i>
                     </Link>
                   </div>
                   <div className="hover">
-                    <Link to="/Info" className="Link_Icon_alignment" onClick={() => setMenuActive(!menuActive)}>
+                    <Link to="/Info" className="Link_Icon_alignment" onClick={() => window.innerWidth < 1400 && setMenuActive(!menuActive)}>
                       INFO <i className='bx bxs-chevron-right'></i>
                     </Link>
                   </div>
                   <div className="hover">
-                    <Link to="/Sources" className="Link_Icon_alignment" onClick={() => setMenuActive(!menuActive)}>
+                    <Link to="/Sources" className="Link_Icon_alignment" onClick={() => window.innerWidth < 1400 && setMenuActive(!menuActive)}>
                       SOURCES <i className='bx bxs-chevron-right'></i>
                     </Link>
                   </div>

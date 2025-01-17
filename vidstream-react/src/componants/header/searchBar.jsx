@@ -7,6 +7,7 @@ export function SearchBar() {
   const [result, setResult] = useState("");
 
   const handleSubmit = (e) => {
+
     e.preventDefault();
     setResult(
       value
