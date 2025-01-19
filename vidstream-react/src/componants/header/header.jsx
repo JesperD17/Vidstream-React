@@ -95,16 +95,6 @@ function Header() {
                     </Link>
                   </div>
                   <div className="hover">
-                    <Link to="/Movies" className="Link_Icon_alignment" onClick={() => window.innerWidth < 1400 && setMenuActive(!menuActive)}>
-                      ALL MOVIES <i className='bx bxs-chevron-right'></i>
-                    </Link>
-                  </div>
-                  <div className="hover">
-                    <Link to="/Series" className="Link_Icon_alignment" onClick={() => window.innerWidth < 1400 && setMenuActive(!menuActive)}>
-                      ALL SERIES <i className='bx bxs-chevron-right'></i>
-                    </Link>
-                  </div>
-                  <div className="hover">
                     <Link to="/Info" className="Link_Icon_alignment" onClick={() => window.innerWidth < 1400 && setMenuActive(!menuActive)}>
                       INFO <i className='bx bxs-chevron-right'></i>
                     </Link>

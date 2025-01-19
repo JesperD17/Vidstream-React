@@ -1,12 +1,15 @@
 import "./Info.css";
 
+import SkeletonLoader from "../../skeletonS/skeletenLoader";
+
 import { Outlet } from "react-router-dom";
 
 function Info() {
     
     return (
         <>
-            info
+            <SkeletonLoader />
+            <div id="Empty">info</div>
             <Outlet />
         </>
     )

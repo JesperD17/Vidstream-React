@@ -11,8 +11,6 @@ import Footer from './componants/footer/footer';
 import Homepage from './componants/Pages/HomePage/Homepage';
 // page 
 import Status from "./componants/Pages/StatusPage/Status";
-import Movies from "./componants/Pages/MoviesPage/Movies";
-import Series from "./componants/Pages/SeriesPage/Series";
 import Info from "./componants/Pages/InfoPage/Info";
 import Sources from "./componants/Pages/SourcesPage/Sources";
 
@@ -20,14 +18,12 @@ import Search from './componants/Pages/searchPage/Search';
 
 const homepage = ReactDOM.createRoot(document.getElementById('all_homepage'));
 homepage.render(
-  <div>
+  <div id="Routing">
     <BrowserRouter>
       <Header />
       <Routes>
         <Route path="/" element={<Homepage />} />
         <Route path="/Status" element={<Status />} />
-        <Route path="/Movies" element={<Movies />} />
-        <Route path="/Series" element={<Series />} />
         <Route path="/Info" element={<Info />} />
         <Route path="/Sources" element={<Sources />} />
 

@@ -13,6 +13,7 @@
 .links_title {
     font-size: 30px;
     color: var(--fourth-color);
+    padding-bottom: 10px;
 }
 
 .logo_links {

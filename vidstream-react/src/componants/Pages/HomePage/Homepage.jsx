@@ -37,7 +37,7 @@ function Homepage() {
   // Handles error and loading/Skeleton.
   if (error) return console.log("FAILED OR INCOMPLETE API!");
   if (isValidating | !allMovies) { // || allMovies.latestMovies.length === 0 || allMovies.latestTvSeries.length === 0 || allMovies.trending.movies.length === 0 || allMovies.trending.tvSeries.length === 0
-    return <SkeletonHome />;
+    return <SkeletonHome /> ;
   }
 
   // repeating amount of banners for the div structure from the api.

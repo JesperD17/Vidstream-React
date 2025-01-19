@@ -1,8 +1,39 @@
+/* text & animation alignment */
+#loadingWrapper {
+    position: sticky;
+    top: 0;
+    z-index: 1;
+}
+
+#loadingAnimations {
+    height: 80vh;
+    width: 100vw;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+    position: absolute;
+    top: 0;
+}
+/* text */
+.loading {
+    clip-path: inset(0 1.5ch 0 0);
+    animation: l 1s steps(4, jump-none) infinite;
+    color: var(--font-color);
+}
+
+@keyframes l {
+    to {
+        clip-path: inset(0)
+    }
+}
+
+/* icons */
 .loadingText {
     width: 100px;
     aspect-ratio: 1;
-    --c: linear-gradient(#f7f7f7 0 0);
-    --m: radial-gradient(farthest-side, #ffffff 92%, #0000);
+    --c: linear-gradient(var(--font-color) 0 0);
+    --m: radial-gradient(farthest-side, var(--font-color) 90%, #0000);
     background: var(--c), var(--m), var(--c), var(--m), var(--c), var(--m);
     background-size: 24px 30px, 24px 24px;
     background-repeat: no-repeat;

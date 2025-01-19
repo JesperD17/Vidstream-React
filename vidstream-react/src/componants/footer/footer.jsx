@@ -17,12 +17,6 @@ function Footer() {
               <Link to="/Status" className="Link_Icon_alignment">
                 STATUS
               </Link>
-              <Link to="/Movies" className="Link_Icon_alignment">
-                ALL MOVIES
-              </Link>
-              <Link to="/Series" className="Link_Icon_alignment">
-                ALL SERIES
-              </Link>
               <Link to="/Info" className="Link_Icon_alignment">
                 INFO
               </Link>
@@ -32,17 +26,17 @@ function Footer() {
             </div>
           </summary>
         </div>
-        <a href="http://localhost/Vidstream/Vidstream/Onscreen/html/homepage.php">
+        <Link to="/">
           <img className="footer_Logo" src="../pics/Logo Icon.png"></img>
-        </a>
+        </Link>
       </div>
 
       <div className="WBR_collab_text">
         <i className='bx bxs-copyright'></i>
         <div id="first_part">2024</div>
-        <a href="http://localhost/Vidstream/Vidstream/Onscreen/html/homepage.php" id="second_part">
+        <Link to="/" id="second_part">
           Vidstream.
-        </a>
+        </Link>
         <div id="third_part">API by</div>
         <a href="https://github.com/WBRK-dev" id="fourth_part">
           WBRK.

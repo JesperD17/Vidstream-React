@@ -24,7 +24,7 @@ function Search() {
     revalidateOnReconnect: false
   });
 
-  if (error) return console.log("FAILED OR INCOMPLETE API!");
+  if (error) return console.log("FAILED OR INCOMPLETE API!"), <div id="Empty"></div>;
   if (isValidating | !allMovies) {
     return <SkeletonCards />;
   }
