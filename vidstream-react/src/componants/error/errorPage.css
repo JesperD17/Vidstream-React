@@ -1,0 +1,29 @@
+#errorWrapper {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+    height: 65vh;
+    margin: 20px;
+    color: red;
+    text-align: center;
+}
+
+#errorWrapper i {
+    font-size: 200px;
+    gap: 20px;
+}
+
+#errorWrapper .errorMessage {
+    margin: 10px;
+}
+
+#errorWrapper .errorMessage a {
+    margin: 0 5px;
+    text-decoration: none;
+    color: #d06a6a;
+}
+
+#errorWrapper .errorMessage a:hover {
+    color: white;
+}
