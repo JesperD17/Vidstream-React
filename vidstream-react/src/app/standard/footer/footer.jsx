@@ -1,6 +1,6 @@
 import './footer.css';
 
-import { Link } from 'react-router-dom';
+import Link from 'next/link';
 
 function Footer() {
   return (
@@ -11,22 +11,22 @@ function Footer() {
           <summary>
             <div className="links">
               <div className="links_title">Navigation</div>
-              <Link to="/" className="Link_Icon_alignment">
+              <Link href="/" className="Link_Icon_alignment">
                 HOME
               </Link>
-              <Link to="/Status" className="Link_Icon_alignment">
+              <Link href="/Status" className="Link_Icon_alignment">
                 STATUS
               </Link>
-              <Link to="/Info" className="Link_Icon_alignment">
+              <Link href="/Info" className="Link_Icon_alignment">
                 INFO
               </Link>
-              <Link to="/Sources" className="Link_Icon_alignment">
+              <Link href="/Sources" className="Link_Icon_alignment">
                 SOURCES
               </Link>
             </div>
           </summary>
         </div>
-        <Link to="/">
+        <Link href="/">
           <img className="footer_Logo" src="../pics/Logo Icon.png"></img>
         </Link>
       </div>
@@ -34,7 +34,7 @@ function Footer() {
       <div className="WBR_collab_text">
         <i className='bx bxs-copyright'></i>
         <div id="first_part">2024</div>
-        <Link to="/" id="second_part">
+        <Link href="/" id="second_part">
           Vidstream.
         </Link>
         <div id="third_part">API by</div>

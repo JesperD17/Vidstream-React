@@ -1,8 +1,6 @@
 import "./Info.css";
 
-import SkeletonLoader from "../../skeletonS/skeletenLoader";
-
-import { Outlet } from "react-router-dom";
+import SkeletonLoader from "../standard/skeletonS/skeletenLoader";
 
 function Info() {
     
@@ -10,7 +8,6 @@ function Info() {
         <>
             <SkeletonLoader />
             <div id="Empty">info</div>
-            <Outlet />
         </>
     )
 }

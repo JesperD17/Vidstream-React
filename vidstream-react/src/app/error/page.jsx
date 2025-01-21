@@ -1,15 +1,15 @@
-import './errorPage.css'
+import './error.css'
 
-import { Link } from 'react-router-dom';
+import Link from 'next/link';
 
 function error() {
 
     return (
         <div id="errorWrapper">
-            <i class='bx bxs-error-alt' ></i>
+            <i className='bx bxs-error-alt' ></i>
             <div className="errorMessage">
                 Unable to load data. Please refresh the page, or visit our 
-                <Link to="/Status">
+                <Link href="/Status">
                     Status
                 </Link>
                  page for more information.

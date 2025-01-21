@@ -1,8 +1,8 @@
-import { useNavigate } from 'react-router-dom';
+import { useRouter } from 'next/compat/router';
 import { useState } from 'react';
 
 export function SearchBar() {
-  const navigate = useNavigate();
+  const navigate = useRouter();
   const [value, setValue] = useState("");
   const [result, setResult] = useState("");
 

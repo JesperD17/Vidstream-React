@@ -1,7 +1,5 @@
 import "./Sources.css";
 
-import { Outlet } from "react-router-dom";
-
 function Source() {
     // json structure
     // imports all the images
@@ -35,7 +33,7 @@ function Source() {
 
     
     const sourceObj = {
-        images: importAll(require.context('./images/', false, /\.(png|jpe?g|svg)$/)),
+        images: importAll(require.context('./images/', false, /\.(png)$/)),
         title: titleText,
         text: innerText,
         link: logoLinks
@@ -59,14 +57,13 @@ function Source() {
                             </div>
                             <div className="imageWrapper">
                                 <a href={sourceObj.link[number]}>
-                                    <img src={sourceObj.images[number]} />
+                                    <img src={sourceObj.images[number].default.src} />
                                 </a>
                             </div>
                         </div>
                     ))}
                 </div>
             </div>
-            <Outlet />
         </>
     )
 }

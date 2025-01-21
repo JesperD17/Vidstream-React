@@ -1,11 +1,12 @@
+"use client"
 import './header.css';
 import React, { useState, useEffect, useRef } from 'react';
 
-import { useLocation } from 'react-router-dom';
+import { useRouter } from 'next/compat/router';
 import { SearchBar } from './searchBar';
 // import Searching from '../Pages/searchPage/Search';
 
-import { Link } from "react-router-dom";
+import Link from 'next/link';
 
 function Header() {
 
@@ -27,10 +28,16 @@ function Header() {
     setMenuActive(!menuActive)
   }
 
+  function closeCollapse() {
+    if (window.innerWidth < 1400) {
+      setMenuActive(!menuActive)
+    }
+  }
+
   // searchUrl
-  const location = useLocation();
+  const location = useRouter();
   const isFirstRender = useRef(true);
-  var urlPath = location.pathname;
+  var urlPath = location;
 
   // window resize collapsible content
   const [menuActive, setMenuActive] = useState(window.innerWidth > 1400); // onpage load defines the width
@@ -64,13 +71,13 @@ function Header() {
       // setMenuActive(menuActive)
       setSearchActive(!searchActive);
     }
-  }, [location.search]) // if location.search changes ("?q=searched item")
+  }, [location]) // if location.search changes ("?q=searched item")
 
   const { handleSubmit, handleChange } = SearchBar();
 
   return (
     <div id="navigation">
-      <Link to="/">
+      <Link href="/">
         <img id="logo" src="../pics/2e logo kopie.png" />
         <img id="logo2" src="../pics/Logo Icon.png" />
       </Link>
@@ -85,22 +92,22 @@ function Header() {
               <summary>
                 <div className="links">
                   <div className="hover">
-                    <Link to="/" className="Link_Icon_alignment" onClick={() => window.innerWidth < 1400 && setMenuActive(!menuActive)}>
+                    <Link href="/" className="Link_Icon_alignment" onClick={closeCollapse}>
                       HOME <i className='bx bxs-chevron-right'></i>
                     </Link>
                   </div>
                   <div className="hover">
-                    <Link to="/Status" className="Link_Icon_alignment" onClick={() => window.innerWidth < 1400 && setMenuActive(!menuActive)}>
+                    <Link href="/status" className="Link_Icon_alignment" onClick={closeCollapse}>
                       STATUS <i className='bx bxs-chevron-right'></i>
                     </Link>
                   </div>
                   <div className="hover">
-                    <Link to="/Info" className="Link_Icon_alignment" onClick={() => window.innerWidth < 1400 && setMenuActive(!menuActive)}>
+                    <Link href="/info" className="Link_Icon_alignment" onClick={closeCollapse}>
                       INFO <i className='bx bxs-chevron-right'></i>
                     </Link>
                   </div>
                   <div className="hover">
-                    <Link to="/Sources" className="Link_Icon_alignment" onClick={() => window.innerWidth < 1400 && setMenuActive(!menuActive)}>
+                    <Link href="/sources" className="Link_Icon_alignment" onClick={closeCollapse}>
                       SOURCES <i className='bx bxs-chevron-right'></i>
                     </Link>
                   </div>

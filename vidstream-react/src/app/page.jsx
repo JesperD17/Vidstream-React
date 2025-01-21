@@ -1,12 +1,11 @@
+"use client"
 import useSWR from 'swr';
 import { useState, useRef, useEffect } from 'react';
 
-import ErrorPage from '../../error/errorPage'
-import SkeletonHome from '../../skeletonS/skeletonHome';
+import ErrorPage from "./error/page";
+import SkeletonHome from './standard/skeletonS/skeletonHome';
 
-// import { useState, useEffect } from 'react';
-
-import "./slideshow.css";
+import "././css/slideshow.css";
 
 // created function to handle API request
 const fetcher = (...args) => fetch(...args).then((res) => res.json());

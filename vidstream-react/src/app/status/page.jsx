@@ -1,8 +1,9 @@
+"use client"
+
 import './Status.css';
-import StatusSkeleton from "./StatusSkeleton";
+import StatusSkeleton from "../standard/skeletonS/StatusSkeleton";
 
 import useSWR from 'swr';
-import { Outlet } from "react-router-dom";
 import { useState, useEffect } from 'react';
 
 const fetcher = (...args) => fetch(...args).then((res) => res.json());
@@ -58,7 +59,6 @@ function Status() {
                         </div>
                     </>}
             </div>
-            <Outlet />
         </>
     )
 }
