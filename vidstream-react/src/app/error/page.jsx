@@ -16,6 +16,7 @@ function error() {
             </div>
         </div>
     )
+    
 }
 
 export default error;
