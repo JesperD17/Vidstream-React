@@ -26,5 +26,4 @@ export function SearchBar() {
   return {
     handleSubmit, handleChange, result
   };
-
 }
