@@ -1,4 +1,4 @@
-import '../../css/animations.css';
+import '../../../../src/app/css/animations.css'
 import './StatusSkeleton.css';
 
 function StatusSkeleton() {

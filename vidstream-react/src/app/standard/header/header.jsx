@@ -40,8 +40,8 @@ function Header() {
   var urlPath = location;
 
   // window resize collapsible content
-  const [menuActive, setMenuActive] = useState(window.innerWidth > 1400); // onpage load defines the width
-  const [searchActive, setSearchActive] = useState(window.innerWidth > 700);
+  const [menuActive, setMenuActive] = useState(false); // onpage load defines the width
+  const [searchActive, setSearchActive] = useState(false);
 
   useEffect(() => {
     const handleResize = () => {
@@ -52,6 +52,7 @@ function Header() {
         setSearchActive(window.innerWidth > 700);
       }
     };
+    handleResize();
     window.addEventListener('resize', handleResize);
     return () => {
       window.removeEventListener('resize', handleResize);
