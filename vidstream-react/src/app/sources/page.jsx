@@ -9,7 +9,7 @@ function Source() {
 
     var titleText = [
         "Figma: ",
-        "React (CRA - Create React App): ",
+        "Next.js: ",
         "Vercel: ",
         "CSS Loaders: ",
         "Boxicons: "
@@ -17,7 +17,7 @@ function Source() {
 
     var innerText = [
         "A collaborative interface design tool, used to conceptualize and design the user interface of this website. It helped in creating wireframes and prototypes for seamless user experience.",
-        "A robust JavaScript library/framework used for building the user interface. CRA provides a streamlined setup for developing single-page applications with modern configurations.",
+        "A versatile React framework used to build this application, providing server-side rendering (SSR), static site generation (SSG), and optimized performance for a fast and seamless user experience.",
         "A powerful cloud platform for deploying and hosting web applications. This project is hosted on Vercel, leveraging its fast global CDN and seamless integration with Git for continuous deployment.",
         "Utilized for creating smooth and visually appealing loading animations that enhance user experience by providing feedback while data fetching or transitions.",
         "A vector icon library implemented across the application to add aesthetic and functional icons, ensuring a clean and professional design."
@@ -25,7 +25,7 @@ function Source() {
 
     var logoLinks = [
         "https://www.figma.com/",
-        "https://create-react-app.dev/",
+        "https://nextjs.org/",
         "https://vercel.com//",
         "https://css-loaders.com/",
         "https://boxicons.com/"

@@ -9,7 +9,7 @@ function error() {
             <i className='bx bxs-error-alt' ></i>
             <div className="errorMessage">
                 Unable to load data. Please refresh the page, or visit our 
-                <Link href="/Status">
+                <Link href="/status">
                     Status
                 </Link>
                  page for more information.
