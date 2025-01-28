@@ -103,8 +103,8 @@ function Header() {
                     </Link>
                   </div>
                   <div className="hover">
-                    <Link href="/info" className="Link_Icon_alignment" onClick={closeCollapse}>
-                      INFO <i className='bx bxs-chevron-right'></i>
+                    <Link href="/copyright" className="Link_Icon_alignment" onClick={closeCollapse}>
+                      COPYRIGHT <i className='bx bxs-chevron-right'></i>
                     </Link>
                   </div>
                   <div className="hover">

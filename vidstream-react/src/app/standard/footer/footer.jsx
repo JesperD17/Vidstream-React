@@ -14,13 +14,13 @@ function Footer() {
               <Link href="/" className="Link_Icon_alignment">
                 HOME
               </Link>
-              <Link href="/Status" className="Link_Icon_alignment">
+              <Link href="/status" className="Link_Icon_alignment">
                 STATUS
               </Link>
-              <Link href="/Info" className="Link_Icon_alignment">
-                INFO
+              <Link href="/copyright" className="Link_Icon_alignment">
+                COPYRIGHT
               </Link>
-              <Link href="/Sources" className="Link_Icon_alignment">
+              <Link href="/sources" className="Link_Icon_alignment">
                 SOURCES
               </Link>
             </div>

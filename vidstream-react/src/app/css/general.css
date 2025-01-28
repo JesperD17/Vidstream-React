@@ -93,6 +93,15 @@ summary .Link_Icon_alignment:hover::after {
 /* blank pages */
 #Empty {
     height: 68vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+	flex-direction: column;
+    gap: 20px;
+}
+
+#Empty .\34 04 {
+    font-size: 15vh;
 }
 
 /* skeleton loading animation */

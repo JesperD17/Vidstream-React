@@ -1,15 +1,15 @@
-import "./Info.css";
+import "./Copyright.css";
 
 import SkeletonLoader from "../standard/skeletonS/skeletenLoader";
 
-function Info() {
+function Copyright() {
     
     return (
         <>
             <SkeletonLoader />
-            <div id="Empty">info</div>
+            <div id="Empty"></div>
         </>
     )
 }
 
-export default Info;
+export default Copyright;
