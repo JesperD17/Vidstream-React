@@ -1,42 +1,90 @@
 "use client"
+import Link from "next/link";
+import "./login.css";
 
-import { useEffect } from "react"
+import { useRef, useState } from "react";
 
-function submitHandler(event) {
-  event.preventDefault();
-  const { response } = GET()
-  console.log("submitted")
-  console.log(response)
+async function fetchUsers() {
+  try {
+    const response = await fetch('../../api/mail'); // Fetch to SQL
+    const data = await response.json(); // Convert response to JSON
+    return data;
+  } catch (error) {
+    console.error(error);
+  }
 }
 
-function GET() {
-  useEffect(() => {
-    let response;
-    const fetchData = async () => {
-      try {
-        const { data } = await fetch('../../api/mail')
-        console.log(data)
-        response = data.json()
-        console.log(response, "aaaa")
+export default function loginForm() {
+  const inputMailRef = useRef();
+  const inputPassRef = useRef();
+
+  const [errorMailState, setErrorMailState] = useState(false);
+  const [errorPassState, setErrorPassState] = useState(false);
+
+  var errorMessageMail = "Email not found.";
+  var errorMessagePass = "Invalid password.";
   
-      } catch (error) {
-        console.log(error)
+  const checkUser = async (e) => {
+    e.preventDefault() // Stops page from reloading
+    var data = await fetchUsers()
+
+    var mailInput = inputMailRef.current.value;
+    var passInput = inputPassRef.current.value;
+
+    if (data) {
+      for (var i = 0; i < data.users.length; i++) {
+        if (data.users[i].email === mailInput) {
+          console.log("YES", i)
+          setErrorMailState(false);
+        } else {
+          setErrorMailState(true);
+        }
+
+        if (data.users[i].password_hash === passInput) {
+          console.log("YES", i)
+          setErrorPassState(false);
+        } else {
+          setErrorPassState(true);
+        }
       }
+    } else {
+      console.log("ERROR")
     }
-    fetchData()
-    return response;
-  }, [])
-}
+  }
 
-export default function LoginPage() {
-  
+  const removeErrorMessages = () => {
+    if (errorMailState) {
+      setErrorMailState(false)
+    }
+
+    if (errorPassState) {
+      setErrorPassState(false)
+    }
+  }
+
   return (
-    <form onSubmit={submitHandler}>
-      <input type="email" name="email" placeholder="Email" required />
+    <div id="Empty">
+      <form className="loginForm" onSubmit={(e) => checkUser(e)}>
+        <div className="formInnerWrapper">
+          <div className="inputWraper">
+            <div className="inputTitle">Email</div>
+            <input type="email" name="email" placeholder="user@gmail.com" ref={inputMailRef} required />
+            {errorMailState && (<div className="errorMessage">{errorMessageMail}</div>)}
+          </div>
 
-      <input type="password" name="password" placeholder="Password" required />
+          <div className="inputWraper">
+            <div className="inputTitle">Password</div>
+            <input type="password" name="password" placeholder="Password" ref={inputPassRef} required />
+            {errorPassState && (<div className="errorMessage">{errorMessagePass}</div>)}
+          </div>
 
-      <button type="submit">Login</button>
-    </form>
+          <div className="submitWrapper">
+            <button type="submit">Login</button>
+            <button type="reset" onClick={removeErrorMessages}>X</button>
+          </div>
+          <Link href="/" className="forgotPass">forgot password?</Link>
+        </div>
+      </form>
+    </div>
   )
 }

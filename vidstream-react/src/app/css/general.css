@@ -57,6 +57,7 @@ i {
 	height: 7px;
 }
 
+
 /* Handle */
 ::-webkit-scrollbar-thumb {
 	background: var(--fourth-color);

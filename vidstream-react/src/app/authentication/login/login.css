@@ -1,0 +1,73 @@
+.formInnerWrapper {
+    display: flex;
+    flex-direction: column;
+    height: 350px;
+    width: 320px;
+    background: var(--sixth-color);
+    border-radius: 8px;
+    justify-content: space-around;
+    align-items: center;
+}
+
+.formInnerWrapper input {
+    width: 80%;
+    height: 35px;
+    background: transparent;
+    border: solid var(--third-color) 2px;
+    border-radius: 8px;
+    font-size: 16px;
+}
+
+.formInnerWrapper .submitWrapper {
+    display: flex;
+    justify-content: center;
+    width: 80%;
+    height: 10%;
+    gap: 1px;
+}
+
+.formInnerWrapper button {
+    border-radius: 8px;
+    border: solid var(--second-color) 2px;
+    background: var(--second-color);
+    color: var(--fourth-color);
+}
+
+.formInnerWrapper button:hover {
+    cursor: pointer;
+}
+
+.formInnerWrapper button:nth-child(even) {
+    width: 20%;
+    border-radius: 0px 8px 8px 0px;
+}
+
+.formInnerWrapper button:nth-child(odd) {
+    width: 80%;
+    border-radius: 8px 0px 0px 8px;
+}
+
+/* inputs */
+.formInnerWrapper .inputWraper {
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    height: fit-content;
+    align-items: center;
+}
+
+.formInnerWrapper .inputTitle {
+    color: var(--second-color);
+    width: 80%;
+    padding-bottom: 5px;
+}
+
+.formInnerWrapper .errorMessage {
+    width: 80%;
+    color: red;
+    padding-top: 2px;
+}
+
+.formInnerWrapper .forgotPass {
+    color: var(--second-color);
+}
