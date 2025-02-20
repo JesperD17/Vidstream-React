@@ -34,14 +34,12 @@ export default function loginForm() {
     if (data) {
       for (var i = 0; i < data.users.length; i++) {
         if (data.users[i].email === mailInput) {
-          console.log("YES", i)
           setErrorMailState(false);
         } else {
           setErrorMailState(true);
         }
 
         if (data.users[i].password_hash === passInput) {
-          console.log("YES", i)
           setErrorPassState(false);
         } else {
           setErrorPassState(true);
