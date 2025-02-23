@@ -1,13 +1,12 @@
 "use client"
 import Link from "next/link";
-import "./login.css";
-
+import "../../css/formStyles.css";
 import { useRef, useState } from "react";
 
 async function fetchUsers() {
   try {
-    const response = await fetch('../../api/mail'); // Fetch to SQL
-    const data = await response.json(); // Convert response to JSON
+    const response = await fetch('../../api/login/CRUD/read-create'); // Fetch to SQL.
+    const data = await response.json(); // Convert response to JSON.
     return data;
   } catch (error) {
     console.error(error);
@@ -15,25 +14,24 @@ async function fetchUsers() {
 }
 
 export default function loginForm() {
-  const inputMailRef = useRef();
+  const inputMailRef = useRef(); // creating refs to get the input values from the form.
   const inputPassRef = useRef();
 
   const [errorMailState, setErrorMailState] = useState(false);
   const [errorPassState, setErrorPassState] = useState(false);
 
-  var errorMessageMail = "Email not found.";
+  var errorMessageMail = "Email not found."; // error messages
   var errorMessagePass = "Invalid password.";
-  
+
   const checkUser = async (e) => {
     e.preventDefault() // Stops page from reloading
     var data = await fetchUsers()
 
     var mailInput = inputMailRef.current.value;
     var passInput = inputPassRef.current.value;
-
-    if (data) {
-      for (var i = 0; i < data.users.length; i++) {
-        if (data.users[i].email === mailInput) {
+    if (data) { // checks if data from Db is existing.
+      for (var i = 0; i < data.users.length; i++) { // reads over every item in the Db.
+        if (data.users[i].email === mailInput) { // checks if input values are the same in the Db.
           setErrorMailState(false);
         } else {
           setErrorMailState(true);
@@ -50,7 +48,7 @@ export default function loginForm() {
     }
   }
 
-  const removeErrorMessages = () => {
+  const removeErrorMessages = () => { // sets the errormessages to false.
     if (errorMailState) {
       setErrorMailState(false)
     }
