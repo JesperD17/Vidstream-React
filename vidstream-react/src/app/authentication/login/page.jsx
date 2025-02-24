@@ -64,13 +64,13 @@ export default function loginForm() {
         <div className="formInnerWrapper">
           <div className="inputWraper">
             <div className="inputTitle">Email</div>
-            <input type="email" name="email" placeholder="user@gmail.com" ref={inputMailRef} required />
+            <input type="email" name="email" placeholder="user@gmail.com" ref={inputMailRef} className={`${errorPassState ? 'errorMessage errorBorder' : ''}`} required />
             {errorMailState && (<div className="errorMessage">{errorMessageMail}</div>)}
           </div>
 
           <div className="inputWraper">
             <div className="inputTitle">Password</div>
-            <input type="password" name="password" placeholder="Password" ref={inputPassRef} required />
+            <input type="password" name="password" placeholder="Password" ref={inputPassRef} className={`${errorPassState ? 'errorMessage errorBorder' : ''}`} required />
             {errorPassState && (<div className="errorMessage">{errorMessagePass}</div>)}
           </div>
 

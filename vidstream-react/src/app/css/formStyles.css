@@ -68,6 +68,10 @@
     padding-top: 2px;
 }
 
+.formInnerWrapper .errorBorder {
+    border: solid;
+}
+
 .formInnerWrapper .forgotPass {
     color: var(--second-color);
 }
