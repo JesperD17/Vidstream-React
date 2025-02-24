@@ -9,7 +9,7 @@ export default function register() {
     const inputPassRef = useRef();
 
     
-    const addInfoToDb = (e) => {
+    const addInfoToDb = async (e) => {
         e.preventDefault()
         
         var nameInput = inputNameRef.current.value;
@@ -18,25 +18,17 @@ export default function register() {
 
         // console.log([nameInput, mailInput, passInput])
 
-        console.log([nameInput, mailInput, passInput]);
+        const formData = [nameInput, mailInput, passInput];
 
-        useEffect(() => {
-            // PUT request using fetch with async/await
-            async function updatePost() {
-                const requestOptions = {
-                    method: 'PUT',
-                    headers: { 'Content-Type': 'application/json' },
-                    body: JSON.stringify({ title: 'React Hooks PUT Request Example' })
-                };
-                const response = await fetch('https://jsonplaceholder.typicode.com/posts/1', requestOptions);
-                const data = await response.json();
-                setPostId(data.id);
-            }
         
-            updatePost();
-        }, []);
-    }
-
+        const response = await fetch('/api/login/CRUD/read-create', {
+            method: 'POST',
+            body: JSON.stringify(formData)
+        })
+        
+        const result = await response.json();
+        console.log("result api: ", response)
+        }
 
     return (
         <div id="Empty">

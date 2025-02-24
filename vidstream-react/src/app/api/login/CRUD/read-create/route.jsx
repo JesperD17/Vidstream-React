@@ -4,9 +4,9 @@ import { NextResponse } from "next/server";
 // read
 export async function GET() {
     try {
-        const db = await createConnection()
+        const database = await createConnection()
         const sql = "SELECT * FROM users"
-        const [users] = await db.query(sql)
+        const [users] = await database.query(sql)
         return NextResponse.json({ users })
     } catch (error) {
         console.log(error)
@@ -17,17 +17,17 @@ export async function GET() {
 // create
 export async function POST(request) {
     try {
-        const db = await createConnection()
+        const database = await createConnection()
 
-        const { name, mail, password_hash } = await request.json();
+        const [ name, mail, password_hash ] = await request.json();
 
         console.log(name, mail, password_hash);
 
-        const result = await db.execute("INSERT INTO users SET ?", {
+        const result = await database.execute("INSERT INTO users (name, email, password_hash) VALUES (?, ?, ?)", [
             name,
             mail,
             password_hash,
-        });
+        ]);
 
         return NextResponse.json({ name, mail, password_hash, id: result.insertId });
     } catch (error) {
