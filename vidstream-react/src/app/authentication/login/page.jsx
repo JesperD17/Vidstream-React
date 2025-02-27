@@ -29,22 +29,27 @@ export default function loginForm() {
 
     var mailInput = inputMailRef.current.value;
     var passInput = inputPassRef.current.value;
+
     if (data) { // checks if data from Db is existing.
+      let foundUser = false;
       for (var i = 0; i < data.users.length; i++) { // reads over every item in the Db.
         if (data.users[i].email === mailInput) { // checks if input values are the same in the Db.
           setErrorMailState(false);
-        } else {
-          setErrorMailState(true);
-        }
 
-        if (data.users[i].password_hash === passInput) {
-          setErrorPassState(false);
-        } else {
-          setErrorPassState(true);
+          foundUser = true;
+
+          if (data.users[i].password_hash === passInput) { // checks the password in the same mail index.
+            setErrorPassState(false);
+          } else {
+            setErrorPassState(true);
+          }
+          break;
         }
       }
-    } else {
-      console.log("ERROR")
+      if (!foundUser) {
+        setErrorMailState(true);
+        setErrorPassState(true);
+      }
     }
   }
 
@@ -64,7 +69,7 @@ export default function loginForm() {
         <div className="formInnerWrapper">
           <div className="inputWraper">
             <div className="inputTitle">Email</div>
-            <input type="email" name="email" placeholder="user@gmail.com" ref={inputMailRef} className={`${errorPassState ? 'errorMessage errorBorder' : ''}`} required />
+            <input type="email" name="email" placeholder="user@gmail.com" ref={inputMailRef} className={`${errorMailState ? 'errorMessage errorBorder' : ''}`} required />
             {errorMailState && (<div className="errorMessage">{errorMessageMail}</div>)}
           </div>
 
