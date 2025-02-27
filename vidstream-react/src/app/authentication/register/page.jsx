@@ -10,7 +10,22 @@ async function fetchUsers() {
         return data;
     } catch (error) {
         console.error(error);
+        return undefined
     }
+}
+
+async function dbStatus() {
+    var data = await fetchUsers();
+    var status = false;
+    console.log(data)
+    if(data) {
+        status = true;
+    } else {
+        status = false;
+    }
+    console.log(status)
+
+    return status;
 }
 
 export default function register() {
@@ -26,8 +41,12 @@ export default function register() {
     var errorMessageMail = "Email already exists.";
     var errorMessagePass = "Password already exists.";
 
+    var status = dbStatus();
+
     const addInfoToDb = async (e) => {
         e.preventDefault()
+
+        console.log(status)
 
         var nameInput = inputNameRef.current.value;
         var mailInput = inputMailRef.current.value;
@@ -38,6 +57,7 @@ export default function register() {
         setErrorNameState(false);
         setErrorMailState(false);
         var data = await fetchUsers()
+
         if (data) { // checks if data from Db is existing.
             for (var i = 0; i < data.users.length; i++) { // reads over every item in the Db.
                 if (data.users[i].name === nameInput) { // checks the password in the same mail index.
