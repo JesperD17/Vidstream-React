@@ -64,6 +64,8 @@ export default function register() {
 
             if (!response.ok) { // if name, mail and or password already exist, this error happens.
                 console.log("error");
+            } else {
+                console.log("succesful creation")
             }
 
         } catch (error) {
