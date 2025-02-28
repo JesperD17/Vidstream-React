@@ -47,11 +47,11 @@ export default function loginForm() {
 
   const checkUser = async (e) => {
     e.preventDefault() // Stops page from reloading
-    var data = await fetchUsers()
-
+    
     var mailInput = inputMailRef.current.value;
     var passInput = inputPassRef.current.value;
-
+    
+    var data = await fetchUsers()
     if (data) { // checks if data from Db is existing.
       let foundUser = false;
       for (var i = 0; i < data.users.length; i++) { // reads over every item in the Db.
@@ -108,11 +108,13 @@ export default function loginForm() {
             {errorPassState && (<div className="errorMessage">{errorMessagePass}</div>)}
           </div>
 
-          <div className="submitWrapper">
-            <button type="submit">Login</button>
-            <button type="reset" onClick={removeErrorMessages}>X</button>
+          <div className="outerSubmitWrapper">
+            <div className="submitWrapper">
+              <button type="submit">Login</button>
+              <button type="reset" onClick={removeErrorMessages}>X</button>
+            </div>
           </div>
-          <Link href="/" className="forgotPass">forgot password?</Link>
+          <Link href="/authentication/reset-password" className="forgotPass">forgot password?</Link>
         </div>
       </form>
     </div>

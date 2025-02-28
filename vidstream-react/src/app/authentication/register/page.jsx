@@ -36,6 +36,8 @@ export default function register() {
 
     const [status, setStatus] = useState(true); // true because if db is active, the error message doesnt display for a split second.
 
+    const [createdUserStatus, setCreatedUserStatus] = useState();
+
     var errorMessageName = "Name already exists.";
     var errorMessageMail = "Email already exists.";
     var errorMessagePass = "Password already exists.";
@@ -74,7 +76,6 @@ export default function register() {
             }
 
             if (nameError === false && mailError === false) { // if the name and mail is not existing.
-                console.log(nameError, mailError)
                 try { // post request to create user.
                     const response = await fetch('/api/login/CRUD/read-create', {
                         method: 'POST',
@@ -82,6 +83,7 @@ export default function register() {
                         body: JSON.stringify(formData)
                     })
                     const data = await response.json();
+                    setCreatedUserStatus(true)
 
                     // (usefull code for the future)
                     // if (!response.ok) { // if name, mail and or password already exist, this error happens.
@@ -101,13 +103,17 @@ export default function register() {
         setErrorMailState(mailError);
     }
 
-    const removeErrorMessages = () => { // sets the errormessages to false.
+    const removeMessages = () => { // sets the errormessages to false.
         if (errorMailState) {
             setErrorMailState(false)
         }
 
         if (errorPassState) {
             setErrorPassState(false)
+        }
+
+        if (createdUserStatus) {
+            setCreatedUserStatus(false)
         }
     }
 
@@ -124,25 +130,30 @@ export default function register() {
                 <div className="formInnerWrapper">
                     <div className="inputWraper">
                         <div className="inputTitle">Username</div>
-                        <input type="text" name="name" placeholder="Name" ref={inputNameRef} required />
+                        <input type="text" name="name" placeholder="Name" ref={inputNameRef} className={`${errorNameState ? 'errorMessage errorBorder' : ''}`} required />
                         {errorNameState && (<div className="errorMessage">{errorMessageName}</div>)}
                     </div>
 
                     <div className="inputWraper">
                         <div className="inputTitle">Email</div>
-                        <input type="email" name="email" placeholder="Email" ref={inputMailRef} required />
+                        <input type="email" name="email" placeholder="Email" ref={inputMailRef} className={`${errorMailState ? 'errorMessage errorBorder' : ''}`} required />
                         {errorMailState && (<div className="errorMessage">{errorMessageMail}</div>)}
                     </div>
 
                     <div className="inputWraper">
                         <div className="inputTitle">Password</div>
-                        <input type="password" name="password" placeholder="Password" ref={inputPassRef} required />
+                        <input type="password" name="password" placeholder="Password" ref={inputPassRef} className={`${errorPassState ? 'errorMessage errorBorder' : ''}`} required />
                         {errorPassState && (<div className="errorMessage">{errorMessagePass}</div>)}
                     </div>
 
-                    <div className="submitWrapper">
-                        <button type="submit">Register</button>
-                        <button type="reset" onClick={removeErrorMessages}>X</button>
+                    <div className="outerSubmitWrapper">
+                        {createdUserStatus && (
+                            <div className="createdAcc">Account succesfully created!</div>
+                        )}
+                        <div className="submitWrapper">
+                            <button type="submit">Register</button>
+                            <button type="reset" onClick={removeMessages}>X</button>
+                        </div>
                     </div>
                 </div>
             </form>
