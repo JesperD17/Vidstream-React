@@ -20,6 +20,7 @@
     --card-width: 250px;
 	
 	--font-color: #a7acb0;
+	--first-shade-color: linear-gradient(90deg, rgba(2, 0, 36, 1) 0%, rgba(167, 172, 176, 0.5550595238095238) 0%);
 }
 
 body, html {

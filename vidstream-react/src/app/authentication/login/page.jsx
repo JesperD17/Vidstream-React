@@ -1,7 +1,7 @@
 "use client"
 import Link from "next/link";
 import "../../css/formStyles.css";
-import { useRef, useState } from "react";
+import { useRef, useState, useEffect } from "react";
 
 async function fetchUsers() {
   try {
@@ -13,6 +13,17 @@ async function fetchUsers() {
   }
 }
 
+async function dbStatus() {
+  var data = await fetchUsers();
+  var status = false;
+  if (data.users) { // data.users does not exist when there is an error from the Db.
+    status = true;
+  } else {
+    status = false;
+  }
+  return status;
+}
+
 export default function loginForm() {
   const inputMailRef = useRef(); // creating refs to get the input values from the form.
   const inputPassRef = useRef();
@@ -20,8 +31,19 @@ export default function loginForm() {
   const [errorMailState, setErrorMailState] = useState(false);
   const [errorPassState, setErrorPassState] = useState(false);
 
+  const [status, setStatus] = useState(true); // true because if db is active, the error message doesnt display for a split second.
+
   var errorMessageMail = "Email not found."; // error messages
   var errorMessagePass = "Invalid password.";
+
+  useEffect(() => {
+    async function checkDbStatus() {
+      const result = await dbStatus();
+      // console.log("db status = ", result)
+      setStatus(result);
+    }
+    checkDbStatus();
+  }, []);
 
   const checkUser = async (e) => {
     e.preventDefault() // Stops page from reloading
@@ -66,6 +88,13 @@ export default function loginForm() {
   return (
     <div id="Empty">
       <form className="loginForm" onSubmit={(e) => checkUser(e)}>
+        {!status && (
+          <div className="offlineDbWrapper">
+            <div className="offlineDbText">
+              This page is NOT receiving data at the moment
+            </div>
+          </div>
+        )}
         <div className="formInnerWrapper">
           <div className="inputWraper">
             <div className="inputTitle">Email</div>

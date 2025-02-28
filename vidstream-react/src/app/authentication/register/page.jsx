@@ -1,7 +1,7 @@
 "use client"
 import "../../css/formStyles.css"
 
-import { useRef, useState } from "react";
+import { useRef, useState, useEffect } from "react";
 
 async function fetchUsers() {
     try {
@@ -17,14 +17,11 @@ async function fetchUsers() {
 async function dbStatus() {
     var data = await fetchUsers();
     var status = false;
-    console.log(data)
-    if(data) {
+    if (data.users) { // data.users does not exist when there is an error from the Db.
         status = true;
     } else {
         status = false;
     }
-    console.log(status)
-
     return status;
 }
 
@@ -33,20 +30,27 @@ export default function register() {
     const inputMailRef = useRef();
     const inputPassRef = useRef();
 
-    const [errorNameState, setErrorNameState] = useState(false)
+    const [errorNameState, setErrorNameState] = useState(false);
     const [errorMailState, setErrorMailState] = useState(false);
     const [errorPassState, setErrorPassState] = useState(false);
+
+    const [status, setStatus] = useState(true); // true because if db is active, the error message doesnt display for a split second.
 
     var errorMessageName = "Name already exists.";
     var errorMessageMail = "Email already exists.";
     var errorMessagePass = "Password already exists.";
 
-    var status = dbStatus();
+    useEffect(() => {
+        async function checkDbStatus() {
+            const result = await dbStatus();
+            // console.log("db status = ", result)
+            setStatus(result);
+        }
+        checkDbStatus();
+    }, []);
 
     const addInfoToDb = async (e) => {
         e.preventDefault()
-
-        console.log(status)
 
         var nameInput = inputNameRef.current.value;
         var mailInput = inputMailRef.current.value;
@@ -54,43 +58,47 @@ export default function register() {
 
         const formData = [nameInput, mailInput, passInput];
 
-        setErrorNameState(false);
-        setErrorMailState(false);
-        var data = await fetchUsers()
+        let nameError = false;
+        let mailError = false;
 
+        var data = await fetchUsers();
         if (data) { // checks if data from Db is existing.
-            for (var i = 0; i < data.users.length; i++) { // reads over every item in the Db.
-                if (data.users[i].name === nameInput) { // checks the password in the same mail index.
-                    setErrorNameState(true);
+            for (var i = 0; i < data.users.length; i++) {
+                if (data.users[i].name === nameInput) { // checks if input values are the same in the Db.
+                    nameError = true;
                 }
-                
-                if (data.users[i].email === mailInput) { // checks if input values are the same in the Db.
-                    setErrorMailState(true);
+
+                if (data.users[i].email === mailInput) {
+                    mailError = true;
                 }
             }
-            if (errorNameState && errorMailState) {
-                return
+
+            if (nameError === false && mailError === false) { // if the name and mail is not existing.
+                console.log(nameError, mailError)
+                try { // post request to create user.
+                    const response = await fetch('/api/login/CRUD/read-create', {
+                        method: 'POST',
+                        headers: { 'Content-Type': 'application/json' },
+                        body: JSON.stringify(formData)
+                    })
+                    const data = await response.json();
+
+                    // (usefull code for the future)
+                    // if (!response.ok) { // if name, mail and or password already exist, this error happens.
+                    //     console.log("error");
+                    // } else {
+                    //     console.log("succesful creation")
+                    // }
+
+                } catch (error) {
+                    console.error(error);
+                }
             }
+
         }
-
-        // post requesst towards database for new user.
-        try {
-            const response = await fetch('/api/login/CRUD/read-create', {
-                method: 'POST',
-                headers: { 'Content-Type': 'application/json' },
-                body: JSON.stringify(formData)
-            })
-            const data = await response.json();
-
-            if (!response.ok) { // if name, mail and or password already exist, this error happens.
-                console.log("error");
-            } else {
-                console.log("succesful creation")
-            }
-
-        } catch (error) {
-            console.error(error);
-        }
+        // Now update the state once, after checking all users
+        setErrorNameState(nameError);
+        setErrorMailState(mailError);
     }
 
     const removeErrorMessages = () => { // sets the errormessages to false.
@@ -106,8 +114,14 @@ export default function register() {
     return (
         <div id="Empty">
             <form className="registerForm" onSubmit={(e) => addInfoToDb(e)}>
+                {!status && (
+                    <div className="offlineDbWrapper">
+                        <div className="offlineDbText">
+                            This page is NOT receiving data at the moment
+                        </div>
+                    </div>
+                )}
                 <div className="formInnerWrapper">
-
                     <div className="inputWraper">
                         <div className="inputTitle">Username</div>
                         <input type="text" name="name" placeholder="Name" ref={inputNameRef} required />
