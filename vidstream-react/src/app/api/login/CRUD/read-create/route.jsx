@@ -39,3 +39,28 @@ export async function POST(request) {
         );
     }
 }
+
+// edit
+export async function PUT(request) {
+
+    const { id, email, password_hash } = await request.json();
+    const updateProducts = await query({
+        query: "UPDATE users SET password_hash = ?",
+        values: [password_hash],
+    });
+
+    const result = updateProducts.affectedRows;
+    let message = result ? "success" : "error";
+
+    const product = {
+        id: id,
+        email: email,
+    };
+
+    return new Response(JSON.stringify({
+        message: message,
+        status: 200,
+        product: product
+    }), { headers: { 'Content-Type': 'application/json' } });
+
+}

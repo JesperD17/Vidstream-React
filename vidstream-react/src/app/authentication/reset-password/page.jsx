@@ -1,6 +1,8 @@
 "use client"
 import { useRef, useState, useEffect } from "react";
 
+import { redirect } from 'next/navigation'
+
 import "../../css/formStyles.css"
 
 async function fetchUsers() {
@@ -29,6 +31,7 @@ export default function resetForm() {
     const inputMailRef = useRef(); // creating refs to get the input values from the form.
 
     const [errorMailState, setErrorMailState] = useState(false);
+    const [redirectingMailState, setRedirectingMailState] = useState(false)
 
     const [status, setStatus] = useState(true); // true because if db is active, the error message doesnt display for a split second.
 
@@ -50,13 +53,27 @@ export default function resetForm() {
 
         var data = await fetchUsers()
         if (data) { // checks if data from Db is existing.
+            var foundUser = false;
+            var userID;
             for (var i = 0; i < data.users.length; i++) { // reads over every item in the Db.
                 if (data.users[i].email === mailInput) { // checks if input values are the same in the Db.
                     setErrorMailState(false);
+                    setRedirectingMailState(true);
+                    foundUser = true;
+                    userID = data.users[i].id;
                     break;
-                } else {
-                    setErrorMailState(true);
                 }
+                setErrorMailState(!foundUser);
+            }
+        }
+
+        if (errorMailState !== null && mailInput && foundUser) {
+            // console.log(errorMailState)
+            if (errorMailState) {
+                console.log("noredirect");
+            } else {
+                console.log("redirect");
+                redirect(`/authentication/edit-${userID}`)
             }
         }
     }
@@ -66,6 +83,7 @@ export default function resetForm() {
             setErrorMailState(false)
         }
     }
+
 
     return (
         <div id="Empty">
@@ -80,12 +98,13 @@ export default function resetForm() {
                 <div className="formInnerWrapper">
                     <div className="textWrapper">
                         <div className="resetMainTitle">Password Reset</div>
-                        <div className="resetText">Provide the email adress with your account to recover your passowrd.</div>
+                        <div className="resetText">Provide the email adress with your account to recover your passoword.</div>
                     </div>
                     <div className="inputWraper">
                         <div className="inputTitle">Email</div>
                         <input type="email" name="email" placeholder="user@gmail.com" ref={inputMailRef} className={`${errorMailState ? 'errorMessage errorBorder' : ''}`} required />
                         {errorMailState && (<div className="errorMessage">{errorMessageMail}</div>)}
+                        {redirectingMailState && (<div className="createdAcc">Email found! Redirecting...</div>)}
                     </div>
 
                     <div className="outerSubmitWrapper">

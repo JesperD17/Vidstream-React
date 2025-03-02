@@ -20,9 +20,9 @@ function Footer() {
               <Link href="/copyright" className="Link_Icon_alignment">
                 COPYRIGHT
               </Link>
-              <Link href="/sources" className="Link_Icon_alignment">
+              {/* <Link href="/sources" className="Link_Icon_alignment">
                 SOURCES
-              </Link>
+              </Link> */}
             </div>
           </summary>
         </div>

@@ -12,7 +12,6 @@ function Header() {
 
   function openSearch() {
     if (menuActive) {
-      console.log("search")
       setMenuActive(!menuActive)
       setSearchActive(!searchActive)
     }
@@ -21,7 +20,6 @@ function Header() {
 
   function openCollapse() {
     if (searchActive && window.innerWidth < 700) {
-      console.log("search")
       setSearchActive(!searchActive)
       setMenuActive(!menuActive)
     }
@@ -107,9 +105,19 @@ function Header() {
                       COPYRIGHT <i className='bx bxs-chevron-right'></i>
                     </Link>
                   </div>
-                  <div className="hover">
+                  {/* <div className="hover">
                     <Link href="/sources" className="Link_Icon_alignment" onClick={closeCollapse}>
                       SOURCES <i className='bx bxs-chevron-right'></i>
+                    </Link>
+                  </div> */}
+                  <div className="hover">
+                    <Link href="/authentication/login" className="Link_Icon_alignment" onClick={closeCollapse}>
+                      LOGIN <i className='bx bxs-chevron-right'></i>
+                    </Link>
+                  </div>
+                  <div className="hover">
+                    <Link href="/authentication/register" className="Link_Icon_alignment" onClick={closeCollapse}>
+                      REGISTER <i className='bx bxs-chevron-right'></i>
                     </Link>
                   </div>
                 </div>

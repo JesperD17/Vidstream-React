@@ -1,8 +1,8 @@
-import { useRouter } from 'next/compat/router';
 import { useState } from 'react';
 
+import { redirect } from 'next/navigation'
+
 export function SearchBar() {
-  const navigate = useRouter();
   const [value, setValue] = useState("");
   const [result, setResult] = useState("");
 
@@ -14,7 +14,7 @@ export function SearchBar() {
     )
 
     if (value) {
-      navigate(`/Search?q=${value}`);
+      redirect(`/Search?q=${value}`);
     }
   }
 
