@@ -15,7 +15,7 @@ function Homepage() {
     data: allMovies,
     error,
     isValidating,
-  } = useSWR('https://vidstream-api.vercel.app/home', fetcher, { // settings to stop swr from reloading.
+  } = useSWR('http://localhost:4030/home', fetcher, { // settings to stop swr from reloading.
     revalidateIfStale: false,
     revalidateOnFocus: false,
     revalidateOnReconnect: false

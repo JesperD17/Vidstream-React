@@ -1,0 +1,15 @@
+#Searched {
+    display: flex;
+    gap: 5px;
+    margin: 20px;
+    font-size: 25px;
+    width: max-content;
+}
+
+#Searched .SearchWord {
+    color: var(--fourth-color);
+    width: auto;
+    display: flex;
+    flex-wrap: wrap;
+    position: relative;
+}

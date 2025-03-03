@@ -2,7 +2,7 @@
 import './header.css';
 import React, { useState, useEffect, useRef } from 'react';
 
-import { useRouter } from 'next/compat/router';
+import { useRouter } from 'next/navigation';
 import { SearchBar } from './searchBar';
 // import Searching from '../Pages/searchPage/Search';
 
@@ -34,6 +34,7 @@ function Header() {
 
   // searchUrl
   const location = useRouter();
+  
   const isFirstRender = useRef(true);
   var urlPath = location;
 
@@ -69,6 +70,7 @@ function Header() {
       console.log(urlPath);
       // setMenuActive(menuActive)
       setSearchActive(!searchActive);
+      
     }
   }, [location]) // if location.search changes ("?q=searched item")
 
