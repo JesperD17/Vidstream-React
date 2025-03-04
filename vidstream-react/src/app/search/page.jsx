@@ -7,14 +7,21 @@ import SkeletonCards from '../standard/skeletonS/skeletonCards';
 
 const fetcher = (...args) => fetch(...args).then((res) => res.json());
 
-function Search() {
+function getUrlParams() {
   // grabs the url afer /Search
   const location = useSearchParams();
   // var searchQuery = location.search;
   var searchQuery = location.get("q") // onscreen search result
   var endQuery = 30
   if (searchQuery.length > endQuery)
-  searchQuery = searchQuery.substring(0, endQuery) + "..."
+  searchQuery = searchQuery.substring(0, endQuery) + "...";
+
+  return searchQuery;
+}
+
+function Search() {
+  var searchQuery = getUrlParams()
+
   const {
     data: allMovies,
     error,
@@ -27,16 +34,17 @@ function Search() {
 
   if (error) return console.log("FAILED OR INCOMPLETE API!"), <div id="Empty"></div>;
   if (isValidating | !allMovies) {
-    return <SkeletonCards />;
+    return <SkeletonCards />;    
   }
 
   const allLength = allMovies.items.length;
   const totalOnPaginate = new Array(allLength).fill(null); // fills the div structure
 
+  var stats = [];
   var ratingsSearchPage = [];
   var seasonsSearchPage = [];
   var titlesSearchPage = [];
-  var stats = [];
+
   for (let i = 0; i < allLength; i++) {
     stats.push(allMovies.items[i].stats); // pushes all the stats to var
 
@@ -75,7 +83,7 @@ function Search() {
             <div className="card_info">
               <div className="titel">{titlesSearchPage[number]} </div>
               <div className="card_info_inner">
-                <div>{stats[number].hasOwnProperty("duration", 'year', 'rating') ? // if stats contains strings its a movie, else its a serie.
+                <div>{stats[number].hasOwnProperty("duration", 'year', 'rating') ? // if stats contains specific arrays its a movie, else its a serie.
                   <>
                     <div className="review">{ratingsSearchPage[number]} <i className='bx bxs-star'></i></div>
                     <div className="duration">{allMovies.items[number].stats.duration}</div>
