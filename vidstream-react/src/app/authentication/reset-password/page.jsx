@@ -3,7 +3,9 @@ import { useRef, useState, useEffect } from "react";
 
 import { redirect } from 'next/navigation'
 
-import "../../css/formStyles.css"
+import "../../css/formStyles.css";
+
+import { pushToSearch } from "../../standard/searchfunctions/pushToEdit"
 
 async function fetchUsers() {
     try {
@@ -49,6 +51,8 @@ export default function resetForm() {
     const checkMail = async (e) => {
         e.preventDefault()
 
+        handleSubmit(e)
+
         var mailInput = inputMailRef.current.value;
 
         var data = await fetchUsers()
@@ -84,6 +88,7 @@ export default function resetForm() {
         }
     }
 
+    const { handleSubmit, handleChange } = pushToSearch()
 
     return (
         <div id="Empty">
@@ -102,7 +107,15 @@ export default function resetForm() {
                     </div>
                     <div className="inputWraper">
                         <div className="inputTitle">Email</div>
-                        <input type="email" name="email" placeholder="user@gmail.com" ref={inputMailRef} className={`${errorMailState ? 'errorMessage errorBorder' : ''}`} required />
+
+                        <input type="email" 
+                        name="email" 
+                        placeholder="user@gmail.com" 
+                        ref={inputMailRef} 
+                        className={`${errorMailState ? 'errorMessage errorBorder' : ''}`} 
+                        onInput={handleChange}
+                        required />
+                        
                         {errorMailState && (<div className="errorMessage">{errorMessageMail}</div>)}
                         {redirectingMailState && (<div className="createdAcc">Email found! Redirecting...</div>)}
                     </div>

@@ -3,7 +3,7 @@ import './header.css';
 import React, { useState, useEffect, useRef } from 'react';
 
 import { useRouter } from 'next/navigation';
-import { SearchBar } from './searchBar';
+import { pushToSearch } from "../searchfunctions/pushToSearch";
 // import Searching from '../Pages/searchPage/Search';
 
 import Link from 'next/link';
@@ -74,7 +74,7 @@ function Header() {
     }
   }, [location]) // if location.search changes ("?q=searched item")
 
-  const { handleSubmit, handleChange } = SearchBar();
+  const { handleSubmit, handleChange } = pushToSearch();
 
   return (
     <div id="navigation">

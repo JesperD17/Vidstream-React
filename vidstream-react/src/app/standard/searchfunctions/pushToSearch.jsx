@@ -2,7 +2,7 @@
 import { useState } from "react";
 import { useRouter } from "next/navigation";
 
-export function SearchBar() {
+export function pushToSearch() {
   const [value, setValue] = useState("");
   const [result, setResult] = useState("");
   const router = useRouter(); // Ensure it's inside a client component
