@@ -47,10 +47,10 @@ export default function loginForm() {
 
   const checkUser = async (e) => {
     e.preventDefault() // Stops page from reloading
-    
+
     var mailInput = inputMailRef.current.value;
     var passInput = inputPassRef.current.value;
-    
+
     var data = await fetchUsers()
     if (data) { // checks if data from Db is existing.
       let foundUser = false;
@@ -91,7 +91,7 @@ export default function loginForm() {
         {!status && (
           <div className="offlineDbWrapper">
             <div className="offlineDbText">
-              This page is NOT receiving data at the moment
+              This page is NOT receiving data at the moment.
             </div>
           </div>
         )}
@@ -104,7 +104,13 @@ export default function loginForm() {
 
           <div className="inputWraper">
             <div className="inputTitle">Password</div>
-            <input type="password" name="password" placeholder="Password" ref={inputPassRef} className={`${errorPassState ? 'errorMessage errorBorder' : ''}`} required />
+            <input type="password" name="password" placeholder="Password" ref={inputPassRef}
+              className={`${errorPassState ? 'errorMessage errorBorder' : ''}`}
+              required
+              minLength={6}
+              maxLength={15}
+              pattern=".*[\d\W].*" // .* Allows any characters before or after the required part. \d → A digit. \W → A non-word character. .* → Allows any characters before or after the match.
+              title="Password must be 6-15 characters long & include at least 1 number or special character (@, #, $)." />
             {errorPassState && (<div className="errorMessage">{errorMessagePass}</div>)}
           </div>
 

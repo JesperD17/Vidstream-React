@@ -3,14 +3,12 @@ import './header.css';
 import React, { useState, useEffect, useRef } from 'react';
 
 import { useRouter } from 'next/navigation';
-import { pushToSearch } from "../searchfunctions/pushToSearch";
-// import Searching from '../Pages/searchPage/Search';
 
 import Link from 'next/link';
 
 function Header() {
 
-  function openSearch() {
+  const openSearch = () => {
     if (menuActive) {
       setMenuActive(!menuActive)
       setSearchActive(!searchActive)
@@ -18,7 +16,7 @@ function Header() {
     setSearchActive(!searchActive)
   }
 
-  function openCollapse() {
+  const openCollapse = () => {
     if (searchActive && window.innerWidth < 700) {
       setSearchActive(!searchActive)
       setMenuActive(!menuActive)
@@ -33,10 +31,9 @@ function Header() {
   }
 
   // searchUrl
-  const location = useRouter();
+  const urlPath = useRouter();
   
   const isFirstRender = useRef(true);
-  var urlPath = location;
 
   // window resize collapsible content
   const [menuActive, setMenuActive] = useState(false); // onpage load defines the width
@@ -72,9 +69,18 @@ function Header() {
       setSearchActive(!searchActive);
       
     }
-  }, [location]) // if location.search changes ("?q=searched item")
+  }, [urlPath]) // if urlPath changes ("?q=searched item")
 
-  const { handleSubmit, handleChange } = pushToSearch();
+  const inputMailRef = useRef();
+
+  const handleSubmit = (e) => {
+    e.preventDefault()
+    var mailInput = inputMailRef.current.value;
+    if (urlPath)  {
+      urlPath.push(`/search?q=${mailInput}`);
+    }
+  }
+
 
   return (
     <div id="navigation">
@@ -135,17 +141,8 @@ function Header() {
           ></i>
           {searchActive && (
             <>
-              <form id="search"
-                onSubmit={handleSubmit}
-              >
-                <input
-                  type="text"
-                  placeholder="Search..."
-                  id="search-field"
-                  onInput={handleChange}
-                  required
-
-                />
+              <form id="search" onSubmit={handleSubmit}>
+                <input type="text" placeholder="Search..." id="search-field" ref={inputMailRef} required />
                 <i id="IconNoClick" className="bx bx-search bx-tada" ></i>
               </form>
             </>

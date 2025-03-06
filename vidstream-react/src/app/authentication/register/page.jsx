@@ -32,7 +32,6 @@ export default function register() {
 
     const [errorNameState, setErrorNameState] = useState(false);
     const [errorMailState, setErrorMailState] = useState(false);
-    const [errorPassState, setErrorPassState] = useState(false);
 
     const [status, setStatus] = useState(true); // true because if db is active, the error message doesnt display for a split second.
 
@@ -40,12 +39,10 @@ export default function register() {
 
     var errorMessageName = "Name already exists.";
     var errorMessageMail = "Email already exists.";
-    var errorMessagePass = "Password already exists.";
 
-    useEffect(() => {
+    useEffect(() => { // changus the status by function dbStatus.
         async function checkDbStatus() {
             const result = await dbStatus();
-            // console.log("db status = ", result)
             setStatus(result);
         }
         checkDbStatus();
@@ -98,18 +95,18 @@ export default function register() {
             }
 
         }
-        // Now update the state once, after checking all users
+        // Updating the state once, after checking all users
         setErrorNameState(nameError);
         setErrorMailState(mailError);
     }
 
     const removeMessages = () => { // sets the errormessages to false.
-        if (errorMailState) {
+        if (errorNameState) {
             setErrorMailState(false)
         }
 
-        if (errorPassState) {
-            setErrorPassState(false)
+        if (errorMailState) {
+            setErrorMailState(false)
         }
 
         if (createdUserStatus) {
@@ -123,7 +120,7 @@ export default function register() {
                 {!status && (
                     <div className="offlineDbWrapper">
                         <div className="offlineDbText">
-                            This page is NOT receiving data at the moment
+                            This page is NOT receiving data at the moment.
                         </div>
                     </div>
                 )}
@@ -142,8 +139,13 @@ export default function register() {
 
                     <div className="inputWraper">
                         <div className="inputTitle">Password</div>
-                        <input type="password" name="password" placeholder="Password" ref={inputPassRef} className={`${errorPassState ? 'errorMessage errorBorder' : ''}`} required />
-                        {errorPassState && (<div className="errorMessage">{errorMessagePass}</div>)}
+                        <input type="password" name="password" placeholder="Password" ref={inputPassRef}
+                            className={`${errorPassState ? 'errorMessage errorBorder' : ''}`}
+                            required
+                            minLength={6}
+                            maxLength={15}
+                            pattern=".*[\d\W].*" // .* Allows any characters before or after the required part. \d → A digit. \W → A non-word character. .* → Allows any characters before or after the match.
+                            title="Password must be 6-15 characters long & include at least 1 number or special character (@, #, $)." />
                     </div>
 
                     <div className="outerSubmitWrapper">

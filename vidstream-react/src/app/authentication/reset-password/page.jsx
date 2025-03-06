@@ -5,8 +5,6 @@ import { redirect } from 'next/navigation'
 
 import "../../css/formStyles.css";
 
-import { pushToSearch } from "../../standard/searchfunctions/pushToEdit"
-
 async function fetchUsers() {
     try {
         const response = await fetch('../../api/login/CRUD/read-create'); // Fetch to SQL.
@@ -42,7 +40,6 @@ export default function resetForm() {
     useEffect(() => {
         async function checkDbStatus() {
             const result = await dbStatus();
-            // console.log("db status = ", result)
             setStatus(result);
         }
         checkDbStatus();
@@ -50,8 +47,6 @@ export default function resetForm() {
 
     const checkMail = async (e) => {
         e.preventDefault()
-
-        handleSubmit(e)
 
         var mailInput = inputMailRef.current.value;
 
@@ -72,12 +67,8 @@ export default function resetForm() {
         }
 
         if (errorMailState !== null && mailInput && foundUser) {
-            // console.log(errorMailState)
-            if (errorMailState) {
-                console.log("noredirect");
-            } else {
-                console.log("redirect");
-                redirect(`/authentication/edit-${userID}`)
+            if (!errorMailState) {
+                redirect(`/authentication/edit-?q=${userID}`)
             }
         }
     }
@@ -87,9 +78,7 @@ export default function resetForm() {
             setErrorMailState(false)
         }
     }
-
-    const { handleSubmit, handleChange } = pushToSearch()
-
+    
     return (
         <div id="Empty">
             <form className="resetForm" onSubmit={(e) => checkMail(e)}>
@@ -113,7 +102,6 @@ export default function resetForm() {
                         placeholder="user@gmail.com" 
                         ref={inputMailRef} 
                         className={`${errorMailState ? 'errorMessage errorBorder' : ''}`} 
-                        onInput={handleChange}
                         required />
                         
                         {errorMailState && (<div className="errorMessage">{errorMessageMail}</div>)}
