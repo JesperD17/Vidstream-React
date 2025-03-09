@@ -25,6 +25,10 @@ async function dbStatus() {
     return status;
 }
 
+function getRandomInt(min, max) {
+    return Math.random() * (max - min) + min;
+}
+
 export default function register() {
     const inputNameRef = useRef();
     const inputMailRef = useRef();
@@ -50,12 +54,15 @@ export default function register() {
 
     const addInfoToDb = async (e) => {
         e.preventDefault()
+        removeMessages()
+        
+        var newUserID = Math.floor(getRandomInt(1000, 9999));
 
         var nameInput = inputNameRef.current.value;
         var mailInput = inputMailRef.current.value;
         var passInput = inputPassRef.current.value;
 
-        const formData = [nameInput, mailInput, passInput];
+        const formData = [newUserID, nameInput, mailInput, passInput];
 
         let nameError = false;
         let mailError = false;
@@ -127,7 +134,11 @@ export default function register() {
                 <div className="formInnerWrapper">
                     <div className="inputWraper">
                         <div className="inputTitle">Username</div>
-                        <input type="text" name="name" placeholder="Name" ref={inputNameRef} className={`${errorNameState ? 'errorMessage errorBorder' : ''}`} required />
+                        <input type="text" name="name" placeholder="Name" ref={inputNameRef}
+                            className={`${errorNameState ? 'errorMessage errorBorder' : ''}`}
+                            required
+                            minLength={4}
+                            maxLength={25} />
                         {errorNameState && (<div className="errorMessage">{errorMessageName}</div>)}
                     </div>
 
@@ -140,7 +151,6 @@ export default function register() {
                     <div className="inputWraper">
                         <div className="inputTitle">Password</div>
                         <input type="password" name="password" placeholder="Password" ref={inputPassRef}
-                            className={`${errorPassState ? 'errorMessage errorBorder' : ''}`}
                             required
                             minLength={6}
                             maxLength={15}

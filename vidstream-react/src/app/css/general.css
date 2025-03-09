@@ -106,6 +106,13 @@ summary .Link_Icon_alignment:hover::after {
     font-size: 15vh;
 }
 
+.all_homepage {
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+}
+
 /* skeleton loading animation */
 @keyframes skeleton-loading {
     0% {
@@ -114,4 +121,4 @@ summary .Link_Icon_alignment:hover::after {
     100% {
       background-color: hsl(200, 20%, 95%);
     }
-  }
+}

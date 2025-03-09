@@ -2,23 +2,38 @@
 import "../../css/formStyles.css"
 
 import { useRef, useState, useEffect } from "react";
-import { useSearchParams } from 'next/navigation';
 
-async function fetchUsers() {
+// import { useSearchParams } from 'next/navigation';
+import { useRouter } from "next/router";
+async function fetchUserMail() {
+    var test = useRouter();
+    console.log(test)
     try {
+        
         const response = await fetch('../../api/login/CRUD/read-create'); // Fetch to SQL.
         const data = await response.json(); // Convert response to JSON.
-        return data;
+
+        console.log(data, "aaa")
+        var userMail;
+        for (let i = 0; i < data.users.length; i++) {
+            if (data.users[i].id === userID) {
+                console.log("test")
+                userMail = data.users[i].email;
+            }
+        }
+
+        return userMail;
     } catch (error) {
         console.error(error);
-        return undefined
+        return;
     }
 }
 
 async function dbStatus() {
-    var data = await fetchUsers();
+    var mail = await fetchUserMail();
+    console.log(mail)
     var status = false;
-    if (data.users) { // data.users does not exist when there is an error from the Db.
+    if (mail) { // data.users does not exist when there is an error from the Db.
         status = true;
     } else {
         status = false;
@@ -26,15 +41,13 @@ async function dbStatus() {
     return status;
 }
 
-import "../../css/formStyles.css"
-
 export default function editForm() {
     const inputPassRef = useRef();
     const inputPassConfirmRef = useRef();
-
     const [status, setStatus] = useState(true); // true because if db is active, the error message doesnt display for a split second.
+    const [errorPassConfirmState, setErrorPassConfirmState] = useState();
 
-    const [errorPassConfirmState, setErrorPassConfirmState] = useState()
+    const [email, setEmail] = useState();
 
     var errorMessagePassConfirm = "Passwords do not match!";
 
@@ -46,16 +59,17 @@ export default function editForm() {
         checkDbStatus();
     }, []);
 
-    const updatePass = (e) => {
+    const updatePass = async (e) => {
         e.preventDefault()
 
         var passInput = inputPassRef.current.value;
         var passConfirmInput = inputPassConfirmRef.current.value;
 
+
         if (passInput === passConfirmInput) { // checks if both passwords match.
             removeErrorMessage();
             console.log("sme")
-            
+
         } else {
             setErrorPassConfirmState(true)
         }
@@ -80,7 +94,7 @@ export default function editForm() {
                 <div className="formInnerWrapper">
                     <div className="textWrapper">
                         <div className="resetMainTitle">Reset account password</div>
-                        <div className="resetText">Enter a new password for </div>
+                        <div className="resetText">Enter a new password for {}</div>
                     </div>
                     <div className="inputWraper">
                         <div className="inputTitle">Password</div>

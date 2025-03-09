@@ -71,7 +71,7 @@ function Search() {
   }
 
   return (
-    <>
+    <div className="searchWrapper">
       <div id="Searched">Searched for:<div className="SearchWord">{searchQuery}</div></div>
       <div className="allCards" id="searchCards">
         {totalOnPaginate.map((_, number) => (
@@ -100,7 +100,7 @@ function Search() {
           </div>
         ))}
       </div>
-    </>
+    </div>
   )
 }
 
