@@ -9,13 +9,11 @@ const fetcher = (...args) => fetch(...args).then((res) => res.json());
 
 function getUrlParams() {
   // grabs the url afer /Search
-  const location = useSearchParams();
-  // var searchQuery = location.search;
-  var searchQuery = location.get("q") // onscreen search result
+  const searchQuery = useSearchParams().get("q");
   var endQuery = 30
-  if (searchQuery.length > endQuery)
-  searchQuery = searchQuery.substring(0, endQuery) + "...";
-
+  if (searchQuery.length > endQuery) {
+    searchQuery = searchQuery.substring(0, endQuery) + "...";
+  }
   return searchQuery;
 }
 
