@@ -4,10 +4,10 @@ import "../../css/formStyles.css"
 import { useRef, useState, useEffect } from "react";
 
 // import { useSearchParams } from 'next/navigation';
-import { useRouter } from "next/router";
+
 async function fetchUserMail() {
-    var test = useRouter();
-    console.log(test)
+    // var test = useSearchParams();
+    // console.log(test)
     try {
         
         const response = await fetch('../../api/login/CRUD/read-create'); // Fetch to SQL.
@@ -16,10 +16,10 @@ async function fetchUserMail() {
         console.log(data, "aaa")
         var userMail;
         for (let i = 0; i < data.users.length; i++) {
-            if (data.users[i].id === userID) {
-                console.log("test")
-                userMail = data.users[i].email;
-            }
+            // if (data.users[i].id === userID) {
+            //     console.log("test")
+            //     userMail = data.users[i].email;
+            // }
         }
 
         return userMail;

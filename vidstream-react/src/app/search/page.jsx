@@ -7,8 +7,9 @@ import SkeletonCards from '../standard/skeletonS/skeletonCards';
 
 const fetcher = (...args) => fetch(...args).then((res) => res.json());
 
-function Search() {
+export default function Search() {
   const searchQuery = useSearchParams().get("q");
+  
   var endQuery = 30
   if (searchQuery.length > endQuery) {
     searchQuery = searchQuery.substring(0, endQuery) + "...";
@@ -95,5 +96,3 @@ function Search() {
     </div>
   )
 }
-
-export default Search;
