@@ -7,18 +7,12 @@ import SkeletonCards from '../standard/skeletonS/skeletonCards';
 
 const fetcher = (...args) => fetch(...args).then((res) => res.json());
 
-function getUrlParams() {
-  // grabs the url afer /Search
+function Search() {
   const searchQuery = useSearchParams().get("q");
   var endQuery = 30
   if (searchQuery.length > endQuery) {
     searchQuery = searchQuery.substring(0, endQuery) + "...";
   }
-  return searchQuery;
-}
-
-function Search() {
-  var searchQuery = getUrlParams()
 
   const {
     data: allMovies,
