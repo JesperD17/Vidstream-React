@@ -3,25 +3,35 @@ import "../../css/formStyles.css"
 
 import { useRef, useState, useEffect } from "react";
 
-// import { useSearchParams } from 'next/navigation';
+import { useSearchParams } from 'next/navigation';
 
-async function fetchUserMail() {
-    // var test = useSearchParams();
-    // console.log(test)
+function getSearchParam() {
+    var loc = useSearchParams().get("q");
+    console.log(loc)
+    var endQuery = 30
+    var searchQuery;
+    if (loc.length > endQuery) {
+        searchQuery = loc.substring(0, endQuery) + "...";
+    } else {
+        searchQuery = loc;
+    }
+
+    return searchQuery;
+}
+
+async function fetchUsers() {
     try {
-        
         const response = await fetch('../../api/login/CRUD/read-create'); // Fetch to SQL.
         const data = await response.json(); // Convert response to JSON.
 
         console.log(data, "aaa")
         var userMail;
         for (let i = 0; i < data.users.length; i++) {
-            // if (data.users[i].id === userID) {
-            //     console.log("test")
-            //     userMail = data.users[i].email;
-            // }
+            if (data.users[i].id === userID) {
+                console.log("test")
+                userMail = data.users[i].email;
+            }
         }
-
         return userMail;
     } catch (error) {
         console.error(error);
@@ -30,10 +40,9 @@ async function fetchUserMail() {
 }
 
 async function dbStatus() {
-    var mail = await fetchUserMail();
-    console.log(mail)
+    var data = await fetchUsers();
     var status = false;
-    if (mail) { // data.users does not exist when there is an error from the Db.
+    if (data) { // data.users does not exist when there is an error from the Db.
         status = true;
     } else {
         status = false;
@@ -47,7 +56,6 @@ export default function editForm() {
     const [status, setStatus] = useState(true); // true because if db is active, the error message doesnt display for a split second.
     const [errorPassConfirmState, setErrorPassConfirmState] = useState();
 
-    const [email, setEmail] = useState();
 
     var errorMessagePassConfirm = "Passwords do not match!";
 
@@ -80,6 +88,7 @@ export default function editForm() {
             setErrorPassConfirmState(false)
         }
     }
+    
 
     return (
         <div id="Empty">
@@ -94,7 +103,7 @@ export default function editForm() {
                 <div className="formInnerWrapper">
                     <div className="textWrapper">
                         <div className="resetMainTitle">Reset account password</div>
-                        <div className="resetText">Enter a new password for {}</div>
+                        <div className="resetText">Enter a new password for { }</div>
                     </div>
                     <div className="inputWraper">
                         <div className="inputTitle">Password</div>

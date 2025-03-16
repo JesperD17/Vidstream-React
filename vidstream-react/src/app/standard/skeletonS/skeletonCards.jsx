@@ -1,4 +1,4 @@
-function SkeletonCards() {
+export default function SkeletonCards() {
     // cards preloaded
     const amountOfCards = 40;
     const totalCards = new Array(amountOfCards).fill(null);
@@ -43,5 +43,3 @@ function SkeletonCards() {
         </>
     )
 }
-
-export default SkeletonCards

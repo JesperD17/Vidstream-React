@@ -53,13 +53,13 @@ export default function resetForm() {
         var data = await fetchUsers()
         if (data) { // checks if data from Db is existing.
             var foundUser = false;
-            var userID;
+            var userUrlHash;
             for (var i = 0; i < data.users.length; i++) { // reads over every item in the Db.
                 if (data.users[i].email === mailInput) { // checks if input values are the same in the Db.
                     setErrorMailState(false);
                     setRedirectingMailState(true);
                     foundUser = true;
-                    userID = data.users[i].id;
+                    userUrlHash = data.users[i].url_hash;
                     break;
                 }
                 setErrorMailState(!foundUser);
@@ -68,7 +68,7 @@ export default function resetForm() {
 
         if (errorMailState !== null && mailInput && foundUser) {
             if (!errorMailState) {
-                redirect(`/authentication/edit-?q=${userID}`)
+                redirect(`/authentication/edit-?q=${userUrlHash}`)
             }
         }
     }

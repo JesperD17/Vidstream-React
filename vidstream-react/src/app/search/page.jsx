@@ -2,30 +2,41 @@
 import './search.css';
 import useSWR from 'swr';
 
-import { useSearchParams  } from 'next/navigation';
 import SkeletonCards from '../standard/skeletonS/skeletonCards';
+import { useSearchParams  } from 'next/navigation';
+
+import ErrorPage from "../error/page"
+
+function getSearchQuery() {
+  const loc = useSearchParams().get("q");
+
+  var endQuery = 30
+  var searchQuery;
+  if (loc.length > endQuery) {
+    searchQuery = loc.substring(0, endQuery) + "...";
+  } else {
+    searchQuery = loc;
+  }
+
+  return searchQuery;
+}
 
 const fetcher = (...args) => fetch(...args).then((res) => res.json());
 
 export default function Search() {
-  const searchQuery = useSearchParams().get("q");
-  
-  var endQuery = 30
-  if (searchQuery.length > endQuery) {
-    searchQuery = searchQuery.substring(0, endQuery) + "...";
-  }
+  var searchQuery = getSearchQuery();
 
   const {
     data: allMovies,
     error,
     isValidating,
-  } = useSWR(`http://localhost:4030/Search?q=${searchQuery}`, fetcher, { // inputs the searchQuery to new fetch link
+  } = useSWR(`http://localhost:4030/search?q=${searchQuery}`, fetcher, { // inputs the searchQuery to new fetch link
     revalidateIfStale: false,
     revalidateOnFocus: false,
     revalidateOnReconnect: false
   });
 
-  if (error) return console.log("FAILED OR INCOMPLETE API!"), <div id="Empty"></div>;
+  if (error) return console.log("FAILED OR INCOMPLETE API!"), <ErrorPage/>;
   if (isValidating | !allMovies) {
     return <SkeletonCards />;    
   }

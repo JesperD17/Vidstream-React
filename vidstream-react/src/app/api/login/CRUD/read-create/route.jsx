@@ -19,18 +19,16 @@ export async function POST(request) {
     try {
         const database = await createConnection()
 
-        const [ id, name, mail, password_hash ] = await request.json();
+        const [ name, email, password_hash, url_hash ] = await request.json();
 
-        console.log(name, mail, password_hash);
-
-        const result = await database.execute("INSERT INTO users (id, name, email, password_hash) VALUES (?, ?, ?, ?)", [
-            id,
+        const result = await database.execute("INSERT INTO users (name, email, password_hash, url_hash) VALUES (?, ?, ?, ?)", [
             name,
-            mail,
+            email,
             password_hash,
+            url_hash
         ]);
 
-        return NextResponse.json({ name, mail, password_hash, id: result.insertId });
+        return NextResponse.json({ name, email, password_hash, url_hash, id: result.insertId });
     } catch (error) {
         return NextResponse.json(
             { message: error.message },

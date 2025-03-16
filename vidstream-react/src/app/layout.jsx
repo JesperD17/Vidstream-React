@@ -5,6 +5,8 @@ import "./css/animations.css";
 import Header from "./standard/header/header";
 import Footer from "./standard/footer/footer";
 
+import { Suspense } from 'react';
+
 export const metadata = {
   title: "Vidstream NextJs",
   description: "made width create next app",
@@ -20,9 +22,11 @@ export default function RootLayout({ children }) {
       <body>
         <div id="shell">
           <div className="all_homepage">
-            <Header />
-            {children}
-            <Footer />
+            <Suspense>
+              <Header />
+              {children}
+              <Footer />
+            </Suspense>
           </div>
         </div> 
       </body>

@@ -25,11 +25,24 @@ async function dbStatus() {
     return status;
 }
 
-function getRandomInt(min, max) {
-    return Math.random() * (max - min) + min;
+function createRandomHash() {
+    const characters = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789!@#$%^&*()_-+=';
+    const minLength = 200;
+    const maxLength = 254;
+    const hashLength = Math.floor(Math.random() * (maxLength - minLength + 1)) + minLength;
+    let url_hash = '';
+    
+    for (let i = 0; i < hashLength; i++) {
+        url_hash += characters.charAt(Math.floor(Math.random() * characters.length));
+    }
+
+    if (url_hash.length > 0) {
+        return url_hash;
+    }
 }
 
 export default function register() {
+    
     const inputNameRef = useRef();
     const inputMailRef = useRef();
     const inputPassRef = useRef();
@@ -56,13 +69,12 @@ export default function register() {
         e.preventDefault()
         removeMessages()
         
-        var newUserID = Math.floor(getRandomInt(1000, 9999));
-
         var nameInput = inputNameRef.current.value;
         var mailInput = inputMailRef.current.value;
         var passInput = inputPassRef.current.value;
+        var url_hash = createRandomHash();
 
-        const formData = [newUserID, nameInput, mailInput, passInput];
+        const formData = [nameInput, mailInput, passInput, url_hash];
 
         let nameError = false;
         let mailError = false;
@@ -88,13 +100,6 @@ export default function register() {
                     })
                     const data = await response.json();
                     setCreatedUserStatus(true)
-
-                    // (usefull code for the future)
-                    // if (!response.ok) { // if name, mail and or password already exist, this error happens.
-                    //     console.log("error");
-                    // } else {
-                    //     console.log("succesful creation")
-                    // }
 
                 } catch (error) {
                     console.error(error);
@@ -144,7 +149,12 @@ export default function register() {
 
                     <div className="inputWraper">
                         <div className="inputTitle">Email</div>
-                        <input type="email" name="email" placeholder="Email" ref={inputMailRef} className={`${errorMailState ? 'errorMessage errorBorder' : ''}`} required />
+                        <input type="email" name="email" placeholder="Email" ref={inputMailRef} 
+                        className={`${errorMailState ? 'errorMessage errorBorder' : ''}`} 
+                        required 
+                        pattern="^[^@]+@[^@]+$" 
+                        minLength={6} 
+                        maxLength={50} />
                         {errorMailState && (<div className="errorMessage">{errorMessageMail}</div>)}
                     </div>
 
