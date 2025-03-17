@@ -5,34 +5,12 @@ import { useRef, useState, useEffect } from "react";
 
 import { useSearchParams } from 'next/navigation';
 
-function getSearchParam() {
-    var loc = useSearchParams().get("q");
-    console.log(loc)
-    var endQuery = 30
-    var searchQuery;
-    if (loc.length > endQuery) {
-        searchQuery = loc.substring(0, endQuery) + "...";
-    } else {
-        searchQuery = loc;
-    }
-
-    return searchQuery;
-}
-
 async function fetchUsers() {
     try {
         const response = await fetch('../../api/login/CRUD/read-create'); // Fetch to SQL.
         const data = await response.json(); // Convert response to JSON.
 
-        console.log(data, "aaa")
-        var userMail;
-        for (let i = 0; i < data.users.length; i++) {
-            if (data.users[i].id === userID) {
-                console.log("test")
-                userMail = data.users[i].email;
-            }
-        }
-        return userMail;
+        return data;
     } catch (error) {
         console.error(error);
         return;
@@ -49,15 +27,41 @@ async function dbStatus() {
     }
     return status;
 }
-
+// 
 export default function editForm() {
+    const urlHash = useSearchParams().get("q");
+
+    const [userMail, setUserMail] = useState(null);
+
     const inputPassRef = useRef();
     const inputPassConfirmRef = useRef();
     const [status, setStatus] = useState(true); // true because if db is active, the error message doesnt display for a split second.
     const [errorPassConfirmState, setErrorPassConfirmState] = useState();
 
-
     var errorMessagePassConfirm = "Passwords do not match!";
+
+    useEffect(() => {
+        console.log(urlHash);
+
+        if (!urlHash) return; // Prevent running if no query param
+
+        async function fetchMail() {
+            const data = await fetchUsers();
+            for (let i = 0; i < data.users.length; i++) {
+                if (data.users[i].url_hash === urlHash) {
+                    console.log("true");
+                } else {
+                    console.log("false");
+                }
+            }
+            console.log(data);
+
+            if (user) setUserMail(user.email);
+        }
+
+        fetchMail();
+    }, [urlHash]);
+    console.log(userMail);
 
     useEffect(() => { // changus the status by function dbStatus.
         async function checkDbStatus() {
@@ -88,7 +92,7 @@ export default function editForm() {
             setErrorPassConfirmState(false)
         }
     }
-    
+
 
     return (
         <div id="Empty">
@@ -103,7 +107,7 @@ export default function editForm() {
                 <div className="formInnerWrapper">
                     <div className="textWrapper">
                         <div className="resetMainTitle">Reset account password</div>
-                        <div className="resetText">Enter a new password for { }</div>
+                        <div className="resetText">Enter a new password for {userMail}</div>
                     </div>
                     <div className="inputWraper">
                         <div className="inputTitle">Password</div>

@@ -26,7 +26,7 @@ async function dbStatus() {
 }
 
 function createRandomHash() {
-    const characters = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789!@#$%^&*()_-+=';
+    const characters = 'ABCDEFGHIJKLMNOPRSTUVWXYZabcdefghijklmnoprstuvwxyz0123456789!@#$%^&*()_-+';
     const minLength = 200;
     const maxLength = 254;
     const hashLength = Math.floor(Math.random() * (maxLength - minLength + 1)) + minLength;
