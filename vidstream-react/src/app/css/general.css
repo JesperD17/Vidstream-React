@@ -122,3 +122,7 @@ summary .Link_Icon_alignment:hover::after {
       background-color: hsl(200, 20%, 95%);
     }
 }
+
+.resetText .userName {
+    color: var(--third-color);
+}

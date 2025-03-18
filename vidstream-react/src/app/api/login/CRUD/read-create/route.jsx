@@ -19,16 +19,16 @@ export async function POST(request) {
     try {
         const database = await createConnection()
 
-        const [ name, email, password_hash, url_hash ] = await request.json();
+        const [name, email, password_hash, url_hash] = await request.json();
 
-        const result = await database.execute("INSERT INTO users (name, email, password_hash, url_hash) VALUES (?, ?, ?, ?)", [
+        const newData = await database.execute("INSERT INTO users (name, email, password_hash, url_hash) VALUES (?, ?, ?, ?)", [
             name,
             email,
             password_hash,
             url_hash
         ]);
 
-        return NextResponse.json({ name, email, password_hash, url_hash, id: result.insertId });
+        return NextResponse.json({ name, email, password_hash, url_hash, id: newData.insertId });
     } catch (error) {
         return NextResponse.json(
             { message: error.message },
@@ -41,19 +41,21 @@ export async function POST(request) {
 
 // edit
 export async function PUT(request) {
+    const { id, password_hash } = await request.json();
 
-    const { id, email, password_hash } = await request.json();
-    const updateProducts = await query({
-        query: "UPDATE users SET password_hash = ?",
-        values: [password_hash],
+    const database = await createConnection()
+
+    const updateUser = await database.query({
+        query: `UPDATE users SET password_hash = ? WHERE id = ?`,
+        values: [password_hash, id],
     });
 
-    const result = updateProducts.affectedRows;
+    const result = updateUser.affectedRows;
     let message = result ? "success" : "error";
 
     const product = {
         id: id,
-        email: email,
+        password_hash: password_hash,
     };
 
     return new Response(JSON.stringify({

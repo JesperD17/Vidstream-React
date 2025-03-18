@@ -3,7 +3,7 @@ import "../../css/formStyles.css"
 
 import { useRef, useState, useEffect } from "react";
 
-import { useSearchParams } from 'next/navigation';
+import { redirect, useSearchParams } from 'next/navigation';
 
 async function fetchUsers() {
     try {
@@ -27,11 +27,12 @@ async function dbStatus() {
     }
     return status;
 }
-// 
+
 export default function editForm() {
     const urlHash = useSearchParams().get("q");
 
-    const [userMail, setUserMail] = useState(null);
+    const [userID, setUserID] = useState(null);
+    const [userName, setUserName] = useState(null);
 
     const inputPassRef = useRef();
     const inputPassConfirmRef = useRef();
@@ -41,27 +42,26 @@ export default function editForm() {
     var errorMessagePassConfirm = "Passwords do not match!";
 
     useEffect(() => {
-        console.log(urlHash);
-
         if (!urlHash) return; // Prevent running if no query param
 
-        async function fetchMail() {
+        const fetchMail = async() => {
+            var userID;
+            var userName;
             const data = await fetchUsers();
-            for (let i = 0; i < data.users.length; i++) {
+            for (let i = 0; i < data.users.length; i++) {                
                 if (data.users[i].url_hash === urlHash) {
-                    console.log("true");
+                    userID = data.users[i].id;
+                    userName = data.users[i].name;
                 } else {
-                    console.log("false");
+                    redirect('/not-found')
                 }
-            }
-            console.log(data);
-
-            if (user) setUserMail(user.email);
+            }            
+            if (userName) setUserName(userName);
+            if (userID) setUserID(userID);
         }
 
         fetchMail();
     }, [urlHash]);
-    console.log(userMail);
 
     useEffect(() => { // changus the status by function dbStatus.
         async function checkDbStatus() {
@@ -74,14 +74,28 @@ export default function editForm() {
     const updatePass = async (e) => {
         e.preventDefault()
 
-        var passInput = inputPassRef.current.value;
-        var passConfirmInput = inputPassConfirmRef.current.value;
+        const passInput = inputPassRef.current.value;
+        const passConfirmInput = inputPassConfirmRef.current.value;
 
-
+        const formData = [userID, passConfirmInput]
+        
+        console.log(formData);
+        
         if (passInput === passConfirmInput) { // checks if both passwords match.
             removeErrorMessage();
-            console.log("sme")
 
+            try { // post request to create user.
+                const response = await fetch('/api/login/CRUD/read-create', {
+                    method: 'PUT',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify(formData)
+                })
+                const data = await response.json();
+                // setCreatedUserStatus(true)
+
+            } catch (error) {
+                console.error(error);
+            }
         } else {
             setErrorPassConfirmState(true)
         }
@@ -107,7 +121,7 @@ export default function editForm() {
                 <div className="formInnerWrapper">
                     <div className="textWrapper">
                         <div className="resetMainTitle">Reset account password</div>
-                        <div className="resetText">Enter a new password for {userMail}</div>
+                        <div className="resetText">Enter a new password for: <div className="userName">{userName}</div></div>
                     </div>
                     <div className="inputWraper">
                         <div className="inputTitle">Password</div>
