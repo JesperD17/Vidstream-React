@@ -23,7 +23,7 @@ function getSearchQuery() {
 
 const fetcher = (...args) => fetch(...args).then((res) => res.json());
 
-export default function Search() {
+function getMovies() {
   var searchQuery = getSearchQuery();
 
   const {
@@ -40,6 +40,11 @@ export default function Search() {
   if (isValidating | !allMovies) {
     return <SkeletonCards />;    
   }
+  return allMovies;
+}
+
+export default function Search() {
+  getMovies()
 
   const allLength = allMovies.items.length;
   const totalOnPaginate = new Array(allLength).fill(null); // fills the div structure

@@ -1,11 +1,12 @@
 import "./Sources.css";
 
+function importAll(_) {
+    return _.keys().map(_);
+}
+
 function Source() {
     // json structure
     // imports all the images
-    function importAll(_) {
-        return _.keys().map(_);
-    }
 
     var titleText = [
         "Figma: ",
