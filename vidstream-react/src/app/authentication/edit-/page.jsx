@@ -33,31 +33,40 @@ export default function editForm() {
 
     const [userID, setUserID] = useState(null);
     const [userName, setUserName] = useState(null);
+    const [userPass, setUserPass] = useState(null);
 
     const inputPassRef = useRef();
     const inputPassConfirmRef = useRef();
     const [status, setStatus] = useState(true); // true because if db is active, the error message doesnt display for a split second.
     const [errorPassConfirmState, setErrorPassConfirmState] = useState();
+    const [errorOldPassState, setErrorOldPassState] = useState();
 
+    const [passwordChangedState, setPasswordChangedState] = useState();
+
+    var errorMessageOldPass = "Password cannot be your old password!";
     var errorMessagePassConfirm = "Passwords do not match!";
 
     useEffect(() => {
         if (!urlHash) return; // Prevent running if no query param
 
-        const fetchMail = async() => {
+        const fetchMail = async () => {
             var userID;
             var userName;
+            var oldPass;
             const data = await fetchUsers();
-            for (let i = 0; i < data.users.length; i++) {                
+            for (let i = 0; i < data.users.length; i++) {
                 if (data.users[i].url_hash === urlHash) {
                     userID = data.users[i].id;
                     userName = data.users[i].name;
+                    oldPass = data.users[i].password_hash;
+                    break;
                 } else {
                     redirect('/not-found')
                 }
-            }            
-            if (userName) setUserName(userName);
+            }
             if (userID) setUserID(userID);
+            if (userName) setUserName(userName);
+            if (oldPass) setUserPass(oldPass)
         }
 
         fetchMail();
@@ -74,27 +83,34 @@ export default function editForm() {
     const updatePass = async (e) => {
         e.preventDefault()
 
-        const passInput = inputPassRef.current.value;
-        const passConfirmInput = inputPassConfirmRef.current.value;
+        var passInput = inputPassRef.current.value;
+        var passConfirmInput = inputPassConfirmRef.current.value;
 
         const formData = [userID, passConfirmInput]
-        
-        console.log(formData);
-        
+
         if (passInput === passConfirmInput) { // checks if both passwords match.
-            removeErrorMessage();
-
-            try { // post request to create user.
-                const response = await fetch('/api/login/CRUD/read-create', {
-                    method: 'PUT',
-                    headers: { 'Content-Type': 'application/json' },
-                    body: JSON.stringify(formData)
-                })
-                const data = await response.json();
-                // setCreatedUserStatus(true)
-
-            } catch (error) {
-                console.error(error);
+            console.log(userPass, passConfirmInput);
+            
+            if (!userPass === passConfirmInput) {  
+                console.log("aaaaaaa");
+                              
+                removeErrorMessage();
+                try { // post request to create user.
+                    const response = await fetch('/api/login/CRUD/read-create', {
+                        method: 'PUT',
+                        headers: { 'Content-Type': 'application/json' },
+                        body: JSON.stringify(formData)
+                    })
+                    const data = await response.json();
+                    if (data) {
+                        setPasswordChangedState(true)
+                        redirect('/')
+                    }
+                } catch (error) {
+                    console.error(error);
+                }
+            } else {
+                setErrorOldPassState(true)
             }
         } else {
             setErrorPassConfirmState(true)
@@ -102,11 +118,14 @@ export default function editForm() {
     }
 
     const removeErrorMessage = () => {
-        if (errorPassConfirmState) {
-            setErrorPassConfirmState(false)
+        if (errorOldPassState) {
+            setErrorOldPassState(false);
         }
-    }
+        if (errorPassConfirmState) {
+            setErrorPassConfirmState(false);
+        }
 
+    }
 
     return (
         <div id="Empty">
@@ -126,7 +145,7 @@ export default function editForm() {
                     <div className="inputWraper">
                         <div className="inputTitle">Password</div>
                         <input type="password" name="password" placeholder="Password" ref={inputPassRef}
-                            className={`${errorPassConfirmState ? 'errorMessage errorBorder' : ''}`}
+                            className={`${errorPassConfirmState || errorOldPassState ? 'errorMessage errorBorder' : ''}`}
                             required
                             minLength={6}
                             maxLength={15}
@@ -136,11 +155,15 @@ export default function editForm() {
                     </div>
                     <div className="inputWraper">
                         <div className="inputTitle">Confirm Password</div>
-                        <input type="password" name="password" placeholder="Password" ref={inputPassConfirmRef} className={`${errorPassConfirmState ? 'errorMessage errorBorder' : ''}`} required />
+                        <input type="password" name="password" placeholder="Password" ref={inputPassConfirmRef} className={`${errorPassConfirmState || errorOldPassState ? 'errorMessage errorBorder' : ''}`} required />
+                        {errorOldPassState && (<div className="errorMessage">{errorMessageOldPass}</div>)}
                         {errorPassConfirmState && (<div className="errorMessage">{errorMessagePassConfirm}</div>)}
                     </div>
 
                     <div className="outerSubmitWrapper">
+                        {passwordChangedState && (
+                            <div className="createdAcc">Password succesfully changed! Redirecting....</div>
+                        )}
                         <div className="submitWrapper">
                             <button type="submit">Reset password</button>
                             <button type="reset" onClick={removeErrorMessage}>X</button>

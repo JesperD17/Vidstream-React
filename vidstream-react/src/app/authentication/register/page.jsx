@@ -137,6 +137,9 @@ export default function register() {
                     </div>
                 )}
                 <div className="formInnerWrapper">
+                    <div className="textWrapper">
+                        <div className="resetMainTitle">Register</div>
+                    </div>
                     <div className="inputWraper">
                         <div className="inputTitle">Username</div>
                         <input type="text" name="name" placeholder="Name" ref={inputNameRef}

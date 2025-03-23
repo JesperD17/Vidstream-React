@@ -32,36 +32,30 @@ export async function POST(request) {
     } catch (error) {
         return NextResponse.json(
             { message: error.message },
-            {
-                status: 500,
-            }
+            { status: 500 }
         );
     }
 }
 
 // edit
 export async function PUT(request) {
-    const { id, password_hash } = await request.json();
+    try {
+        const database = await createConnection();
 
-    const database = await createConnection()
+        const [ id, password_hash ] = await request.json();
 
-    const updateUser = await database.query({
-        query: `UPDATE users SET password_hash = ? WHERE id = ?`,
-        values: [password_hash, id],
-    });
+        const result = await database.execute("UPDATE users SET password_hash = ? WHERE id = ?", [
+            password_hash,
+            id
+        ]);
 
-    const result = updateUser.affectedRows;
-    let message = result ? "success" : "error";
-
-    const product = {
-        id: id,
-        password_hash: password_hash,
-    };
-
-    return new Response(JSON.stringify({
-        message: message,
-        status: 200,
-        product: product
-    }), { headers: { 'Content-Type': 'application/json' } });
-
+        return NextResponse.json({ id, updatedRows: result.affectedRows });
+    } catch (error) {
+        return NextResponse.json(
+            { message: error.message },
+            { status: 500 }
+        );
+    }
 }
+
+

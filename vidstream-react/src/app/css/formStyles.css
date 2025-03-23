@@ -1,15 +1,23 @@
-form.registerForm, form.loginForm, form.editPassword {
+form.registerForm, form.loginForm, form.resetForm, form.editPassword {
     display: flex;
-    height: 350px;
     width: 320px;
     position: relative;
 }
 
+form.registerForm {
+    height: 400px;
+}
+
+form.loginForm {
+    height: 350px;
+}
+
 form.resetForm {
-    display: flex;
     height: 275px;
-    width: 320px;
-    position: relative;
+}
+
+form.editPassword {
+    height: 400px;
 }
 
 /* wrapper etc */
@@ -41,7 +49,7 @@ form.resetForm {
 }
 
 .formInnerWrapper .outerSubmitWrapper:has(.createdAcc) {
-    height: 17%;
+    height: auto;
     gap: 6px;
 }
 
@@ -67,11 +75,13 @@ form.resetForm {
 
 .formInnerWrapper button:nth-child(even) {
     width: 20%;
+    height: 35px;
     border-radius: 0px 8px 8px 0px;
 }
 
 .formInnerWrapper button:nth-child(odd) {
     width: 80%;
+    height: 35px;
     border-radius: 8px 0px 0px 8px;
 }
 

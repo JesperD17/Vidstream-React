@@ -96,6 +96,9 @@ export default function loginForm() {
           </div>
         )}
         <div className="formInnerWrapper">
+          <div className="textWrapper">
+            <div className="resetMainTitle">Login</div>
+          </div>
           <div className="inputWraper">
             <div className="inputTitle">Email</div>
             <input type="email" name="email" placeholder="user@gmail.com" ref={inputMailRef} className={`${errorMailState ? 'errorMessage errorBorder' : ''}`} required />
