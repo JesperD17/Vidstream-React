@@ -3,6 +3,9 @@ import Link from "next/link";
 import "../../css/formStyles.css";
 import { useRef, useState, useEffect } from "react";
 
+// import { createSession } from '@/app/lib/session'
+import setCookie from '@/lib/set-cookie';
+
 async function fetchUsers() {
   try {
     const response = await fetch('../../api/login/CRUD/read-create'); // Fetch to SQL.
@@ -62,6 +65,13 @@ export default function loginForm() {
 
           if (data.users[i].password_hash === passInput) { // checks the password in the same mail index.
             setErrorPassState(false);
+            console.log("correct");
+
+            var hash = data.users[i].url_hash;
+            setCookie(hash)
+            // await createSession(user.id)
+            // redirect('/')
+
           } else {
             setErrorPassState(true);
           }
