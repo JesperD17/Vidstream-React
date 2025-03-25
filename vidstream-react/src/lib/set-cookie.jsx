@@ -1,6 +1,6 @@
 import { NextResponse } from 'next/server'
 
-export function middleware(request) {
+export function setCookie(request) {
     const accessToken = request.cookies.get('access-token')?.value;
 
     console.log('Access Token:', accessToken);

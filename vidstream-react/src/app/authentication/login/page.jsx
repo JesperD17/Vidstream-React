@@ -3,9 +3,6 @@ import Link from "next/link";
 import "../../css/formStyles.css";
 import { useRef, useState, useEffect } from "react";
 
-// import { createSession } from '@/app/lib/session'
-import setCookie from '@/lib/set-cookie';
-
 async function fetchUsers() {
   try {
     const response = await fetch('../../api/login/CRUD/read-create'); // Fetch to SQL.
@@ -54,33 +51,47 @@ export default function loginForm() {
     var mailInput = inputMailRef.current.value;
     var passInput = inputPassRef.current.value;
 
+    const formData = [ mailInput, passInput ]
+    console.log(mailInput, passInput);
+    
     var data = await fetchUsers()
     if (data) { // checks if data from Db is existing.
-      let foundUser = false;
-      for (var i = 0; i < data.users.length; i++) { // reads over every item in the Db.
-        if (data.users[i].email === mailInput) { // checks if input values are the same in the Db.
-          setErrorMailState(false);
+      // let foundUser = false;
+      // for (var i = 0; i < data.users.length; i++) { // reads over every item in the Db.
+      //   if (data.users[i].email === mailInput) { // checks if input values are the same in the Db.
+      //     setErrorMailState(false);
 
-          foundUser = true;
+      //     foundUser = true;
 
-          if (data.users[i].password_hash === passInput) { // checks the password in the same mail index.
-            setErrorPassState(false);
-            console.log("correct");
+      //     if (data.users[i].password_hash === passInput) { // checks the password in the same mail index.
+      //       setErrorPassState(false);
+      //       console.log("correct");
 
-            var hash = data.users[i].url_hash;
-            setCookie(hash)
-            // await createSession(user.id)
-            // redirect('/')
+      //       var hash = data.users[i].url_hash;
 
-          } else {
-            setErrorPassState(true);
-          }
-          break;
-        }
-      }
-      if (!foundUser) {
-        setErrorMailState(true);
-        setErrorPassState(true);
+      //       setCookie(hash)
+
+      //     } else {
+      //       setErrorPassState(true);
+      //     }
+      //     break;
+      //   }
+      // }
+      // if (!foundUser) {
+      //   setErrorMailState(true);
+      //   setErrorPassState(true);
+      // }
+
+      try { // post request to create user.
+        const response = await fetch('/api/login/CRUD/loginCheck', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify(formData)
+        })
+        const data = await response.json();
+
+      } catch (error) {
+        console.error(error);
       }
     }
   }
