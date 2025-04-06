@@ -93,7 +93,7 @@ export default function register() {
 
             if (nameError === false && mailError === false) { // if the name and mail is not existing.
                 try { // post request to create user.
-                    const response = await fetch('/api/login/CRUD/read-create', {
+                    const response = await fetch('/api/login/CRUD/create', {
                         method: 'POST',
                         headers: { 'Content-Type': 'application/json' },
                         body: JSON.stringify(formData)

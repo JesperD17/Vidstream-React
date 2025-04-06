@@ -96,7 +96,7 @@ export default function editForm() {
                               
                 removeErrorMessage();
                 try { // post request to create user.
-                    const response = await fetch('/api/login/CRUD/read-create', {
+                    const response = await fetch('/api/login/CRUD/edit', {
                         method: 'PUT',
                         headers: { 'Content-Type': 'application/json' },
                         body: JSON.stringify(formData)

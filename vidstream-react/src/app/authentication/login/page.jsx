@@ -5,7 +5,7 @@ import { useRef, useState, useEffect } from "react";
 
 async function fetchUsers() {
   try {
-    const response = await fetch('../../api/login/CRUD/read-create'); // Fetch to SQL.
+    const response = await fetch('../../api/login/CRUD/read'); // Fetch to SQL.
     const data = await response.json(); // Convert response to JSON.
     return data;
   } catch (error) {
@@ -83,7 +83,7 @@ export default function loginForm() {
       // }
 
       try { // post request to create user.
-        const response = await fetch('/api/login/CRUD/loginCheck', {
+        const response = await fetch('/api/login/loginCheck', {
           method: 'POST',
           headers: { 'Content-Type': 'application/json' },
           body: JSON.stringify(formData)

@@ -1,5 +1,6 @@
-import { createConnection } from "@/lib/db";
 import { NextResponse } from 'next/server';
+
+import { database } from "../CRUD/read/route";
 
 export async function POST(request) {
     try {
@@ -13,10 +14,9 @@ export async function POST(request) {
             return NextResponse.json({ error: `Missing mail or pass input` }, { status: 400 });
         }
         
-        const database = await createConnection()
-        const users = await database
+        const db = await database()
 
-        return (NextResponse.json({ message: `Payload received! ` + JSON.stringify(users) }));
+        return (NextResponse.json({ message: `Payload received! ` + JSON.stringify(db) }));
     } catch (error) {
         return NextResponse.json({ error: "Invalid request" }, { status: 400 });
     }
