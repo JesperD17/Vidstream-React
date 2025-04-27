@@ -1,4 +1,4 @@
-# Vidstream-React
+# Vidstream-React (paused project)
 
 Vidstream-React is a Next.js application designed for streaming movies with a user authentication system. It fetches movie data using a third-party API and provides a sleek, modern experience for users to discover and watch films.
 
@@ -8,7 +8,7 @@ Vidstream-React is a Next.js application designed for streaming movies with a us
 - [Installation](#installation)
 - [Deployment](#deployment)
 - [Contributors](#contributors)
-- [Acknowledgements](#acknowledgements)
+- [Acknowledgements](#Thanks-to)
 
 ## About
 Vidstream-React is built with Next.js and React. It features:
@@ -23,7 +23,7 @@ This project consists of:
 
 - **Frontend**: Built with React components and styled for a clean movie streaming experience.
 - **Authentication**: Secure login and signup system integrated into the app.
-- **Movie Data Fetching**: Movies are fetched dynamically from a third-party movie API. vidstream-api, @WBRK-dev.
+- **Movie Data Fetching**: Movies are fetched dynamically from a third-party movie API. vidstream-api, WBRK-dev/vidstream-api.
 - **Routing**: Uses Next.js dynamic routing for pages such as movie details, login, etc.
 - **Hosting**: Easily deployable to platforms like Vercel for instant live previews.
 
@@ -65,6 +65,9 @@ You can also deploy manually using:
 vercel deploy
 ```
 
-Contributors
+## Contributors
 @JesperD17
 @WBRK-dev
+
+## Thanks to
+WBRK-dev/vidstream-api for providing this third part API i used in this project.
