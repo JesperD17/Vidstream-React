@@ -23,7 +23,7 @@ This project consists of:
 
 - **Frontend**: Built with React components and styled for a clean movie streaming experience.
 - **Authentication**: Secure login and signup system integrated into the app.
-- **Movie Data Fetching**: Movies are fetched dynamically from a third-party movie API (e.g., TMDB or similar).
+- **Movie Data Fetching**: Movies are fetched dynamically from a third-party movie API. vidstream-api, @WBRK-dev.
 - **Routing**: Uses Next.js dynamic routing for pages such as movie details, login, etc.
 - **Hosting**: Easily deployable to platforms like Vercel for instant live previews.
 
@@ -45,7 +45,7 @@ cd Vidstream-React
 npm install
 ```
 
-# Create a .env.local file and add your API keys and environment variables
+## Create a .env.local file and add your API keys and environment variables
 
 # Run the development server
 ```
@@ -53,3 +53,18 @@ npm run dev
 ```
 
 Visit http://localhost:3000 to view it in your browser.
+
+Deployment
+This project is optimized for deployment on Vercel:
+
+1. Connect your GitHub repository to Vercel.
+2. Set your environment variables (API keys, etc.).
+3. Deploy!
+You can also deploy manually using:
+```
+vercel deploy
+```
+
+Contributors
+@JesperD17
+@WBRK-dev
